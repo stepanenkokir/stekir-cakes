@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { useCart } from "@/lib/cart/CartProvider";
 
 const navLinks = [
   { href: "/catalog", label: "Our Cakes" },
@@ -13,6 +14,7 @@ const navLinks = [
 ];
 
 export function Header() {
+  const { itemCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -66,12 +68,14 @@ export function Header() {
             <Link
               href="/cart"
               className="relative rounded-full p-2 text-text transition-colors hover:bg-surface hover:text-primary-dark"
-              aria-label="Shopping cart, 0 items"
+              aria-label={`Shopping cart, ${itemCount} items`}
             >
               <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
-                0
-              </span>
+              {itemCount > 0 ? (
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
+                  {itemCount > 9 ? "9+" : itemCount}
+                </span>
+              ) : null}
             </Link>
 
             <Button href="/catalog" size="sm" className="hidden sm:inline-flex">

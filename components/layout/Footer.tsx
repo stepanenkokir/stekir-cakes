@@ -84,7 +84,9 @@ export function Footer() {
             Elk Grove &amp; Rancho Cordova
           </p>
           <p className="mt-3 text-center text-sm text-text-muted">
-            © {new Date().getFullYear()} SteKir Cakes. All rights reserved.
+            <span suppressHydrationWarning>
+              © {new Date().getFullYear()} SteKir Cakes. All rights reserved.
+            </span>
           </p>
         </div>
       </div>

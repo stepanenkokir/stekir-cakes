@@ -6,6 +6,7 @@ import {
 } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { CartProvider } from "@/lib/cart/CartProvider";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -53,9 +54,11 @@ export default function RootLayout({
       className={`${playfair.variable} ${sourceSans.variable} ${dancingScript.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-body">
-        <Header />
-        <div className="flex-1">{children}</div>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

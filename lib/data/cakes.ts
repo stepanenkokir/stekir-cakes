@@ -8,7 +8,10 @@ export type Cake = {
   minWeight: number;
   servings: string;
   prepTime: string;
+  noticeDays: number;
   image: string;
+  images: string[];
+  storageInstructions: string;
   tags: string[];
 };
 
@@ -24,8 +27,15 @@ export const cakes: Cake[] = [
     minWeight: 2,
     servings: "1 lb feeds approx. 3–4 people",
     prepTime: "3 days notice required",
+    noticeDays: 3,
     image:
       "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1621303837174-897873a273d1?auto=format&fit=crop&w=800&q=80",
+    ],
+    storageInstructions:
+      "Refrigerate in the box. Best consumed within 3 days. Napoleon improves with 1 day of refrigeration.",
     tags: ["Birthday", "Anniversary", "Most Popular"],
   },
   {
@@ -39,8 +49,15 @@ export const cakes: Cake[] = [
     minWeight: 2,
     servings: "1 lb feeds approx. 3–4 people",
     prepTime: "3 days notice required",
+    noticeDays: 3,
     image:
       "https://images.unsplash.com/photo-1621303837174-897873a273d1?auto=format&fit=crop&w=800&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1621303837174-897873a273d1?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+    ],
+    storageInstructions:
+      "Refrigerate in the box. Best consumed within 3 days for optimal freshness and texture.",
     tags: ["Birthday", "Holiday", "Fan Favorite"],
   },
   {
@@ -54,8 +71,15 @@ export const cakes: Cake[] = [
     minWeight: 2,
     servings: "1 lb feeds approx. 3–4 people",
     prepTime: "2 days notice required",
+    noticeDays: 2,
     image:
       "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80",
+    ],
+    storageInstructions:
+      "Refrigerate in the box. Best consumed within 3 days. Let sit at room temperature for 15 minutes before serving.",
     tags: ["Everyday", "Birthday", "Kids"],
   },
   {
@@ -69,8 +93,15 @@ export const cakes: Cake[] = [
     minWeight: 1.5,
     servings: "1 lb feeds approx. 3–4 people",
     prepTime: "2 days notice required",
+    noticeDays: 2,
     image:
       "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80",
+    ],
+    storageInstructions:
+      "Store covered at room temperature for up to 2 days, or refrigerate for up to 4 days. Best enjoyed within 2 days.",
     tags: ["Kids", "Everyday", "Gluten-Sensitive Option"],
   },
 ];
@@ -81,4 +112,8 @@ export function getStartingPrice(cake: Cake): number {
 
 export function getCakeBySlug(slug: string): Cake | undefined {
   return cakes.find((cake) => cake.slug === slug);
+}
+
+export function getRelatedCakes(slug: string): Cake[] {
+  return cakes.filter((cake) => cake.slug !== slug);
 }
