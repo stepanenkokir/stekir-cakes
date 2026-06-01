@@ -42,7 +42,7 @@ export function Button({
   const classes = [
     "inline-flex items-center justify-center rounded-full font-medium transition-all duration-200",
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-    "disabled:cursor-not-allowed disabled:opacity-50",
+    "cursor-pointer disabled:cursor-not-allowed disabled:opacity-50",
     variantClasses[variant],
     sizeClasses[size],
     className,
@@ -57,7 +57,7 @@ export function Button({
   }
 
   return (
-    <button type={type} className={classes} disabled={disabled} {...props}>
+    <button type={type} className={classes} disabled={disabled} onClick={onClick} {...props}>
       {children}
     </button>
   );

@@ -1,22 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, ShoppingBag, X } from "lucide-react";
+import { LogOut, Menu, ShoppingBag, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/lib/cart/CartProvider";
+import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 const navLinks = [
   { href: "/catalog", label: "Our Cakes" },
   { href: "/catalog/gallery", label: "Gallery" },
-  { href: "/about", label: "About" },
+  { href: "/catalog/about", label: "About" },
   { href: "/contacts", label: "Contact" },
 ];
 
 export function Header() {
   const { itemCount } = useCart();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 8);
@@ -31,6 +35,43 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClientOrNull();
+    if (!supabase) {
+      return;
+    }
+
+    const syncAuthState = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setIsAuthenticated(Boolean(session));
+    };
+
+    void syncAuthState();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(Boolean(session));
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  async function handleSignOut() {
+    const supabase = getSupabaseBrowserClientOrNull();
+    if (!supabase) {
+      return;
+    }
+    await supabase.auth.signOut();
+    setIsMenuOpen(false);
+    router.push("/account/login");
+    router.refresh();
+  }
 
   return (
     <>
@@ -82,6 +123,14 @@ export function Header() {
               Order Now
             </Button>
 
+            <Link
+              href={isAuthenticated ? "/account" : "/account/login"}
+              className="rounded-full p-2 text-text transition-colors hover:bg-surface hover:text-primary-dark"
+              aria-label={isAuthenticated ? "Go to my account" : "Sign in to account"}
+            >
+              <UserRound className="h-5 w-5" />
+            </Link>
+
             <button
               type="button"
               className="rounded-full p-2 text-text transition-colors hover:bg-surface md:hidden"
@@ -127,12 +176,31 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
+              <Link
+                href={isAuthenticated ? "/account" : "/account/login"}
+                className="rounded-xl px-3 py-3 text-lg font-medium text-text transition-colors hover:bg-surface hover:text-primary-dark"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {isAuthenticated ? "My Account" : "Sign In"}
+              </Link>
             </nav>
 
             <div className="border-t border-border px-5 py-6">
-              <Button href="/catalog" className="w-full" onClick={() => setIsMenuOpen(false)}>
-                Order Now
-              </Button>
+              <div className="flex flex-col gap-3">
+                <Button href="/catalog" className="w-full" onClick={() => setIsMenuOpen(false)}>
+                  Order Now
+                </Button>
+                {isAuthenticated ? (
+                  <button
+                    type="button"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-bg px-6 py-2.5 text-base font-medium text-text transition-colors hover:border-primary hover:text-primary-dark"
+                    onClick={handleSignOut}
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign Out
+                  </button>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>

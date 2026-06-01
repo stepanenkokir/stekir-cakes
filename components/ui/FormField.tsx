@@ -4,17 +4,28 @@ type FormFieldProps = {
   label: string;
   htmlFor: string;
   hint?: string;
+  hintTone?: "muted" | "danger";
   children: ReactNode;
 };
 
-export function FormField({ label, htmlFor, hint, children }: FormFieldProps) {
+export function FormField({
+  label,
+  htmlFor,
+  hint,
+  hintTone = "muted",
+  children,
+}: FormFieldProps) {
   return (
     <div className="space-y-2">
       <label htmlFor={htmlFor} className="block text-sm font-medium text-text">
         {label}
       </label>
       {children}
-      {hint ? <p className="text-xs text-text-muted">{hint}</p> : null}
+      {hint ? (
+        <p className={hintTone === "danger" ? "text-xs text-red-600" : "text-xs text-text-muted"}>
+          {hint}
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -15,7 +15,10 @@ import type { AddCartItemInput, CartItem } from "./types";
 type CartContextValue = {
   items: CartItem[];
   itemCount: number;
+  subtotal: number;
   addItem: (item: AddCartItemInput) => void;
+  removeItem: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -52,8 +55,27 @@ export function CartProvider({ children }: { children: ReactNode }) {
     ]);
   }, []);
 
+  const removeItem = useCallback((id: string) => {
+    setItems((current) => current.filter((item) => item.id !== id));
+  }, []);
+
+  const updateQuantity = useCallback((id: string, quantity: number) => {
+    if (quantity < 1) {
+      return;
+    }
+
+    setItems((current) =>
+      current.map((item) => (item.id === id ? { ...item, quantity } : item)),
+    );
+  }, []);
+
   const itemCount = useMemo(
     () => items.reduce((total, item) => total + item.quantity, 0),
+    [items],
+  );
+
+  const subtotal = useMemo(
+    () => items.reduce((total, item) => total + item.unitPrice * item.quantity, 0),
     [items],
   );
 
@@ -61,9 +83,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     () => ({
       items,
       itemCount,
+      subtotal,
       addItem,
+      removeItem,
+      updateQuantity,
     }),
-    [items, itemCount, addItem],
+    [items, itemCount, subtotal, addItem, removeItem, updateQuantity],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

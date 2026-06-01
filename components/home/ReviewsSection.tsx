@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 import { ReviewCard } from "@/components/shared/ReviewCard";
+import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { reviews } from "@/lib/data/reviews";
 
@@ -65,6 +66,12 @@ export function ReviewsSection() {
               />
             </div>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center sm:justify-start">
+          <Button href="/catalog/reviews" variant="ghost">
+            Read All Reviews
+          </Button>
         </div>
       </div>
     </section>

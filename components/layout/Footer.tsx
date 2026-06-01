@@ -5,9 +5,10 @@ const footerLinks = [
   { href: "/", label: "Home" },
   { href: "/catalog", label: "Catalog" },
   { href: "/catalog/gallery", label: "Gallery" },
-  { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/terms", label: "Terms" },
+  { href: "/catalog/about", label: "About" },
+  { href: "/catalog/reviews", label: "Reviews" },
+  { href: "/catalog/faq", label: "FAQ" },
+  { href: "/catalog/terms", label: "Terms" },
   { href: "/privacy", label: "Privacy" },
 ];
 

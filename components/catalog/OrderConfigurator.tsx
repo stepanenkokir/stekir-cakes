@@ -45,6 +45,16 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
 
   const totalPrice = effectiveWeight * cake.pricePerPound;
 
+  const noticeLabel = `${cake.noticeDays} ${cake.noticeDays === 1 ? "day" : "days"} notice required`;
+
+  const deliveryDateError = !deliveryDate
+    ? `Please select a delivery date (${noticeLabel}).`
+    : minDeliveryDate && deliveryDate < minDeliveryDate
+      ? `Please choose a date on or after ${minDeliveryDate} (${noticeLabel}).`
+      : "";
+
+  const isDeliveryDateValid = !deliveryDateError;
+
   const handleWeightPreset = (preset: number) => {
     setIsCustomWeight(false);
     setWeight(preset);
@@ -56,7 +66,7 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
   };
 
   const handleAddToCart = () => {
-    if (!deliveryDate) {
+    if (!isDeliveryDateValid) {
       return;
     }
 
@@ -162,15 +172,20 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
           />
         </FormField>
 
-        <FormField label="Preferred delivery date" htmlFor="delivery-date">
+        <FormField
+          label="Preferred delivery date"
+          htmlFor="delivery-date"
+          hint={deliveryDateError || undefined}
+          hintTone={deliveryDateError ? "danger" : "muted"}
+        >
           <input
             id="delivery-date"
             type="date"
             min={minDeliveryDate}
             value={deliveryDate}
             onChange={(event) => setDeliveryDate(event.target.value)}
-            required
             className={formInputClassName()}
+            aria-invalid={deliveryDateError ? true : undefined}
           />
         </FormField>
 
@@ -205,7 +220,7 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
         <Button
           type="button"
           className="w-full"
-          disabled={!deliveryDate || isAdded}
+          disabled={!isDeliveryDateValid || isAdded}
           onClick={handleAddToCart}
         >
           {isAdded ? "Added to Cart!" : "Add to Cart"}
