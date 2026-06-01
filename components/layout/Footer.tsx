@@ -4,7 +4,7 @@ import { AtSign, Mail, Phone } from "lucide-react";
 const footerLinks = [
   { href: "/", label: "Home" },
   { href: "/catalog", label: "Catalog" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/catalog/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
   { href: "/terms", label: "Terms" },

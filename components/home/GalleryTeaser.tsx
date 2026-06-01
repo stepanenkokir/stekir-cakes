@@ -57,7 +57,7 @@ export function GalleryTeaser() {
         </div>
 
         <div className="mt-10 text-center">
-          <Button href="/gallery" variant="ghost">
+          <Button href="/catalog/gallery" variant="ghost">
             See Full Gallery
           </Button>
         </div>

@@ -8,7 +8,7 @@ import { useCart } from "@/lib/cart/CartProvider";
 
 const navLinks = [
   { href: "/catalog", label: "Our Cakes" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/catalog/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/contacts", label: "Contact" },
 ];

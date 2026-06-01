@@ -51,10 +51,10 @@ export const cakes: Cake[] = [
     prepTime: "3 days notice required",
     noticeDays: 3,
     image:
-      "https://images.unsplash.com/photo-1621303837174-897873a273d1?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1725275648140-5326d32dbe21?auto=format&fit=crop&w=800&q=80",
     images: [
-      "https://images.unsplash.com/photo-1621303837174-897873a273d1?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1725275648140-5326d32dbe21?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1624000961428-eeece184988b?auto=format&fit=crop&w=800&q=80",
     ],
     storageInstructions:
       "Refrigerate in the box. Best consumed within 3 days for optimal freshness and texture.",
