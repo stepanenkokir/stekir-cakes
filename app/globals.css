@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #fdf8f2;
+  --color-primary: #b5813a;
+  --color-primary-dark: #8c6020;
+  --color-accent: #d4a96a;
+  --color-text: #2c1a0e;
+  --color-text-muted: #7a6050;
+  --color-surface: #fff9f0;
+  --color-border: #e8d9c4;
+}
+
+@theme inline {
+  --color-bg: #fdf8f2;
+  --color-primary: #b5813a;
+  --color-primary-dark: #8c6020;
+  --color-accent: #d4a96a;
+  --color-text: #2c1a0e;
+  --color-text-muted: #7a6050;
+  --color-surface: #fff9f0;
+  --color-border: #e8d9c4;
+
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-source-sans);
+  --font-accent: var(--font-dancing);
+
+  --shadow-card: 0 4px 24px rgba(44, 26, 14, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(44, 26, 14, 0.12);
+  --shadow-soft: 0 2px 12px rgba(44, 26, 14, 0.04);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@keyframes bounce-subtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
