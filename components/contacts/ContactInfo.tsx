@@ -6,10 +6,14 @@ import {
   MessageSquare,
   Phone,
 } from "lucide-react";
+import { getLocale, getTranslations } from "next-intl/server";
+import { BAKERY_PHONE, BAKERY_PHONE_DISPLAY } from "@/lib/constants";
 import {
-  BAKERY_HOURS,
-  contactChannels,
+  BAKERY_EMAIL,
+  BAKERY_INSTAGRAM_HANDLE,
+  BAKERY_INSTAGRAM_URL,
 } from "@/lib/data/contact";
+import { getMessages } from "@/lib/i18n/messages";
 
 const channelIcons = {
   phone: Phone,
@@ -19,18 +23,57 @@ const channelIcons = {
   whatsapp: MessageCircle,
 } as const;
 
-export function ContactInfo() {
+export async function ContactInfo() {
+  const locale = await getLocale();
+  const t = await getTranslations("contact");
+  const contact = getMessages(locale).contact;
+  const hours = contact.hours;
+  const channels = [
+    {
+      id: "phone" as const,
+      label: contact.channels.phone.label,
+      value: BAKERY_PHONE_DISPLAY,
+      href: `tel:${BAKERY_PHONE}`,
+      description: contact.channels.phone.description,
+    },
+    {
+      id: "email" as const,
+      label: contact.channels.email.label,
+      value: BAKERY_EMAIL,
+      href: `mailto:${BAKERY_EMAIL}`,
+      description: contact.channels.email.description,
+    },
+    {
+      id: "instagram" as const,
+      label: contact.channels.instagram.label,
+      value: BAKERY_INSTAGRAM_HANDLE,
+      href: BAKERY_INSTAGRAM_URL,
+      description: contact.channels.instagram.description,
+    },
+    {
+      id: "sms" as const,
+      label: contact.channels.sms.label,
+      value: contact.channels.sms.value,
+      href: `sms:${BAKERY_PHONE}`,
+      description: contact.channels.sms.description,
+    },
+    {
+      id: "whatsapp" as const,
+      label: contact.channels.whatsapp.label,
+      value: contact.channels.whatsapp.value,
+      href: `https://wa.me/${BAKERY_PHONE.replace("+", "")}`,
+      description: contact.channels.whatsapp.description,
+    },
+  ];
+
   return (
     <div className="space-y-8">
       <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-8">
-        <h2 className="font-display text-2xl font-semibold text-text">Reach Us</h2>
-        <p className="mt-2 text-text-muted">
-          Questions about a custom design, wedding cake, or delivery? We would love to hear from
-          you.
-        </p>
+        <h2 className="font-display text-2xl font-semibold text-text">{t("reachUs")}</h2>
+        <p className="mt-2 text-text-muted">{t("reachIntro")}</p>
 
         <ul className="mt-6 space-y-4">
-          {contactChannels.map(({ id, label, value, href, description }) => {
+          {channels.map(({ id, label, value, href, description }) => {
             const Icon = channelIcons[id];
             const isExternal = href.startsWith("http");
 
@@ -67,25 +110,22 @@ export function ContactInfo() {
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-bg text-primary">
             <Clock className="h-5 w-5" aria-hidden="true" />
           </span>
-          <h2 className="font-display text-xl font-semibold text-text">Business Hours</h2>
+          <h2 className="font-display text-xl font-semibold text-text">{t("businessHours")}</h2>
         </div>
 
         <ul className="mt-5 space-y-3">
-          {BAKERY_HOURS.map(({ days, hours }) => (
+          {hours.map(({ days, hours: time }) => (
             <li
               key={days}
               className="flex items-center justify-between gap-4 border-b border-border/60 pb-3 last:border-0 last:pb-0"
             >
               <span className="font-medium text-text">{days}</span>
-              <span className="text-text-muted">{hours}</span>
+              <span className="text-text-muted">{time}</span>
             </li>
           ))}
         </ul>
 
-        <p className="mt-5 text-sm leading-relaxed text-text-muted">
-          Orders are baked fresh to your schedule — please allow at least 3 days notice for standard
-          cakes.
-        </p>
+        <p className="mt-5 text-sm leading-relaxed text-text-muted">{t("hoursNote")}</p>
       </div>
     </div>
   );

@@ -1,14 +1,19 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { ReviewCard } from "@/components/shared/ReviewCard";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { reviews } from "@/lib/data/reviews";
+import { getReviews } from "@/lib/data/reviews";
 
 export function ReviewsSection() {
+  const locale = useLocale();
+  const t = useTranslations("home.reviews");
+  const tc = useTranslations("common");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const reviews = useMemo(() => getReviews(locale), [locale]);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -25,8 +30,8 @@ export function ReviewsSection() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             id="reviews-heading"
-            title="What Our Customers Say"
-            subtitle="Real reviews from Sacramento-area celebrations"
+            title={t("title")}
+            subtitle={t("subtitle")}
             align="left"
             className="mb-0"
           />
@@ -36,7 +41,7 @@ export function ReviewsSection() {
               type="button"
               onClick={() => scroll("left")}
               className="rounded-full border border-border bg-bg p-2 text-text transition-colors hover:border-primary hover:text-primary-dark"
-              aria-label="Previous reviews"
+              aria-label={t("prev")}
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -44,7 +49,7 @@ export function ReviewsSection() {
               type="button"
               onClick={() => scroll("right")}
               className="rounded-full border border-border bg-bg p-2 text-text transition-colors hover:border-primary hover:text-primary-dark"
-              aria-label="Next reviews"
+              aria-label={t("next")}
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -70,7 +75,7 @@ export function ReviewsSection() {
 
         <div className="mt-10 flex justify-center sm:justify-start">
           <Button href="/catalog/reviews" variant="ghost">
-            Read All Reviews
+            {tc("readAllReviews")}
           </Button>
         </div>
       </div>

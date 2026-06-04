@@ -1,4 +1,6 @@
 import { galleryImagePath } from "@/lib/images";
+import { getMessages } from "@/lib/i18n/messages";
+import { toLocale } from "@/lib/i18n/locale";
 
 export type GalleryCategory =
   | "napoleon"
@@ -17,162 +19,68 @@ export type GalleryImage = {
   height: "short" | "medium" | "tall";
 };
 
-export const galleryFilters: { id: GalleryFilter; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "napoleon", label: "Napoleon" },
-  { id: "medovik", label: "Medovik" },
-  { id: "smetannik", label: "Smetannik" },
-  { id: "mannik", label: "Mannik" },
-  { id: "custom", label: "Custom Designs" },
+const galleryMeta: {
+  id: string;
+  category: GalleryCategory;
+  height: GalleryImage["height"];
+}[] = [
+  { id: "napoleon-1", category: "napoleon", height: "tall" },
+  { id: "napoleon-2", category: "napoleon", height: "medium" },
+  { id: "napoleon-3", category: "napoleon", height: "short" },
+  { id: "napoleon-4", category: "napoleon", height: "medium" },
+  { id: "medovik-1", category: "medovik", height: "tall" },
+  { id: "medovik-2", category: "medovik", height: "medium" },
+  { id: "medovik-3", category: "medovik", height: "short" },
+  { id: "medovik-4", category: "medovik", height: "tall" },
+  { id: "smetannik-1", category: "smetannik", height: "medium" },
+  { id: "smetannik-2", category: "smetannik", height: "short" },
+  { id: "smetannik-3", category: "smetannik", height: "tall" },
+  { id: "smetannik-4", category: "smetannik", height: "medium" },
+  { id: "mannik-1", category: "mannik", height: "medium" },
+  { id: "mannik-2", category: "mannik", height: "short" },
+  { id: "mannik-3", category: "mannik", height: "tall" },
+  { id: "mannik-4", category: "mannik", height: "medium" },
+  { id: "custom-1", category: "custom", height: "tall" },
+  { id: "custom-2", category: "custom", height: "medium" },
+  { id: "custom-3", category: "custom", height: "short" },
+  { id: "custom-4", category: "custom", height: "medium" },
 ];
 
-export const galleryImages: GalleryImage[] = [
-  {
-    id: "napoleon-1",
-    src: galleryImagePath("napoleon-1"),
-    alt: "Layered Napoleon cake with flaky pastry and custard cream",
-    category: "napoleon",
-    height: "tall",
-  },
-  {
-    id: "napoleon-2",
-    src: galleryImagePath("napoleon-2"),
-    alt: "Close-up of crisp Napoleon pastry layers",
-    category: "napoleon",
-    height: "medium",
-  },
-  {
-    id: "napoleon-3",
-    src: galleryImagePath("napoleon-3"),
-    alt: "Classic mille-feuille Napoleon slices on a plate",
-    category: "napoleon",
-    height: "short",
-  },
-  {
-    id: "napoleon-4",
-    src: galleryImagePath("napoleon-4"),
-    alt: "Golden flaky pastry dessert with powdered sugar",
-    category: "napoleon",
-    height: "medium",
-  },
-  {
-    id: "medovik-1",
-    src: galleryImagePath("medovik-1"),
-    alt: "Honey Medovik cake with sour cream frosting",
-    category: "medovik",
-    height: "tall",
-  },
-  {
-    id: "medovik-2",
-    src: galleryImagePath("medovik-2"),
-    alt: "Slice of layered honey sponge cake",
-    category: "medovik",
-    height: "medium",
-  },
-  {
-    id: "medovik-3",
-    src: galleryImagePath("medovik-3"),
-    alt: "Medovik slice showing thin honey layers",
-    category: "medovik",
-    height: "short",
-  },
-  {
-    id: "medovik-4",
-    src: galleryImagePath("medovik-4"),
-    alt: "Whole honey cake decorated with fresh flowers",
-    category: "medovik",
-    height: "tall",
-  },
-  {
-    id: "smetannik-1",
-    src: galleryImagePath("smetannik-1"),
-    alt: "Light sour cream Smetannik cake slice",
-    category: "smetannik",
-    height: "medium",
-  },
-  {
-    id: "smetannik-2",
-    src: galleryImagePath("smetannik-2"),
-    alt: "Fluffy sponge cake with creamy filling",
-    category: "smetannik",
-    height: "short",
-  },
-  {
-    id: "smetannik-3",
-    src: galleryImagePath("smetannik-3"),
-    alt: "Elegant white cream cake for a celebration",
-    category: "smetannik",
-    height: "tall",
-  },
-  {
-    id: "smetannik-4",
-    src: galleryImagePath("smetannik-4"),
-    alt: "Whole sour cream layer cake on a stand",
-    category: "smetannik",
-    height: "medium",
-  },
-  {
-    id: "mannik-1",
-    src: galleryImagePath("mannik-1"),
-    alt: "Rustic semolina Mannik cake with golden crumb",
-    category: "mannik",
-    height: "medium",
-  },
-  {
-    id: "mannik-2",
-    src: galleryImagePath("mannik-2"),
-    alt: "Simple home-style cake with tender texture",
-    category: "mannik",
-    height: "short",
-  },
-  {
-    id: "mannik-3",
-    src: galleryImagePath("mannik-3"),
-    alt: "Semolina cake slice on a ceramic plate",
-    category: "mannik",
-    height: "tall",
-  },
-  {
-    id: "mannik-4",
-    src: galleryImagePath("mannik-4"),
-    alt: "Comforting everyday cake with light glaze",
-    category: "mannik",
-    height: "medium",
-  },
-  {
-    id: "custom-1",
-    src: galleryImagePath("custom-1"),
-    alt: "Custom tiered celebration cake with elegant piping",
-    category: "custom",
-    height: "tall",
-  },
-  {
-    id: "custom-2",
-    src: galleryImagePath("custom-2"),
-    alt: "Birthday cake with candles and custom decoration",
-    category: "custom",
-    height: "medium",
-  },
-  {
-    id: "custom-3",
-    src: galleryImagePath("custom-3"),
-    alt: "Custom chocolate cake topped with fresh berries",
-    category: "custom",
-    height: "short",
-  },
-  {
-    id: "custom-4",
-    src: galleryImagePath("custom-4"),
-    alt: "Assorted custom pastries and dessert display",
-    category: "custom",
-    height: "medium",
-  },
-];
-
-export function filterGalleryImages(filter: GalleryFilter): GalleryImage[] {
-  if (filter === "all") {
-    return galleryImages;
-  }
-
-  return galleryImages.filter((image) => image.category === filter);
+export function getGalleryFilters(locale: string) {
+  const f = getMessages(toLocale(locale)).galleryFilters;
+  return [
+    { id: "all" as const, label: f.all },
+    { id: "napoleon" as const, label: f.napoleon },
+    { id: "medovik" as const, label: f.medovik },
+    { id: "smetannik" as const, label: f.smetannik },
+    { id: "mannik" as const, label: f.mannik },
+    { id: "custom" as const, label: f.custom },
+  ];
 }
+
+export function getGalleryImages(locale: string): GalleryImage[] {
+  const altById = Object.fromEntries(
+    getMessages(toLocale(locale)).gallery.items.map((item) => [item.id, item.alt]),
+  );
+
+  return galleryMeta.map((meta) => ({
+    ...meta,
+    src: galleryImagePath(meta.id),
+    alt: altById[meta.id] ?? meta.id,
+  }));
+}
+
+export function filterGalleryImages(
+  filter: GalleryFilter,
+  locale: string,
+): GalleryImage[] {
+  const images = getGalleryImages(locale);
+  if (filter === "all") {
+    return images;
+  }
+  return images.filter((image) => image.category === filter);
+}
+
+/** @deprecated */
+export const galleryFilters = getGalleryFilters("en");
+export const galleryImages = getGalleryImages("en");

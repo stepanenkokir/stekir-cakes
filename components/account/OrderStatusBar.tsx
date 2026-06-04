@@ -1,29 +1,30 @@
+import { getTranslations } from "next-intl/server";
 import { ORDER_STATUS_STEPS, getOrderStatusIndex, type OrderStatus } from "@/lib/account/orders";
 
 type OrderStatusBarProps = {
   status: string;
 };
 
-const STEP_LABELS: Record<(typeof ORDER_STATUS_STEPS)[number], string> = {
-  pending: "Order Received",
-  confirmed: "Confirmed",
-  baking: "Baking",
-  out_for_delivery: "Out for Delivery",
-  delivered: "Delivered",
-};
-
-export function OrderStatusBar({ status }: OrderStatusBarProps) {
+export async function OrderStatusBar({ status }: OrderStatusBarProps) {
+  const t = await getTranslations("account.status.tracker");
   const normalized = status.toLowerCase() as OrderStatus;
 
   if (normalized === "cancelled") {
     return (
       <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
-        <p className="font-medium text-red-700">This order has been cancelled.</p>
+        <p className="font-medium text-red-700">{t("cancelled")}</p>
       </div>
     );
   }
 
   const activeIndex = getOrderStatusIndex(status);
+  const stepLabels: Record<(typeof ORDER_STATUS_STEPS)[number], string> = {
+    pending: t("received"),
+    confirmed: t("confirmed"),
+    baking: t("baking"),
+    out_for_delivery: t("outForDelivery"),
+    delivered: t("delivered"),
+  };
 
   return (
     <ol className="grid gap-3 md:grid-cols-5">
@@ -40,7 +41,7 @@ export function OrderStatusBar({ status }: OrderStatusBarProps) {
               {index + 1}
             </span>
             <span className={isCompleted ? "text-sm font-medium text-text" : "text-sm text-text-muted"}>
-              {STEP_LABELS[step]}
+              {stepLabels[step]}
             </span>
           </li>
         );

@@ -1,8 +1,11 @@
 import { StarRating } from "@/components/shared/StarRating";
 import { getReviewStats } from "@/lib/data/reviews";
+import { getLocale, getTranslations } from "next-intl/server";
 
-export function ReviewsSummary() {
-  const { averageRating, totalReviews } = getReviewStats();
+export async function ReviewsSummary() {
+  const locale = await getLocale();
+  const t = await getTranslations("reviews");
+  const { averageRating, totalReviews } = getReviewStats(locale);
 
   return (
     <div
@@ -17,14 +20,13 @@ export function ReviewsSummary() {
             <span className="text-xl font-normal text-text-muted"> / 5</span>
           </p>
           <p className="mt-1 text-sm text-text-muted">
-            Based on {totalReviews} customer review{totalReviews === 1 ? "" : "s"}
+            {totalReviews === 1
+              ? t("basedOn", { count: totalReviews })
+              : t("basedOnPlural", { count: totalReviews })}
           </p>
         </div>
       </div>
-      <p className="max-w-md text-sm leading-relaxed text-text-muted">
-        Every review is from a real order in the Sacramento area. Thank you for
-        trusting us with your celebrations.
-      </p>
+      <p className="max-w-md text-sm leading-relaxed text-text-muted">{t("trustNote")}</p>
     </div>
   );
 }

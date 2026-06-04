@@ -1,0 +1,1187 @@
+{
+  "common": {
+    "brand": "SteKir Cakes",
+    "home": "Inicio",
+    "orderNow": "Pedir ahora",
+    "browseCakes": "Ver pasteles",
+    "browseOurCakes": "Ver nuestros pasteles",
+    "learnMore": "Saber más",
+    "customizeOrder": "Personalizar y pedir",
+    "addToCart": "Añadir al carrito",
+    "addedToCart": "¡Añadido al carrito!",
+    "continue": "Continuar",
+    "back": "Atrás",
+    "contactUs": "Contáctenos",
+    "readFaq": "Ver preguntas frecuentes",
+    "readTerms": "Ver términos",
+    "emailUs": "Escríbanos",
+    "textUs": "Envíenos un mensaje",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "myAccount": "Mi cuenta",
+    "languageSwitcher": "Elegir idioma",
+    "fromPrice": "Desde {price}",
+    "lbs": "{weight} lbs",
+    "somethingWrong": "Algo salió mal. Por favor, inténtelo de nuevo.",
+    "required": "Obligatorio",
+    "optional": "Opcional",
+    "customer": "Cliente",
+    "friend": "Amigo",
+    "customCake": "Pastel personalizado",
+    "na": "N/D",
+    "all": "Todos",
+    "soon": "Pronto",
+    "sending": "Enviando...",
+    "saving": "Guardando...",
+    "updating": "Actualizando...",
+    "deleting": "Eliminando...",
+    "placingOrder": "Realizando pedido...",
+    "placeOrder": "Realizar pedido",
+    "proceedCheckout": "Ir al pago",
+    "continueShopping": "Seguir comprando",
+    "sendMessage": "Enviar mensaje",
+    "submitReview": "Enviar reseña",
+    "submitting": "Enviando...",
+    "saveProfile": "Guardar perfil",
+    "updatePassword": "Actualizar contraseña",
+    "deleteAccount": "Eliminar cuenta",
+    "viewOrders": "Ver pedidos",
+    "updateProfile": "Actualizar perfil",
+    "viewOrderStatus": "Ver estado del pedido",
+    "backToHome": "Volver al inicio",
+    "seeFullGallery": "Ver galería completa",
+    "readAllReviews": "Leer todas las reseñas",
+    "sendAnotherMessage": "Enviar otro mensaje",
+    "ourCakes": "Nuestros pasteles",
+    "catalog": "Catálogo",
+    "gallery": "Galería",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "reviews": "Reseñas",
+    "faq": "Preguntas frecuentes",
+    "terms": "Términos",
+    "privacy": "Privacidad",
+    "cart": "Carrito",
+    "checkout": "Pago",
+    "termsConditions": "Términos y condiciones",
+    "privacyPolicy": "Política de privacidad",
+    "paymentZelle": "Zelle",
+    "paymentVenmo": "Venmo",
+    "paymentCash": "Efectivo contra entrega",
+    "pickup": "Recogida",
+    "delivery": "Entrega",
+    "depositPercent": "Depósito requerido (50%)",
+    "depositConfirm": "Depósito requerido (50% para confirmar)",
+    "orderNumber": "Número de pedido",
+    "orderSummary": "Resumen del pedido",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Costo de entrega",
+    "estDelivery": "Entrega est.",
+    "estimatedTotal": "Total estimado",
+    "total": "Total",
+    "weight": "Peso",
+    "tiers": "pisos",
+    "tier": "piso",
+    "inscription": "Inscripción",
+    "notes": "Notas",
+    "ingredients": "Ingredientes",
+    "storage": "Conservación",
+    "paymentMethod": "Método de pago",
+    "cake": "Pastel",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "nav": {
+    "ourCakes": "Nuestros pasteles",
+    "gallery": "Galería",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "mainNav": "Navegación principal",
+    "mobileNav": "Navegación móvil",
+    "cartAria": "Carrito de compras, {count} artículos",
+    "accountAria": "Ir a mi cuenta",
+    "signInAria": "Iniciar sesión en la cuenta",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "closeOverlay": "Cerrar superposición del menú"
+  },
+  "footer": {
+    "tagline": "Pasteles caseros de Europa del Este en Sacramento — horneados frescos bajo pedido para cada celebración.",
+    "quickLinks": "Enlaces rápidos",
+    "contact": "Contacto",
+    "serviceArea": "Servimos Sacramento, Carmichael, Folsom, Roseville, El Dorado Hills, Elk Grove y Rancho Cordova",
+    "copyright": "© {year} SteKir Cakes. Todos los derechos reservados."
+  },
+  "metadata": {
+    "defaultTitle": "SteKir Cakes | Pasteles caseros personalizados en Sacramento",
+    "defaultDescription": "Pasteles personalizados al estilo de Europa del Este, hechos bajo pedido en Sacramento. Napoleon, Medovik, Smetannik y Mannik — entregados a Folsom, Roseville, El Dorado Hills y más.",
+    "ogDescription": "Pasteles clásicos de Europa del Este, horneados frescos bajo pedido y entregados en el área de Sacramento.",
+    "template": "%s | SteKir Cakes",
+    "catalogTitle": "Nuestros pasteles",
+    "catalogDescription": "Recetas clásicas de Europa del Este, reinventadas para cada celebración",
+    "notFound": "Pastel no encontrado"
+  },
+  "cakes": {
+    "napoleon": {
+      "name": "Napoleon",
+      "tagline": "Capas de tradición, un sabor para toda la vida",
+      "description": "Nuestro Napoleon es un auténtico clásico: docenas de capas de hojaldre finísimas y crujientes alternadas con una rica crema pastelera casera. Cada bocado equilibra lo crujiente y lo sedoso. Perfecto para cumpleaños, aniversarios y cualquier momento que merezca celebrarse.",
+      "ingredients": "Mantequilla, harina, huevos, leche entera, azúcar, vainilla",
+      "servings": "1 lb alimenta aprox. a 3–4 personas",
+      "prepTime": "Se requieren 3 días de anticipación",
+      "storageInstructions": "Refrigere en la caja. Mejor consumir en 3 días. El Napoleon mejora con 1 día de refrigeración.",
+      "tags": [
+        "Birthday",
+        "Anniversary",
+        "Most Popular"
+      ]
+    },
+    "medovik": {
+      "name": "Medovik",
+      "tagline": "Capas con miel, crema suave como una nube",
+      "description": "El Medovik es nuestro pastel más querido: finas capas de bizcocho de miel que se impregnan con el tiempo, acompañadas de un glaseado aterciopelado de crema agria. Su dulzura aromática y textura que se deshace en la boca lo han convertido en el favorito de la familia de generación en generación.",
+      "ingredients": "Miel, mantequilla, huevos, harina, crema agria, azúcar",
+      "servings": "1 lb alimenta aprox. a 3–4 personas",
+      "prepTime": "Se requieren 3 días de anticipación",
+      "storageInstructions": "Refrigere en la caja. Mejor consumir en 3 días para una frescura y textura óptimas.",
+      "tags": [
+        "Birthday",
+        "Holiday",
+        "Fan Favorite"
+      ]
+    },
+    "smetannik": {
+      "name": "Smetannik",
+      "tagline": "Ligero como una nube, cálido como el hogar",
+      "description": "El Smetannik es el pastel que su abuela habría hecho un domingo por la tarde. Esponjosas capas de bizcocho con crema agria y un relleno suave y ligeramente ácido — más ligero de lo que parece e imposible de dejar de comer.",
+      "ingredients": "Crema agria, huevos, harina, azúcar, mantequilla, vainilla",
+      "servings": "1 lb alimenta aprox. a 3–4 personas",
+      "prepTime": "Se requieren 2 días de anticipación",
+      "storageInstructions": "Refrigere en la caja. Mejor consumir en 3 días. Deje reposar a temperatura ambiente 15 minutos antes de servir.",
+      "tags": [
+        "Everyday",
+        "Birthday",
+        "Kids"
+      ]
+    },
+    "mannik": {
+      "name": "Mannik",
+      "tagline": "Sencillo, tierno y profundamente satisfactorio",
+      "description": "Nuestro Mannik es un pastel a base de sémola con una miga única, densa pero tierna — sin harina, solo sémola gruesa que le da una textura rústica y reconfortante. Adaptable sin lácteos, ideal para niños y quienes prefieren un postre menos dulce.",
+      "ingredients": "Sémola, huevos, crema agria, azúcar, mantequilla, bicarbonato",
+      "servings": "1 lb alimenta aprox. a 3–4 personas",
+      "prepTime": "Se requieren 2 días de anticipación",
+      "storageInstructions": "Guarde cubierto a temperatura ambiente hasta 2 días, o refrigere hasta 4 días. Mejor disfrutarlo en 2 días.",
+      "tags": [
+        "Kids",
+        "Everyday",
+        "Gluten-Sensitive Option"
+      ]
+    }
+  },
+  "cakeTags": {
+    "Birthday": "Cumpleaños",
+    "Anniversary": "Aniversario",
+    "Most Popular": "Más popular",
+    "Holiday": "Festividades",
+    "Fan Favorite": "Favorito del público",
+    "Everyday": "Día a día",
+    "Kids": "Niños",
+    "Gluten-Sensitive Option": "Opción sensible al gluten"
+  },
+  "catalogFilters": {
+    "all": "Todos",
+    "birthday": "Cumpleaños",
+    "anniversary": "Aniversario",
+    "holiday": "Festividades",
+    "everyday": "Día a día",
+    "filterAria": "Filtrar pasteles por ocasión",
+    "noMatch": "Ningún pastel coincide con esta ocasión. Pruebe otro filtro o vea todos los pasteles."
+  },
+  "galleryFilters": {
+    "all": "Todos",
+    "napoleon": "Napoleon",
+    "medovik": "Medovik",
+    "smetannik": "Smetannik",
+    "mannik": "Mannik",
+    "custom": "Diseños personalizados",
+    "filterAria": "Filtrar galería por tipo de pastel",
+    "noPhotos": "Aún no hay fotos en esta categoría. ¡Vuelva pronto!",
+    "viewPhoto": "Ver foto: {alt}",
+    "lightboxTitle": "Visor de imágenes de la galería",
+    "closeViewer": "Cerrar visor de galería",
+    "close": "Cerrar",
+    "prev": "Imagen anterior",
+    "next": "Imagen siguiente",
+    "counter": "{current} de {total}"
+  },
+  "faq": {
+    "pageTitle": "Preguntas frecuentes",
+    "pageIntro": "Todo lo que necesita saber sobre pedidos, entrega, pago y cuidado de su pastel",
+    "footerTitle": "¿Aún tiene preguntas?",
+    "footerText": "Estaremos encantados de ayudarle con solicitudes personalizadas, consultas de bodas o cualquier tema no cubierto aquí.",
+    "categories": [
+      {
+        "id": "ordering",
+        "title": "Pedidos",
+        "items": [
+          {
+            "id": "advance-notice",
+            "question": "¿Con cuánta anticipación debo pedir?",
+            "answer": "Requerimos un mínimo de 3 días de anticipación para pedidos estándar. Para pedidos grandes o diseños personalizados, permita al menos 1 semana para que podamos planificar cada detalle con cuidado."
+          },
+          {
+            "id": "minimum-size",
+            "question": "¿Cuál es el tamaño mínimo del pastel?",
+            "answer": "Nuestro tamaño mínimo es 2 lbs, que sirve aproximadamente para 8–10 personas. Mannik está disponible desde 1.5 lbs para reuniones más pequeñas."
+          },
+          {
+            "id": "customize-flavor",
+            "question": "¿Puedo personalizar el sabor o el relleno?",
+            "answer": "¡Sí! Aceptamos solicitudes de personalización. Contáctenos a través del formulario o llámenos para hablar de variaciones de sabor, rellenos e ideas de diseño."
+          },
+          {
+            "id": "wedding-cakes",
+            "question": "¿Hacen pasteles de boda?",
+            "answer": "Nos encanta crear pasteles para bodas y celebraciones especiales. Las consultas personalizadas son bienvenidas — contáctenos con su fecha, número de invitados y visión."
+          }
+        ]
+      },
+      {
+        "id": "delivery",
+        "title": "Entrega",
+        "items": [
+          {
+            "id": "delivery-areas",
+            "question": "¿A qué zonas entregan?",
+            "answer": "Entregamos en Sacramento, Carmichael, Folsom, Roseville, El Dorado Hills, Elk Grove, Rancho Cordova y Fair Oaks — hasta 30 millas del código postal 95608."
+          },
+          {
+            "id": "delivery-fee",
+            "question": "¿Cuánto cuesta la entrega?",
+            "answer": "La entrega cuesta $10 dentro de 15 millas de nuestra cocina y $20 para direcciones a 15–30 millas. Su tarifa exacta se calcula al pagar según su ubicación."
+          },
+          {
+            "id": "pickup",
+            "question": "¿Puedo recoger el pedido?",
+            "answer": "¡Sí! La recogida es gratuita. Compartiremos la dirección y la franja horaria después de confirmar su pedido."
+          }
+        ]
+      },
+      {
+        "id": "payment",
+        "title": "Pago",
+        "items": [
+          {
+            "id": "payment-methods",
+            "question": "¿Cómo puedo pagar?",
+            "answer": "Aceptamos Zelle, Venmo y efectivo contra entrega. Se requiere un depósito del 50% para confirmar su pedido — le enviaremos instrucciones de pago después de revisar su solicitud."
+          },
+          {
+            "id": "payment-due",
+            "question": "¿Cuándo debo pagar?",
+            "answer": "El depósito del 50% vence dentro de las 24 horas posteriores a la confirmación del pedido. El saldo restante se paga en la entrega o al recoger."
+          }
+        ]
+      },
+      {
+        "id": "allergies-storage",
+        "title": "Alergias y conservación",
+        "items": [
+          {
+            "id": "allergens",
+            "question": "¿Sus pasteles contienen alérgenos?",
+            "answer": "Todos nuestros pasteles contienen lácteos y huevos. Mannik puede adaptarse como opción sensible al gluten — infórmenos sobre alergias o necesidades dietéticas al pedir."
+          },
+          {
+            "id": "storage",
+            "question": "¿Cómo debo conservar el pastel?",
+            "answer": "Mantenga el pastel refrigerado en la caja. Para mejor sabor y textura, consúmalo en 3 días. El Napoleon especialmente se beneficia de un día de refrigeración antes de servir."
+          }
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "pageTitle": "Términos y condiciones",
+    "pageIntro": "Lea estas políticas antes de realizar un pedido. Al marcar la casilla de acuerdo al pagar, acepta estos términos.",
+    "onThisPage": "En esta página",
+    "contactForm": "Formulario de contacto",
+    "footerCtaTitle": "¿Listo para pedir?",
+    "footerCtaText": "Explore nuestro catálogo, personalice su pastel y acepte estos términos al pagar.",
+    "browseCakes": "Ver pasteles",
+    "readFaq": "Ver preguntas frecuentes",
+    "sections": [
+      {
+        "id": "order-policy",
+        "title": "Política de pedidos",
+        "paragraphs": [
+          "Todos los pasteles se elaboran frescos bajo pedido. Al realizar un pedido con SteKir Cakes, acepta las políticas descritas en esta página.",
+          "Los pedidos estándar requieren un mínimo de 3 días de anticipación antes de la fecha de entrega o recogida solicitada. Pedidos grandes, diseños de varios pisos o pasteles muy personalizados pueden requerir al menos 1 semana de anticipación.",
+          "Nuestro tamaño mínimo es 2 lbs (aproximadamente 8–10 porciones), salvo indicación contraria para un pastel específico. Los detalles del pedido — peso, pisos, inscripción, notas de decoración y fecha de entrega — se confirman antes de comenzar el horneado."
+        ],
+        "listItems": [
+          "Los pedidos no se confirman hasta que revisemos su solicitud y recibamos el depósito del 50% requerido.",
+          "Los cambios de peso, diseño o fecha de entrega pueden aceptarse a nuestra discreción si se solicitan con suficiente anticipación.",
+          "Las cancelaciones realizadas más de 48 horas antes de la fecha programada de entrega o recogida pueden recibir un reembolso parcial del depósito, menos los costos ya incurridos.",
+          "Las cancelaciones dentro de las 48 horas de la entrega o recogida no son elegibles para reembolso, ya que los ingredientes se han comprado y la producción normalmente ha comenzado."
+        ]
+      },
+      {
+        "id": "delivery-policy",
+        "title": "Política de entrega",
+        "paragraphs": [
+          "Entregamos en el área metropolitana de Sacramento y sus suburbios circundantes, hasta 30 millas del código postal 95608."
+        ],
+        "listItems": [
+          "Costo de entrega: $10 dentro de 15 millas de nuestra cocina.",
+          "Costo de entrega: $20 para direcciones a 15–30 millas.",
+          "La recogida gratuita está disponible — la dirección y la franja horaria se comparten después de confirmar su pedido.",
+          "Las zonas de entrega incluyen Sacramento, Carmichael, Folsom, Roseville, El Dorado Hills, Elk Grove, Rancho Cordova, Fair Oaks, Citrus Heights y Orangevale.",
+          "Debe haber alguien disponible para recibir el pedido en la franja horaria acordada. Si la entrega no puede completarse por dirección incorrecta, destinatario no disponible o acceso restringido, podemos intentar reprogramar. Un segundo intento de entrega puede generar un cargo adicional.",
+          "No somos responsables de daños a pasteles dejados sin supervisión después de una entrega o entrega en recogida exitosa."
+        ]
+      },
+      {
+        "id": "payment-policy",
+        "title": "Política de pago",
+        "paragraphs": [
+          "Aceptamos Zelle, Venmo y efectivo contra entrega o al recoger. Las instrucciones de pago se envían después de confirmar los detalles de su pedido."
+        ],
+        "listItems": [
+          "Se requiere un depósito del 50% para confirmar su pedido.",
+          "El depósito vence dentro de las 24 horas posteriores a la confirmación del pedido.",
+          "El saldo restante se paga en la entrega o al recoger.",
+          "Los pedidos pueden cancelarse si el depósito no se recibe dentro del plazo indicado.",
+          "Los precios están en USD y pueden actualizarse sin previo aviso; los pedidos confirmados se honran al precio acordado en la confirmación."
+        ]
+      },
+      {
+        "id": "allergen-disclaimer",
+        "title": "Aviso sobre alérgenos",
+        "paragraphs": [
+          "Nuestros pasteles se preparan en una cocina casera con licencia bajo el programa Cottage Food Operations del Condado de Sacramento. Puede producirse contacto cruzado con alérgenos comunes.",
+          "Infórmenos sobre alergias o restricciones dietéticas al pedir. Aunque tomamos precauciones razonables, no podemos garantizar un entorno libre de alérgenos."
+        ],
+        "listItems": [
+          "Todos los pasteles contienen lácteos y huevos, salvo acuerdo explícito en contrario.",
+          "Mannik puede adaptarse como opción sensible al gluten — contáctenos para hablar de sus necesidades.",
+          "No usamos frutos secos como ingrediente estándar, pero indique alergias a frutos secos para evaluar su pedido individualmente.",
+          "Los clientes con alergias graves piden bajo su propio riesgo y deben consultarnos antes de realizar un pedido."
+        ]
+      },
+      {
+        "id": "liability-limitations",
+        "title": "Limitación de responsabilidad",
+        "paragraphs": [
+          "SteKir Cakes ofrece productos horneados personalizados tal cual. Nuestra responsabilidad se limita al monto pagado por el pedido en cuestión."
+        ],
+        "listItems": [
+          "No somos responsables del almacenamiento, manipulación o consumo inadecuados después de la entrega o recogida.",
+          "Los productos perecederos deben refrigerarse de inmediato y consumirse en 3 días, salvo indicación contraria.",
+          "No somos responsables de retrasos causados por circunstancias fuera de nuestro control razonable, incluido clima severo o condiciones de tráfico.",
+          "Las fotografías en nuestro sitio web y redes sociales son representativas; pueden producirse ligeras variaciones en la decoración debido a la naturaleza artesanal de nuestro trabajo.",
+          "Nada en estos términos limita derechos que no puedan excluirse según la ley aplicable de California."
+        ]
+      },
+      {
+        "id": "contact",
+        "title": "Información de contacto",
+        "paragraphs": [
+          "¿Preguntas sobre estos términos, su pedido o una solicitud personalizada? Escríbanos — estaremos encantados de ayudarle.",
+          "SteKir Cakes · Sacramento, CA · Cottage Food Operation",
+          "Estos términos se actualizaron por última vez en mayo de 2026. Podemos revisar esta página periódicamente; el uso continuado de nuestros servicios de pedido constituye la aceptación de la versión vigente."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "pageTitle": "Política de privacidad",
+    "pageIntro": "Cómo tratamos su información personal cuando navega, pide o crea una cuenta en SteKir Cakes.",
+    "onThisPage": "En esta página",
+    "contactForm": "Formulario de contacto",
+    "footerCtaTitle": "¿Preguntas sobre sus datos?",
+    "footerCtaText": "Escríbanos para solicitar acceso, corrección o eliminación de su información personal.",
+    "emailUs": "Escríbanos",
+    "readTerms": "Ver términos",
+    "sections": [
+      {
+        "id": "overview",
+        "title": "Resumen",
+        "paragraphs": [
+          "SteKir Cakes («nosotros») respeta su privacidad. Esta política explica qué información personal recopilamos cuando usa nuestro sitio web, realiza un pedido o crea una cuenta, y cómo usamos y protegemos esa información.",
+          "Al usar nuestro sitio o enviar un pedido, acepta las prácticas descritas aquí. Si no está de acuerdo, no utilice nuestros servicios de pedido."
+        ]
+      },
+      {
+        "id": "data-we-collect",
+        "title": "Qué datos recopilamos",
+        "paragraphs": [
+          "Recopilamos solo la información necesaria para cumplir sus pedidos de pasteles, comunicarnos con usted y mejorar su experiencia en nuestro sitio."
+        ],
+        "listItems": [
+          "Datos de contacto: nombre, dirección de correo electrónico y número de teléfono.",
+          "Información de entrega: dirección, ciudad, código postal, fecha de entrega preferida, franja horaria e instrucciones especiales (cuando elige entrega).",
+          "Detalles del pedido: selección de pasteles, peso, pisos, inscripciones, notas de decoración, preferencia de método de pago e historial de pedidos.",
+          "Información de cuenta: si crea una cuenta, almacenamos los datos de su perfil vinculados a su inicio de sesión a través de nuestro proveedor de autenticación.",
+          "Comunicaciones: mensajes enviados mediante nuestro formulario de contacto o por correo, mensaje de texto o teléfono.",
+          "Datos técnicos: registros básicos del servidor (como dirección IP y tipo de navegador) usados para seguridad y resolución de problemas — no para perfiles publicitarios."
+        ]
+      },
+      {
+        "id": "how-we-use-data",
+        "title": "Cómo usamos sus datos",
+        "paragraphs": [
+          "Usamos su información únicamente para operar nuestra pastelería y atenderle. No vendemos sus datos personales a terceros."
+        ],
+        "listItems": [
+          "Procesar y cumplir pedidos de pasteles, incluidas llamadas o mensajes de confirmación.",
+          "Enviar confirmaciones de pedido, instrucciones de pago y actualizaciones de entrega por correo o SMS.",
+          "Responder preguntas, solicitudes de diseño personalizado e consultas de soporte.",
+          "Mantener su historial de pedidos cuando ha iniciado sesión en su cuenta.",
+          "Cumplir obligaciones legales y proteger contra fraude o abuso de nuestros servicios."
+        ]
+      },
+      {
+        "id": "sharing",
+        "title": "Compartir con terceros",
+        "paragraphs": [
+          "No vendemos, alquilamos ni intercambiamos su información personal. Compartimos datos solo con proveedores de confianza que nos ayudan a operar el negocio, y únicamente según sea necesario para desempeñar su función."
+        ],
+        "listItems": [
+          "Envío de correos (p. ej., confirmaciones de pedido) a través de nuestro proveedor de correo transaccional.",
+          "Servicios de alojamiento, base de datos y autenticación que almacenan pedidos y datos de cuenta de forma segura.",
+          "La coordinación de pagos se realiza directamente entre usted y nosotros (Zelle, Venmo o efectivo) — no almacenamos números de tarjeta de crédito en nuestro sitio web.",
+          "Podemos divulgar información si la ley lo exige o para proteger los derechos, la seguridad o la propiedad de nuestros clientes y del negocio."
+        ]
+      },
+      {
+        "id": "cookies",
+        "title": "Cookies y almacenamiento local",
+        "paragraphs": [
+          "Nuestro sitio usa cookies mínimas y almacenamiento del navegador. No usamos cookies publicitarias ni de seguimiento entre sitios."
+        ],
+        "listItems": [
+          "El contenido del carrito puede almacenarse en el almacenamiento local de su navegador para que sus selecciones persistan entre visitas.",
+          "Pueden usarse cookies de sesión si inicia sesión en su cuenta, gestionadas por nuestro proveedor de autenticación.",
+          "Puede borrar el almacenamiento local y las cookies en la configuración de su navegador; hacerlo puede vaciar su carrito o cerrar su sesión."
+        ]
+      },
+      {
+        "id": "retention-security",
+        "title": "Conservación y seguridad",
+        "paragraphs": [
+          "Conservamos registros de pedidos y contacto el tiempo necesario para cumplir pedidos, resolver disputas y cumplir requisitos contables o legales.",
+          "Aplicamos medidas técnicas y organizativas razonables para proteger sus datos. Ningún servicio en línea puede garantizar seguridad absoluta; use una contraseña fuerte y única si crea una cuenta."
+        ]
+      },
+      {
+        "id": "your-rights",
+        "title": "Sus derechos y eliminación de datos",
+        "paragraphs": [
+          "Según donde viva, puede tener derecho a acceder, corregir o eliminar la información personal que tenemos sobre usted.",
+          "Los residentes de California pueden tener derechos adicionales bajo la California Consumer Privacy Act (CCPA), incluido el derecho a saber qué recopilamos y a solicitar la eliminación, sujeto a ciertas excepciones (como registros que debemos conservar para completar un pedido o fines fiscales)."
+        ],
+        "listItems": [
+          "Para solicitar una copia de sus datos, corregir información inexacta o pedirnos que eliminemos su cuenta y registros asociados, contáctenos con los datos indicados abajo.",
+          "Responderemos en un plazo razonable. Las solicitudes de eliminación pueden limitarse cuando estemos obligados a conservar información por razones legales u operativas."
+        ]
+      },
+      {
+        "id": "children",
+        "title": "Privacidad de menores",
+        "paragraphs": [
+          "Nuestros servicios no están dirigidos a menores de 13 años. No recopilamos a sabiendas información personal de menores. Si cree que hemos recibido dicha información, contáctenos para eliminarla."
+        ]
+      },
+      {
+        "id": "contact",
+        "title": "Contáctenos",
+        "paragraphs": [
+          "¿Preguntas sobre esta política de privacidad o una solicitud de datos? Escríbanos — le ayudaremos con prontitud.",
+          "SteKir Cakes · Sacramento, CA · Cottage Food Operation",
+          "Esta política se actualizó por última vez en mayo de 2026. Podemos actualizar esta página periódicamente; los cambios importantes se reflejarán aquí con una fecha actualizada."
+        ]
+      }
+    ]
+  },
+  "reviews": {
+    "filters": {
+      "all": "Todos los pasteles",
+      "napoleon": "Napoleon",
+      "medovik": "Medovik",
+      "smetannik": "Smetannik",
+      "mannik": "Mannik"
+    },
+    "pageTitle": "Lo que dicen nuestros clientes",
+    "pageIntro": "Opiniones sinceras de familias y celebraciones en Sacramento, Folsom, Roseville y más allá",
+    "basedOn": "Basado en {count} reseña de cliente",
+    "basedOnPlural": "Basado en {count} reseñas de clientes",
+    "trustNote": "Cada reseña proviene de un pedido real en el área de Sacramento. Gracias por confiar en nosotros para sus celebraciones.",
+    "noReviews": "Aún no hay reseñas para este pastel. ¡Sea el primero en compartir su experiencia!",
+    "photoBy": "Foto compartida por {name}",
+    "items": [
+      {
+        "id": "1",
+        "quote": "El Napoleon era absolutamente impresionante: capas crujientes y una crema divina. ¡Nuestros invitados del aniversario no dejaban de elogiarlo!",
+        "name": "Maria K.",
+        "occasion": "Pastel de aniversario",
+        "cakeSlug": "napoleon"
+      },
+      {
+        "id": "2",
+        "quote": "Pedí un Medovik para el cumpleaños de mi hija y fue la estrella de la fiesta. Tan húmedo y no demasiado dulce — exactamente lo que buscábamos.",
+        "name": "James T.",
+        "occasion": "Pastel de cumpleaños",
+        "cakeSlug": "medovik"
+      },
+      {
+        "id": "3",
+        "quote": "Fresco, hermoso y entregado puntualmente en Folsom. El Smetannik sabía a algo de la cocina de mi abuela.",
+        "name": "Elena P.",
+        "occasion": "Celebración familiar",
+        "cakeSlug": "smetannik"
+      },
+      {
+        "id": "4",
+        "quote": "Pedimos un Mannik cada pocos meses — es nuestro favorito para reuniones de fin de semana. Ligero, tierno y siempre perfecto.",
+        "name": "David R.",
+        "occasion": "Antojo del día a día",
+        "cakeSlug": "mannik"
+      },
+      {
+        "id": "5",
+        "quote": "Servicio profesional de principio a fin. Confirmaron cada detalle por mensaje y el pastel se veía aún mejor en persona.",
+        "name": "Sarah M.",
+        "occasion": "Fiesta de festividades",
+        "cakeSlug": "medovik"
+      },
+      {
+        "id": "6",
+        "quote": "El mejor Napoleon que he probado fuera de Europa. Las capas eran increíblemente finas y crujientes. Valió cada centavo para nuestro aniversario de bodas.",
+        "name": "Olga V.",
+        "occasion": "Aniversario de bodas",
+        "cakeSlug": "napoleon"
+      },
+      {
+        "id": "7",
+        "quote": "El Medovik fue el centro de atención en nuestra fiesta de oficina. Varios compañeros pidieron el contacto de la pastelería el mismo día.",
+        "name": "Michael B.",
+        "occasion": "Celebración de oficina",
+        "cakeSlug": "medovik"
+      },
+      {
+        "id": "8",
+        "quote": "Ligero, ligeramente ácido y no demasiado dulce — el Smetannik fue perfecto para nuestro brunch en Roseville.",
+        "name": "Jennifer L.",
+        "occasion": "Reunión de brunch",
+        "cakeSlug": "smetannik"
+      },
+      {
+        "id": "9",
+        "quote": "¡A mis hijos les encantó el Mannik! Excelente textura y justo la cantidad de dulzura. Definitivamente volveremos a pedir.",
+        "name": "Chris H.",
+        "occasion": "Cumpleaños infantil",
+        "cakeSlug": "mannik"
+      },
+      {
+        "id": "10",
+        "quote": "Entregado a Elk Grove a tiempo y perfectamente refrigerado. El Napoleon se mantuvo impecable para nuestra cena familiar.",
+        "name": "Nina S.",
+        "occasion": "Cena familiar",
+        "cakeSlug": "napoleon"
+      },
+      {
+        "id": "11",
+        "quote": "Las capas de miel se deshacían en la boca. Este Medovik me recordó a los pasteles de mi infancia en Ucrania.",
+        "name": "Andrei M.",
+        "occasion": "Celebración de herencia",
+        "cakeSlug": "medovik"
+      },
+      {
+        "id": "12",
+        "quote": "Pedí un Smetannik de 3 lbs para un baby shower — elegante, delicioso y presentado con mucho gusto. ¡Muy recomendable!",
+        "name": "Rachel W.",
+        "occasion": "Baby shower",
+        "cakeSlug": "smetannik"
+      }
+    ]
+  },
+  "gallery": {
+    "items": [
+      {
+        "id": "napoleon-1",
+        "alt": "Pastel Napoleon en capas con hojaldre y crema pastelera"
+      },
+      {
+        "id": "napoleon-2",
+        "alt": "Primer plano de capas crujientes de hojaldre Napoleon"
+      },
+      {
+        "id": "napoleon-3",
+        "alt": "Porciones clásicas de Napoleon mille-feuille en un plato"
+      },
+      {
+        "id": "napoleon-4",
+        "alt": "Postre de hojaldre dorado con azúcar glas"
+      },
+      {
+        "id": "medovik-1",
+        "alt": "Pastel Medovik de miel con glaseado de crema agria"
+      },
+      {
+        "id": "medovik-2",
+        "alt": "Porción de bizcocho de miel en capas"
+      },
+      {
+        "id": "medovik-3",
+        "alt": "Porción de Medovik mostrando finas capas de miel"
+      },
+      {
+        "id": "medovik-4",
+        "alt": "Pastel de miel entero decorado con flores frescas"
+      },
+      {
+        "id": "smetannik-1",
+        "alt": "Porción ligera de pastel Smetannik con crema agria"
+      },
+      {
+        "id": "smetannik-2",
+        "alt": "Bizcocho esponjoso con relleno cremoso"
+      },
+      {
+        "id": "smetannik-3",
+        "alt": "Elegante pastel de crema blanca para una celebración"
+      },
+      {
+        "id": "smetannik-4",
+        "alt": "Pastel entero de capas con crema agria sobre un soporte"
+      },
+      {
+        "id": "mannik-1",
+        "alt": "Pastel Mannik rústico de sémola con miga dorada"
+      },
+      {
+        "id": "mannik-2",
+        "alt": "Pastel casero sencillo con textura tierna"
+      },
+      {
+        "id": "mannik-3",
+        "alt": "Porción de pastel de sémola en plato de cerámica"
+      },
+      {
+        "id": "mannik-4",
+        "alt": "Pastel reconfortante del día a día con glaseado ligero"
+      },
+      {
+        "id": "custom-1",
+        "alt": "Pastel personalizado de varios pisos con decoración elegante"
+      },
+      {
+        "id": "custom-2",
+        "alt": "Pastel de cumpleaños con velas y decoración personalizada"
+      },
+      {
+        "id": "custom-3",
+        "alt": "Pastel de chocolate personalizado con frutos rojos frescos"
+      },
+      {
+        "id": "custom-4",
+        "alt": "Variedad de pasteles personalizados y exhibición de postres"
+      }
+    ]
+  },
+  "contact": {
+    "pageTitle": "Contáctenos",
+    "pageIntro": "Estamos aquí para ayudarle con pedidos personalizados, preguntas de entrega y celebraciones especiales",
+    "reachUs": "Cómo contactarnos",
+    "reachIntro": "¿Preguntas sobre un diseño personalizado, pastel de boda o entrega? Nos encantaría saber de usted.",
+    "businessHours": "Horario de atención",
+    "hoursNote": "Los pasteles se hornean frescos según su calendario — permita al menos 3 días de anticipación para pasteles estándar.",
+    "sendMessage": "Enviar un mensaje",
+    "formIntro": "Consultas de bodas, diseños personalizados o cualquier otra cosa — cuéntenos qué está planeando.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "phoneHint": "Para poder llamarle o escribirle",
+    "placeholders": {
+      "name": "Su nombre",
+      "email": "you@example.com",
+      "phone": "(916) 555-0123",
+      "message": "Cuéntenos sobre su evento, pastel preferido, fecha de entrega o cualquier pregunta..."
+    },
+    "successTitle": "¡Mensaje enviado!",
+    "successText": "Gracias por contactarnos. Le responderemos en un día hábil — normalmente mucho antes.",
+    "deliveryZone": "Zona de entrega",
+    "deliveryZoneIntro": "Entregamos pasteles frescos dentro de 30 millas de Carmichael, CA (95608). La entrega cuesta $10 dentro de 15 millas y $20 de 15 a 30 millas.",
+    "radiusLabel": "Radio de entrega de 30 millas",
+    "centerLabel": "Carmichael, CA (95608)",
+    "areasTitle": "Zonas que servimos",
+    "channels": {
+      "phone": {
+        "label": "Teléfono",
+        "description": "Llame o envíe un mensaje para preguntas rápidas sobre su pedido"
+      },
+      "email": {
+        "label": "Correo electrónico",
+        "description": "Respondemos en un día hábil"
+      },
+      "instagram": {
+        "label": "Instagram",
+        "description": "Vea nuestras últimas creaciones y el detrás de escena"
+      },
+      "sms": {
+        "label": "Mensaje de texto",
+        "value": "Envíenos un mensaje",
+        "description": "La forma más rápida de contactarnos sobre pedidos personalizados"
+      },
+      "whatsapp": {
+        "label": "WhatsApp",
+        "value": "Chatee en WhatsApp",
+        "description": "Escríbanos cuando quiera — respondemos en horario de atención"
+      }
+    },
+    "hours": [
+      {
+        "days": "Lun – Sáb",
+        "hours": "9:00 AM – 7:00 PM"
+      },
+      {
+        "days": "Domingo",
+        "hours": "10:00 AM – 4:00 PM"
+      }
+    ],
+    "areas": [
+      "Sacramento",
+      "Carmichael",
+      "Folsom",
+      "Roseville",
+      "El Dorado Hills",
+      "Elk Grove",
+      "Rancho Cordova",
+      "Fair Oaks",
+      "Citrus Heights",
+      "Orangevale"
+    ]
+  },
+  "home": {
+    "hero": {
+      "accent": "Pastelería casera de Sacramento",
+      "title": "Pasteles caseros, hechos bajo pedido",
+      "subtitle": "Elaborados con amor en Sacramento. Entregamos a Folsom, Roseville, El Dorado Hills y más allá.",
+      "browseCakes": "Ver pasteles",
+      "howItWorks": "Cómo funciona",
+      "imageAlt": "Pastel Napoleon en capas con hojaldre dorado y crema",
+      "scrollLabel": "Desplácese para saber más"
+    },
+    "trust": {
+      "aria": "Por qué confían en nosotros",
+      "items": [
+        "Ingredientes naturales",
+        "Cualquier tamaño, cualquier ocasión",
+        "Entrega local",
+        "Hecho desde cero"
+      ]
+    },
+    "ourCakes": {
+      "title": "Elija su pastel",
+      "subtitle": "Recetas clásicas de Europa del Este, reinventadas para cada celebración"
+    },
+    "howItWorks": {
+      "title": "Cómo funciona",
+      "subtitle": "Tres pasos sencillos hacia su pastel perfecto",
+      "steps": [
+        {
+          "title": "Elija y personalice",
+          "text": "Seleccione su pastel, tamaño y añada un mensaje personal para la celebración perfecta."
+        },
+        {
+          "title": "Confirmamos y horneamos",
+          "text": "Le llamaremos o escribiremos para confirmar los detalles y hornear fresco bajo pedido solo para usted."
+        },
+        {
+          "title": "Entrega fresca",
+          "text": "Entregado a su puerta en Sacramento y alrededores en la fecha elegida."
+        }
+      ]
+    },
+    "galleryTeaser": {
+      "title": "Hecho con amor",
+      "subtitle": "Un vistazo a pasteles que hemos elaborado para celebraciones en Sacramento"
+    },
+    "reviews": {
+      "title": "Lo que dicen nuestros clientes",
+      "subtitle": "Reseñas reales de celebraciones en el área de Sacramento",
+      "prev": "Reseñas anteriores",
+      "next": "Reseñas siguientes"
+    },
+    "cta": {
+      "title": "¿Listo para pedir su pastel perfecto?",
+      "subtitle": "Pida con al menos 3 días de anticipación. ¡Los pedidos de fin de semana se agotan rápido!"
+    }
+  },
+  "catalog": {
+    "pageTitle": "Nuestros pasteles",
+    "pageSubtitle": "Recetas clásicas de Europa del Este, reinventadas para cada celebración",
+    "detailsSr": "Detalles del pastel",
+    "youMightLove": "También le puede gustar",
+    "relatedSubtitle": "Explore más de nuestros favoritos artesanales",
+    "imageAlt": "Pastel {name}",
+    "configurator": {
+      "weight": "Peso",
+      "tiers": "Número de pisos",
+      "inscription": "Inscripción en el pastel",
+      "deliveryDate": "Fecha de entrega preferida",
+      "decorationNotes": "Notas de decoración",
+      "inscriptionOptional": "Opcional, máx. 40 caracteres",
+      "inscriptionPlaceholder": "¡Feliz cumpleaños, Anna!",
+      "notesPlaceholder": "¿Algún deseo especial para decoración, sabores o diseño?",
+      "custom": "Personalizado",
+      "customWeight": "Peso personalizado en libras",
+      "weightPreset": "{weight} lbs",
+      "estimatedPrice": "Precio estimado",
+      "priceFormula": "{weight} lbs × {price}/lb",
+      "deliveryFees": "Entrega: $10 dentro de 15 millas | $20 hasta 30 millas",
+      "questionsText": "¿Preguntas? Escríbanos",
+      "selectDate": "Seleccione una fecha de entrega (se requieren {days} {dayLabel} de anticipación).",
+      "dateAfter": "Elija una fecha en o después del {date} (se requieren {days} {dayLabel} de anticipación).",
+      "day": "día",
+      "days": "días",
+      "thumbAria": "Ver imagen {index} de {total}",
+      "thumbsLabel": "Miniaturas de imágenes del producto"
+    },
+    "galleryPage": {
+      "title": "Hecho con amor",
+      "subtitle": "Una colección de pasteles que hemos elaborado para cumpleaños, bodas, festividades y alegría cotidiana en Sacramento"
+    }
+  },
+  "cart": {
+    "pageTitle": "Su carrito",
+    "readySingle": "{count} pedido personalizado listo para pagar",
+    "readyPlural": "{count} pedidos personalizados listos para pagar",
+    "emptyTitle": "Aún no hay pasteles",
+    "emptyText": "Explore nuestro catálogo y personalice un pastel horneado fresco bajo pedido para su celebración.",
+    "summaryTitle": "Resumen del pedido",
+    "deliveryNote": "La entrega cuesta $10 dentro de 15 millas y $20 hasta 30 millas. Su tarifa exacta se calcula al pagar según su dirección.",
+    "itemDelivery": "Entrega: {date}",
+    "itemInscription": "Inscripción: \"{text}\"",
+    "itemNotes": "Notas: {text}",
+    "each": "{price} c/u",
+    "qtyAria": "Cantidad de {name}",
+    "decrease": "Disminuir cantidad de {name}",
+    "increase": "Aumentar cantidad de {name}",
+    "remove": "Eliminar {name} del carrito"
+  },
+  "checkout": {
+    "pageTitle": "Pago",
+    "pageIntro": "Complete su pedido en tres pasos rápidos. Confirmaremos los detalles por teléfono o mensaje.",
+    "stepOf": "Paso {step} de 3",
+    "steps": {
+      "contact": "Contacto",
+      "delivery": "Entrega",
+      "review": "Revisión"
+    },
+    "step1": {
+      "title": "Información de contacto",
+      "intro": "Usaremos su teléfono para confirmar los detalles del pedido y el horario de entrega.",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "phone": "Número de teléfono",
+      "email": "Correo electrónico",
+      "phoneHint": "Obligatorio para la llamada o mensaje de confirmación del pedido",
+      "phonePlaceholder": "(916) 555-0192",
+      "errors": {
+        "firstName": "El nombre es obligatorio.",
+        "lastName": "El apellido es obligatorio.",
+        "phone": "Introduzca un número de teléfono válido.",
+        "email": "Introduzca una dirección de correo válida."
+      }
+    },
+    "step2": {
+      "title": "Detalles de entrega",
+      "intro": "Elija entrega o recogida, luego indique la fecha y franja horaria preferidas.",
+      "method": "Método de entrega",
+      "deliveryOption": "Entrega",
+      "deliveryHint": "$10 dentro de 15 millas, $20 hasta 30 millas",
+      "pickupOption": "Recogida",
+      "pickupHint": "Recogida gratuita tras confirmación",
+      "street": "Dirección",
+      "city": "Ciudad",
+      "zip": "Código postal",
+      "dateDelivery": "Fecha de entrega",
+      "datePickup": "Fecha de recogida",
+      "timeWindow": "Franja horaria",
+      "instructions": "Instrucciones especiales (opcional)",
+      "instructionsPlaceholder": "Código de acceso, estacionamiento, punto de referencia o nota de recogida",
+      "windows": {
+        "morning": "Mañana (9am-12pm)",
+        "afternoon": "Tarde (12pm-5pm)",
+        "evening": "Noche (5pm-8pm)"
+      },
+      "fees": {
+        "pickup": "Recogida gratuita tras confirmación",
+        "estimate10": "Entrega estimada: $10 (confirme el código postal para la tarifa exacta)",
+        "invalidZip": "Introduzca un código postal válido para confirmar el costo de entrega.",
+        "within15": "Entrega dentro de 15 millas: $10",
+        "within30": "Entrega 15–30 millas: $20",
+        "outside": "Este código postal puede estar fuera de nuestra zona de entrega de 30 millas. Contáctenos para confirmar."
+      },
+      "errors": {
+        "date": "Elija una fecha.",
+        "window": "Seleccione una franja horaria.",
+        "street": "Introduzca su dirección.",
+        "city": "Introduzca su ciudad.",
+        "zip": "Introduzca un código postal válido de 5 dígitos."
+      }
+    },
+    "step3": {
+      "title": "Revisión y pago",
+      "intro": "Confirme los detalles de su pedido y elija cómo pagar su depósito.",
+      "lineItem": "{weight} lbs, {tiers} {tierLabel}, inscripción: \"{inscription}\"",
+      "lineDate": "{type} el {date}",
+      "depositNote": "Se requiere un depósito del 50% ({amount}) para confirmar su pedido. Enviaremos instrucciones de pago por mensaje/correo tras la revisión.",
+      "agreeTerms": "Acepto los Términos y condiciones.",
+      "errors": {
+        "payment": "Seleccione un método de pago.",
+        "terms": "Debe aceptar los Términos y condiciones.",
+        "submit": "No se puede realizar su pedido en este momento. Inténtelo de nuevo.",
+        "generic": "Algo salió mal. Inténtelo de nuevo en un momento."
+      }
+    }
+  },
+  "account": {
+    "login": {
+      "title": "Mi cuenta",
+      "intro": "Inicie sesión para ver sus pedidos y seguir el estado de su pastel.",
+      "passwordTab": "Contraseña",
+      "magicTab": "Enlace mágico",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "emailHintOrder": "Use el correo con el que realizó el pedido.",
+      "emailHintMagic": "Enviaremos un enlace seguro de inicio de sesión a este correo.",
+      "emailPlaceholder": "you@example.com",
+      "signingIn": "Iniciando sesión...",
+      "sendMagic": "Enviar enlace mágico",
+      "magicSent": "Enlace mágico enviado. Revise su bandeja de entrada para continuar.",
+      "supabaseMissing": "Supabase aún no está configurado. Configure NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY."
+    },
+    "sidebar": {
+      "account": "Cuenta",
+      "dashboard": "Panel",
+      "orders": "Pedidos",
+      "profile": "Perfil"
+    },
+    "welcome": "Bienvenido de nuevo",
+    "dashboard": {
+      "totalOrders": "Total de pedidos",
+      "activeOrders": "Pedidos activos",
+      "loyalty": "Puntos de fidelidad",
+      "quickLinks": "Enlaces rápidos"
+    },
+    "orders": {
+      "emptyTitle": "Aún no hay pedidos",
+      "emptyText": "Cuando realice su primer pedido de pastel, su historial aparecerá aquí.",
+      "headers": {
+        "number": "Pedido #",
+        "cake": "Pastel",
+        "weight": "Peso",
+        "date": "Fecha de entrega",
+        "total": "Total",
+        "status": "Estado",
+        "actions": "Acciones"
+      },
+      "viewDetails": "Ver detalles",
+      "customWeight": "Peso personalizado"
+    },
+    "orderDetail": {
+      "title": "Pedido #{number}",
+      "details": "Detalles del pedido",
+      "statusTracker": "Seguimiento de estado",
+      "cakeItems": "Artículos del pedido",
+      "deliveryPayment": "Entrega y pago",
+      "deliveryType": "Tipo de entrega",
+      "date": "Fecha",
+      "timeWindow": "Franja horaria",
+      "address": "Dirección de entrega",
+      "instructions": "Instrucciones:",
+      "help": "¿Necesita ayuda con este pedido?",
+      "helpText": "Contáctenos si necesita ajustar detalles de entrega o tiene preguntas sobre el diseño."
+    },
+    "status": {
+      "pending": "Pendiente",
+      "confirmed": "Confirmado",
+      "baking": "Horneando",
+      "outForDelivery": "En camino",
+      "delivered": "Entregado",
+      "cancelled": "Cancelado",
+      "tracker": {
+        "received": "Pedido recibido",
+        "confirmed": "Confirmado",
+        "baking": "Horneando",
+        "outForDelivery": "En camino",
+        "delivered": "Entregado",
+        "cancelled": "Este pedido ha sido cancelado."
+      }
+    },
+    "profile": {
+      "title": "Detalles del perfil",
+      "intro": "Actualice su contacto e información de entrega predeterminada.",
+      "fullName": "Nombre completo",
+      "phone": "Teléfono",
+      "defaultAddress": "Dirección de entrega predeterminada",
+      "addressHint": "Opcional — se completa automáticamente al pagar cuando elige entrega.",
+      "changePassword": "Cambiar contraseña",
+      "passwordHint": "Solo inicio de sesión con contraseña. Los usuarios de enlace mágico pueden establecer una contraseña aquí.",
+      "currentPassword": "Contraseña actual",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Confirmar nueva contraseña",
+      "deleteTitle": "Eliminar cuenta",
+      "deleteText": "Eliminar permanentemente su cuenta y perfil. El historial de pedidos puede conservarse para registros de la pastelería.",
+      "messages": {
+        "profileUpdated": "Perfil actualizado correctamente.",
+        "passwordUpdated": "Contraseña actualizada correctamente.",
+        "passwordLength": "La nueva contraseña debe tener al menos 8 caracteres.",
+        "passwordMismatch": "Las nuevas contraseñas no coinciden.",
+        "wrongPassword": "La contraseña actual es incorrecta.",
+        "notConfigured": "El servicio de cuenta no está configurado.",
+        "deleteFailed": "No se pudo eliminar la cuenta."
+      },
+      "deleteConfirm": "¿Eliminar su cuenta permanentemente? Esta acción no se puede deshacer. Los pedidos activos pueden cumplirse según nuestros términos."
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Nuestra historia",
+      "subtitle": "Hecho con amor en Sacramento",
+      "imageAlt": "Pastelera preparando un pastel fresco en una cocina casera acogedora"
+    },
+    "story": {
+      "title": "De nuestra cocina a su mesa",
+      "subtitle": "Una pastelería casera arraigada en la tradición familiar y la calidez californiana",
+      "p1": "SteKir Cakes comenzó en nuestra mesa familiar — recetas transmitidas de generación en generación de la repostería de Europa del Este, ahora compartidas con vecinos en Sacramento.",
+      "p2": "Cada pastel se hornea fresco bajo pedido en nuestra cocina casera con licencia. Sin congeladores, sin atajos — solo mantequilla, miel, crema y la paciencia que merecen los pasteles en capas."
+    },
+    "why": {
+      "title": "Por qué elegirnos",
+      "subtitle": "Repostería en pequeños lotes con un servicio de corazón",
+      "items": [
+        {
+          "title": "Fresco cada día",
+          "text": "Cada pastel se hornea bajo pedido — nunca sacado de un congelador ni esperando en un estante."
+        },
+        {
+          "title": "Sin conservantes",
+          "text": "Ingredientes sencillos y honestos que puede pronunciar. Mantequilla, huevos, miel y crema de verdad."
+        },
+        {
+          "title": "Tamaños personalizados",
+          "text": "Desde reuniones íntimas hasta grandes celebraciones — elija el peso y los pisos que se adapten a su evento."
+        },
+        {
+          "title": "Entrega local",
+          "text": "Entregamos en Sacramento y sus suburbios, fresco a su puerta en la fecha elegida."
+        }
+      ]
+    },
+    "baker": {
+      "title": "Conozca a la pastelera",
+      "subtitle": "Las manos y el corazón detrás de cada capa",
+      "name": "Anna",
+      "role": "Fundadora y pastelera principal",
+      "imageAlt": "Anna, fundadora y pastelera principal de SteKir Cakes",
+      "p1": "Anna creció viendo a su madre y abuela apilar capas de miel y doblar hojaldre para Napoleon — habilidades que aplica en cada pedido hoy.",
+      "p2": "Cree que los pasteles de celebración deben saber a recuerdo: familiares, generosos y hechos con un cuidado que se siente en cada bocado."
+    },
+    "certs": {
+      "title": "Certificados y asegurados",
+      "intro": "Operamos bajo las regulaciones de alimentos caseros del Condado de Sacramento con las licencias y el seguro que su celebración merece.",
+      "cottageTitle": "Condado de Sacramento",
+      "cottageSubtitle": "Licencia Cottage Food",
+      "cottageText": "Registrados y aprobados para ventas directas al cliente bajo la ley de alimentos caseros de California.",
+      "insuredTitle": "Asegurados y certificados",
+      "insuredSubtitle": "Cobertura completa",
+      "insuredText": "Seguro de responsabilidad civil para su tranquilidad en cada celebración que servimos."
+    }
+  },
+  "reviewsForm": {
+    "title": "Comparta su experiencia",
+    "intro": "Las reseñas se moderan antes de publicarse. Iniciar sesión es opcional — nombre y correo son obligatorios para invitados.",
+    "yourName": "Su nombre",
+    "email": "Correo electrónico",
+    "emailHint": "No se muestra públicamente.",
+    "cake": "¿Qué pastel pidió?",
+    "selectCake": "Seleccione un pastel",
+    "rating": "Su calificación",
+    "ratingHint": "Toque una estrella para calificar",
+    "occasion": "Ocasión (opcional)",
+    "review": "Su reseña",
+    "occasionPlaceholder": "Pastel de cumpleaños, aniversario, etc.",
+    "reviewPlaceholder": "Cuéntenos qué le encantó de su pastel...",
+    "thankYou": "¡Gracias! Su reseña fue enviada y aparecerá tras la aprobación.",
+    "submitFailed": "No se pudo enviar la reseña.",
+    "starsAria": "Califique su experiencia de 1 a 5 estrellas",
+    "starLabel": "{count} estrella",
+    "starsLabel": "{count} estrellas"
+  },
+  "orderSuccess": {
+    "thankYou": "¡Gracias, {name}!",
+    "received": "Hemos recibido su pedido. Nos pondremos en contacto en breve.",
+    "fallbackOrder": "SAC-00001",
+    "pickupDate": "Fecha de recogida",
+    "deliveryDate": "Fecha de entrega",
+    "nextTitle": "¿Qué sigue?",
+    "steps": [
+      {
+        "title": "Nos comunicaremos pronto",
+        "text": "Recibirá un mensaje o llamada en unas horas para confirmar los detalles de su pedido."
+      },
+      {
+        "title": "Envíe su depósito",
+        "text": "Se requiere un depósito del 50% para confirmar su pedido. Le enviaremos instrucciones de pago por mensaje."
+      },
+      {
+        "title": "Entrega fresca en su fecha",
+        "text": "Su pastel se horneará fresco y se entregará a su puerta en la fecha elegida."
+      }
+    ],
+    "signInTrack": "Iniciar sesión para seguir el pedido",
+    "questions": "¿Preguntas? Escríbanos o llámenos al (916) 555-0192 — estaremos encantados de ayudarle."
+  },
+  "api": {
+    "firstName": "Introduzca su nombre.",
+    "lastName": "Introduzca su apellido.",
+    "phone": "Introduzca un número de teléfono válido.",
+    "email": "Introduzca una dirección de correo válida.",
+    "deliveryType": "Seleccione entrega o recogida.",
+    "deliveryDate": "Seleccione una fecha de entrega.",
+    "deliveryWindow": "Seleccione una franja horaria.",
+    "street": "Introduzca su dirección.",
+    "city": "Introduzca su ciudad.",
+    "zip": "Introduzca un código postal válido.",
+    "payment": "Seleccione un método de pago.",
+    "terms": "Debe aceptar los términos y condiciones.",
+    "items": "Su carrito está vacío.",
+    "invalidItem": "Artículo del carrito no válido.",
+    "supabase": "El servicio de pedidos no está configurado.",
+    "emailFailed": "Pedido realizado pero no se pudo enviar el correo de confirmación.",
+    "contactName": "Introduzca su nombre.",
+    "contactEmail": "Introduzca una dirección de correo válida.",
+    "contactMessage": "Introduzca un mensaje.",
+    "reviewName": "Introduzca su nombre.",
+    "reviewEmail": "Introduzca una dirección de correo válida.",
+    "reviewCake": "Seleccione un pastel.",
+    "reviewRating": "Seleccione una calificación.",
+    "reviewText": "Introduzca su reseña."
+  },
+  "emails": {
+    "customerSubject": "Su solicitud de pedido SteKir Cakes — #{orderNumber}",
+    "ownerSubject": "Nueva solicitud de pedido #{orderNumber}",
+    "greeting": "Hola {name},",
+    "received": "¡Gracias por su solicitud de pedido! Recibimos los detalles a continuación y nos pondremos en contacto en breve para confirmar.",
+    "deposit": "Se requiere un depósito del 50% para confirmar su pedido. Enviaremos instrucciones de pago tras la revisión.",
+    "orderDetails": "Detalles del pedido",
+    "newOrder": "Nueva solicitud de pedido de pastel",
+    "review": "Revise y confirme este pedido en el panel de administración."
+  }
+}

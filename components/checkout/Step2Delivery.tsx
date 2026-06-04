@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
 
 export type DeliveryType = "delivery" | "pickup";
@@ -28,18 +31,23 @@ export function Step2Delivery({
   errors,
   onChange,
 }: Step2DeliveryProps) {
+  const t = useTranslations("checkout.step2");
   const isDelivery = values.deliveryType === "delivery";
+
+  const windowOptions = [
+    { id: "morning" as const, label: t("windows.morning") },
+    { id: "afternoon" as const, label: t("windows.afternoon") },
+    { id: "evening" as const, label: t("windows.evening") },
+  ];
 
   return (
     <section className="rounded-2xl border border-border bg-surface p-6 shadow-card sm:p-8">
-      <h2 className="font-display text-2xl font-semibold text-text">Delivery Details</h2>
-      <p className="mt-2 text-sm text-text-muted">
-        Choose delivery or pickup, then set your preferred date and time window.
-      </p>
+      <h2 className="font-display text-2xl font-semibold text-text">{t("title")}</h2>
+      <p className="mt-2 text-sm text-text-muted">{t("intro")}</p>
 
       <div className="mt-6">
         <fieldset>
-          <legend className="text-sm font-medium text-text">Delivery method</legend>
+          <legend className="text-sm font-medium text-text">{t("method")}</legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-bg p-4">
               <input
@@ -51,8 +59,8 @@ export function Step2Delivery({
                 className="mt-1"
               />
               <span>
-                <span className="block font-medium text-text">Delivery</span>
-                <span className="block text-sm text-text-muted">$10 within 15 miles, $20 up to 30 miles</span>
+                <span className="block font-medium text-text">{t("deliveryOption")}</span>
+                <span className="block text-sm text-text-muted">{t("deliveryHint")}</span>
               </span>
             </label>
 
@@ -66,8 +74,8 @@ export function Step2Delivery({
                 className="mt-1"
               />
               <span>
-                <span className="block font-medium text-text">Pickup</span>
-                <span className="block text-sm text-text-muted">Free pickup after confirmation</span>
+                <span className="block font-medium text-text">{t("pickupOption")}</span>
+                <span className="block text-sm text-text-muted">{t("pickupHint")}</span>
               </span>
             </label>
           </div>
@@ -78,7 +86,7 @@ export function Step2Delivery({
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <FormField
-              label="Street address"
+              label={t("street")}
               htmlFor="checkout-delivery-address"
               hint={errors?.deliveryAddress}
               hintTone="danger"
@@ -93,7 +101,12 @@ export function Step2Delivery({
             </FormField>
           </div>
 
-          <FormField label="City" htmlFor="checkout-delivery-city" hint={errors?.deliveryCity} hintTone="danger">
+          <FormField
+            label={t("city")}
+            htmlFor="checkout-delivery-city"
+            hint={errors?.deliveryCity}
+            hintTone="danger"
+          >
             <input
               id="checkout-delivery-city"
               autoComplete="address-level2"
@@ -103,7 +116,12 @@ export function Step2Delivery({
             />
           </FormField>
 
-          <FormField label="ZIP code" htmlFor="checkout-delivery-zip" hint={errors?.deliveryZip} hintTone="danger">
+          <FormField
+            label={t("zip")}
+            htmlFor="checkout-delivery-zip"
+            hint={errors?.deliveryZip}
+            hintTone="danger"
+          >
             <input
               id="checkout-delivery-zip"
               autoComplete="postal-code"
@@ -122,7 +140,12 @@ export function Step2Delivery({
       ) : null}
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <FormField label={isDelivery ? "Delivery date" : "Pickup date"} htmlFor="checkout-delivery-date" hint={errors?.deliveryDate} hintTone="danger">
+        <FormField
+          label={isDelivery ? t("dateDelivery") : t("datePickup")}
+          htmlFor="checkout-delivery-date"
+          hint={errors?.deliveryDate}
+          hintTone="danger"
+        >
           <input
             id="checkout-delivery-date"
             type="date"
@@ -134,13 +157,9 @@ export function Step2Delivery({
         </FormField>
 
         <fieldset>
-          <legend className="block text-sm font-medium text-text">Time window</legend>
+          <legend className="block text-sm font-medium text-text">{t("timeWindow")}</legend>
           <div className="mt-2 grid gap-2">
-            {[
-              { id: "morning", label: "Morning (9am-12pm)" },
-              { id: "afternoon", label: "Afternoon (12pm-5pm)" },
-              { id: "evening", label: "Evening (5pm-8pm)" },
-            ].map((windowOption) => (
+            {windowOptions.map((windowOption) => (
               <label key={windowOption.id} className="flex items-center gap-2 text-sm text-text">
                 <input
                   type="radio"
@@ -161,7 +180,7 @@ export function Step2Delivery({
 
       <div className="mt-6">
         <FormField
-          label="Special instructions (optional)"
+          label={t("instructions")}
           htmlFor="checkout-delivery-instructions"
           hint={errors?.deliveryInstructions}
           hintTone="danger"
@@ -172,7 +191,7 @@ export function Step2Delivery({
             value={values.deliveryInstructions}
             onChange={(event) => onChange("deliveryInstructions", event.target.value)}
             className={formInputClassName("resize-y")}
-            placeholder="Gate code, parking details, landmark, or pickup note"
+            placeholder={t("instructionsPlaceholder")}
           />
         </FormField>
       </div>

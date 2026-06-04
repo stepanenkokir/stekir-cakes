@@ -1,24 +1,28 @@
 import Image from "next/image";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { galleryImages } from "@/lib/data/gallery";
+import { getGalleryImages } from "@/lib/data/gallery";
 
-const teaserImages = galleryImages.slice(0, 6);
+export async function GalleryTeaser() {
+  const locale = await getLocale();
+  const t = await getTranslations("home.galleryTeaser");
+  const tc = await getTranslations("common");
+  const teaserImages = getGalleryImages(locale).slice(0, 6);
 
-export function GalleryTeaser() {
   return (
     <section className="bg-bg py-20" aria-labelledby="gallery-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          id="gallery-heading"
-          title="Made with Love" subtitle="A glimpse of cakes we've crafted for Sacramento celebrations" />
+        <SectionHeading id="gallery-heading" title={t("title")} subtitle={t("subtitle")} />
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
           {teaserImages.map((image, index) => (
             <div
               key={image.id}
               className={`relative overflow-hidden rounded-2xl ${
-                index === 0 ? "col-span-2 row-span-2 aspect-square md:aspect-auto md:min-h-[320px]" : "aspect-square"
+                index === 0
+                  ? "col-span-2 row-span-2 aspect-square md:aspect-auto md:min-h-[320px]"
+                  : "aspect-square"
               }`}
             >
               <Image
@@ -34,7 +38,7 @@ export function GalleryTeaser() {
 
         <div className="mt-10 text-center">
           <Button href="/catalog/gallery" variant="ghost">
-            See Full Gallery
+            {tc("seeFullGallery")}
           </Button>
         </div>
       </div>

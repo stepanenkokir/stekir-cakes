@@ -1,0 +1,1187 @@
+{
+  "common": {
+    "brand": "SteKir Cakes",
+    "home": "Home",
+    "orderNow": "Order Now",
+    "browseCakes": "Browse Cakes",
+    "browseOurCakes": "Browse Our Cakes",
+    "learnMore": "Learn More",
+    "customizeOrder": "Customize & Order",
+    "addToCart": "Add to Cart",
+    "addedToCart": "Added to Cart!",
+    "continue": "Continue",
+    "back": "Back",
+    "contactUs": "Contact Us",
+    "readFaq": "Read FAQ",
+    "readTerms": "Read Terms",
+    "emailUs": "Email Us",
+    "textUs": "Text Us",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "myAccount": "My Account",
+    "languageSwitcher": "Choose language",
+    "fromPrice": "From {price}",
+    "lbs": "{weight} lbs",
+    "somethingWrong": "Something went wrong. Please try again.",
+    "required": "Required",
+    "optional": "Optional",
+    "customer": "Customer",
+    "friend": "Friend",
+    "customCake": "Custom Cake",
+    "na": "N/A",
+    "all": "All",
+    "soon": "Soon",
+    "sending": "Sending...",
+    "saving": "Saving...",
+    "updating": "Updating...",
+    "deleting": "Deleting...",
+    "placingOrder": "Placing Order...",
+    "placeOrder": "Place Order",
+    "proceedCheckout": "Proceed to Checkout",
+    "continueShopping": "Continue Shopping",
+    "sendMessage": "Send Message",
+    "submitReview": "Submit Review",
+    "submitting": "Submitting...",
+    "saveProfile": "Save Profile",
+    "updatePassword": "Update Password",
+    "deleteAccount": "Delete Account",
+    "viewOrders": "View Orders",
+    "updateProfile": "Update Profile",
+    "viewOrderStatus": "View Order Status",
+    "backToHome": "Back to Home",
+    "seeFullGallery": "See Full Gallery",
+    "readAllReviews": "Read All Reviews",
+    "sendAnotherMessage": "Send another message",
+    "ourCakes": "Our Cakes",
+    "catalog": "Catalog",
+    "gallery": "Gallery",
+    "about": "About",
+    "contact": "Contact",
+    "reviews": "Reviews",
+    "faq": "FAQ",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "cart": "Cart",
+    "checkout": "Checkout",
+    "termsConditions": "Terms & Conditions",
+    "privacyPolicy": "Privacy Policy",
+    "paymentZelle": "Zelle",
+    "paymentVenmo": "Venmo",
+    "paymentCash": "Cash on Delivery",
+    "pickup": "Pickup",
+    "delivery": "Delivery",
+    "depositPercent": "Deposit due (50%)",
+    "depositConfirm": "Deposit due (50% to confirm)",
+    "orderNumber": "Order number",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery fee",
+    "estDelivery": "Est. delivery",
+    "estimatedTotal": "Estimated total",
+    "total": "Total",
+    "weight": "Weight",
+    "tiers": "tiers",
+    "tier": "tier",
+    "inscription": "Inscription",
+    "notes": "Notes",
+    "ingredients": "Ingredients",
+    "storage": "Storage",
+    "paymentMethod": "Payment method",
+    "cake": "Cake",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "nav": {
+    "ourCakes": "Our Cakes",
+    "gallery": "Gallery",
+    "about": "About",
+    "contact": "Contact",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "cartAria": "Shopping cart, {count} items",
+    "accountAria": "Go to my account",
+    "signInAria": "Sign in to account",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "closeOverlay": "Close menu overlay"
+  },
+  "footer": {
+    "tagline": "Homemade Eastern European cakes in Sacramento — baked fresh to order for every celebration.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "serviceArea": "Serving Sacramento, Carmichael, Folsom, Roseville, El Dorado Hills, Elk Grove & Rancho Cordova",
+    "copyright": "© {year} SteKir Cakes. All rights reserved."
+  },
+  "metadata": {
+    "defaultTitle": "SteKir Cakes | Homemade Custom Cakes in Sacramento",
+    "defaultDescription": "Eastern European-style custom cakes made to order in Sacramento. Napoleon, Medovik, Smetannik & Mannik — delivered to Folsom, Roseville, El Dorado Hills & beyond.",
+    "ogDescription": "Classic Eastern European cakes, baked fresh to order and delivered across the Sacramento area.",
+    "template": "%s | SteKir Cakes",
+    "catalogTitle": "Our Cakes",
+    "catalogDescription": "Classic Eastern European recipes, reimagined for every celebration",
+    "notFound": "Cake Not Found"
+  },
+  "cakes": {
+    "napoleon": {
+      "name": "Napoleon",
+      "tagline": "Layers of tradition, a lifetime of flavor",
+      "description": "Our Napoleon is a true classic — dozens of paper-thin, flaky pastry layers alternating with rich homemade custard cream. Every bite is a balance of crunch and silk. Perfect for birthdays, anniversaries, and any moment worth celebrating.",
+      "ingredients": "Butter, flour, eggs, whole milk, sugar, vanilla bean",
+      "servings": "1 lb feeds approx. 3–4 people",
+      "prepTime": "3 days notice required",
+      "storageInstructions": "Refrigerate in the box. Best consumed within 3 days. Napoleon improves with 1 day of refrigeration.",
+      "tags": [
+        "Birthday",
+        "Anniversary",
+        "Most Popular"
+      ]
+    },
+    "medovik": {
+      "name": "Medovik",
+      "tagline": "Honey-kissed layers, cloud-soft cream",
+      "description": "Medovik is our most beloved cake — thin honey sponge layers soaked in time, paired with a velvety sour cream frosting. Its fragrant sweetness and melt-in-your-mouth texture have made it a family favorite across generations.",
+      "ingredients": "Honey, butter, eggs, flour, sour cream, sugar",
+      "servings": "1 lb feeds approx. 3–4 people",
+      "prepTime": "3 days notice required",
+      "storageInstructions": "Refrigerate in the box. Best consumed within 3 days for optimal freshness and texture.",
+      "tags": [
+        "Birthday",
+        "Holiday",
+        "Fan Favorite"
+      ]
+    },
+    "smetannik": {
+      "name": "Smetannik",
+      "tagline": "Light as a cloud, warm as home",
+      "description": "Smetannik is the cake your grandmother would have made on a Sunday afternoon. Fluffy sour cream sponge layers with a smooth, tangy cream — this cake is lighter than it looks and impossible to stop eating.",
+      "ingredients": "Sour cream, eggs, flour, sugar, butter, vanilla",
+      "servings": "1 lb feeds approx. 3–4 people",
+      "prepTime": "2 days notice required",
+      "storageInstructions": "Refrigerate in the box. Best consumed within 3 days. Let sit at room temperature for 15 minutes before serving.",
+      "tags": [
+        "Everyday",
+        "Birthday",
+        "Kids"
+      ]
+    },
+    "mannik": {
+      "name": "Mannik",
+      "tagline": "Simple, tender, and perfectly satisfying",
+      "description": "Our Mannik is a semolina-based cake with a uniquely dense yet tender crumb — no flour, just coarsely ground semolina giving it a rustic, comforting texture. Naturally dairy-free adaptable, great for kids and those who prefer a less sweet dessert.",
+      "ingredients": "Semolina, eggs, sour cream, sugar, butter, baking soda",
+      "servings": "1 lb feeds approx. 3–4 people",
+      "prepTime": "2 days notice required",
+      "storageInstructions": "Store covered at room temperature for up to 2 days, or refrigerate for up to 4 days. Best enjoyed within 2 days.",
+      "tags": [
+        "Kids",
+        "Everyday",
+        "Gluten-Sensitive Option"
+      ]
+    }
+  },
+  "cakeTags": {
+    "Birthday": "Birthday",
+    "Anniversary": "Anniversary",
+    "Most Popular": "Most Popular",
+    "Holiday": "Holiday",
+    "Fan Favorite": "Fan Favorite",
+    "Everyday": "Everyday",
+    "Kids": "Kids",
+    "Gluten-Sensitive Option": "Gluten-Sensitive Option"
+  },
+  "catalogFilters": {
+    "all": "All",
+    "birthday": "Birthday",
+    "anniversary": "Anniversary",
+    "holiday": "Holiday",
+    "everyday": "Everyday",
+    "filterAria": "Filter cakes by occasion",
+    "noMatch": "No cakes match this occasion. Try another filter or browse all cakes."
+  },
+  "galleryFilters": {
+    "all": "All",
+    "napoleon": "Napoleon",
+    "medovik": "Medovik",
+    "smetannik": "Smetannik",
+    "mannik": "Mannik",
+    "custom": "Custom Designs",
+    "filterAria": "Filter gallery by cake type",
+    "noPhotos": "No photos in this category yet. Check back soon!",
+    "viewPhoto": "View photo: {alt}",
+    "lightboxTitle": "Gallery image viewer",
+    "closeViewer": "Close gallery viewer",
+    "close": "Close",
+    "prev": "Previous image",
+    "next": "Next image",
+    "counter": "{current} of {total}"
+  },
+  "faq": {
+    "pageTitle": "Frequently Asked Questions",
+    "pageIntro": "Everything you need to know about ordering, delivery, payment, and caring for your cake",
+    "footerTitle": "Still have questions?",
+    "footerText": "We are happy to help with custom requests, wedding inquiries, or anything not covered here.",
+    "categories": [
+      {
+        "id": "ordering",
+        "title": "Ordering",
+        "items": [
+          {
+            "id": "advance-notice",
+            "question": "How far in advance do I need to order?",
+            "answer": "We require a minimum of 3 days notice for standard orders. For large orders or custom designs, please allow at least 1 week so we can plan every detail with care."
+          },
+          {
+            "id": "minimum-size",
+            "question": "What is the minimum cake size?",
+            "answer": "Our minimum cake size is 2 lbs, which serves approximately 8–10 people. Mannik is available from 1.5 lbs for smaller gatherings."
+          },
+          {
+            "id": "customize-flavor",
+            "question": "Can I customize the flavor or filling?",
+            "answer": "Yes! We welcome customization requests. Reach out through our contact form or give us a call to discuss flavor variations, fillings, and design ideas."
+          },
+          {
+            "id": "wedding-cakes",
+            "question": "Do you make wedding cakes?",
+            "answer": "We love creating cakes for weddings and special celebrations. Custom inquiries are welcome — please contact us with your date, guest count, and vision."
+          }
+        ]
+      },
+      {
+        "id": "delivery",
+        "title": "Delivery",
+        "items": [
+          {
+            "id": "delivery-areas",
+            "question": "What areas do you deliver to?",
+            "answer": "We deliver throughout Sacramento, Carmichael, Folsom, Roseville, El Dorado Hills, Elk Grove, Rancho Cordova, and Fair Oaks — up to 30 miles from zip code 95608."
+          },
+          {
+            "id": "delivery-fee",
+            "question": "How much is delivery?",
+            "answer": "Delivery is $10 within 15 miles of our kitchen, and $20 for addresses 15–30 miles away. Your exact fee is calculated at checkout based on your location."
+          },
+          {
+            "id": "pickup",
+            "question": "Can I pick up instead?",
+            "answer": "Yes! Free pickup is available. We will share the pickup address and time window after your order is confirmed."
+          }
+        ]
+      },
+      {
+        "id": "payment",
+        "title": "Payment",
+        "items": [
+          {
+            "id": "payment-methods",
+            "question": "How do I pay?",
+            "answer": "We accept Zelle, Venmo, and cash on delivery. A 50% deposit is required to confirm your order — we will send payment instructions after we review your request."
+          },
+          {
+            "id": "payment-due",
+            "question": "When is payment due?",
+            "answer": "The 50% deposit is due within 24 hours of order confirmation. The remaining balance is due on delivery or at pickup."
+          }
+        ]
+      },
+      {
+        "id": "allergies-storage",
+        "title": "Allergies & Storage",
+        "items": [
+          {
+            "id": "allergens",
+            "question": "Do your cakes contain allergens?",
+            "answer": "All of our cakes contain dairy and eggs. Mannik can be adapted as a gluten-sensitive option — please let us know about any allergies or dietary needs when you order."
+          },
+          {
+            "id": "storage",
+            "question": "How should I store the cake?",
+            "answer": "Keep your cake refrigerated in the box. For best flavor and texture, enjoy within 3 days. Napoleon especially benefits from one day of refrigeration before serving."
+          }
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "pageTitle": "Terms & Conditions",
+    "pageIntro": "Please read these policies before placing an order. By checking the agreement box at checkout, you accept these terms.",
+    "onThisPage": "On this page",
+    "contactForm": "Contact form",
+    "footerCtaTitle": "Ready to order?",
+    "footerCtaText": "Browse our catalog, customize your cake, and agree to these terms at checkout.",
+    "browseCakes": "Browse Cakes",
+    "readFaq": "Read FAQ",
+    "sections": [
+      {
+        "id": "order-policy",
+        "title": "Order Policy",
+        "paragraphs": [
+          "All cakes are made fresh to order. By placing an order with SteKir Cakes, you agree to the policies outlined on this page.",
+          "Standard orders require a minimum of 3 days notice before your requested delivery or pickup date. Large orders, multi-tier designs, or heavily customized cakes may require at least 1 week of notice.",
+          "Our minimum cake size is 2 lbs (approximately 8–10 servings), unless otherwise noted for a specific cake. Order details — including weight, tiers, inscription, decoration notes, and delivery date — are confirmed before baking begins."
+        ],
+        "listItems": [
+          "Orders are not confirmed until we review your request and receive the required 50% deposit.",
+          "Changes to weight, design, or delivery date may be accepted at our discretion if requested with sufficient notice.",
+          "Cancellations made more than 48 hours before the scheduled delivery or pickup date may receive a partial refund of the deposit, minus any costs already incurred.",
+          "Cancellations within 48 hours of delivery or pickup are not eligible for a refund, as ingredients are purchased and production has typically begun."
+        ]
+      },
+      {
+        "id": "delivery-policy",
+        "title": "Delivery Policy",
+        "paragraphs": [
+          "We deliver throughout the Sacramento metro area and surrounding suburbs, up to 30 miles from zip code 95608."
+        ],
+        "listItems": [
+          "Delivery fee: $10 within 15 miles of our kitchen.",
+          "Delivery fee: $20 for addresses 15–30 miles away.",
+          "Free pickup is available — the pickup address and time window are shared after your order is confirmed.",
+          "Delivery areas include Sacramento, Carmichael, Folsom, Roseville, El Dorado Hills, Elk Grove, Rancho Cordova, Fair Oaks, Citrus Heights, and Orangevale.",
+          "Someone must be available to receive the order at the agreed time window. If delivery cannot be completed due to an incorrect address, unavailable recipient, or restricted access, we may attempt to reschedule. A second delivery attempt may incur an additional fee.",
+          "We are not responsible for damage to cakes left unattended after a successful delivery or pickup handoff."
+        ]
+      },
+      {
+        "id": "payment-policy",
+        "title": "Payment Policy",
+        "paragraphs": [
+          "We accept Zelle, Venmo, and cash on delivery or at pickup. Payment instructions are sent after we confirm your order details."
+        ],
+        "listItems": [
+          "A 50% deposit is required to confirm your order.",
+          "The deposit is due within 24 hours of order confirmation.",
+          "The remaining balance is due on delivery or at pickup.",
+          "Orders may be cancelled if the deposit is not received within the stated timeframe.",
+          "Prices are listed in USD and may be updated without notice; confirmed orders are honored at the price agreed at confirmation."
+        ]
+      },
+      {
+        "id": "allergen-disclaimer",
+        "title": "Allergen Disclaimer",
+        "paragraphs": [
+          "Our cakes are prepared in a home kitchen licensed under the Sacramento County Cottage Food Operations program. Cross-contact with common allergens may occur.",
+          "Please inform us of any allergies or dietary restrictions when you order. While we take reasonable care, we cannot guarantee an allergen-free environment."
+        ],
+        "listItems": [
+          "All cakes contain dairy and eggs unless explicitly discussed otherwise.",
+          "Mannik may be adapted as a gluten-sensitive option — please contact us to discuss your needs.",
+          "We do not use nuts as a standard ingredient, but please disclose nut allergies so we can assess your order individually.",
+          "Customers with severe allergies order at their own risk and should consult us before placing an order."
+        ]
+      },
+      {
+        "id": "liability-limitations",
+        "title": "Liability Limitations",
+        "paragraphs": [
+          "SteKir Cakes provides custom baked goods on an as-is basis. Our liability is limited to the amount paid for the order in question."
+        ],
+        "listItems": [
+          "We are not liable for improper storage, handling, or consumption after delivery or pickup.",
+          "Perishable products should be refrigerated promptly and consumed within 3 days unless otherwise advised.",
+          "We are not responsible for delays caused by circumstances outside our reasonable control, including severe weather or traffic conditions.",
+          "Photographs on our website and social media are representative; slight variations in decoration may occur due to the handmade nature of our work.",
+          "Nothing in these terms limits rights that cannot be excluded under applicable California law."
+        ]
+      },
+      {
+        "id": "contact",
+        "title": "Contact Information",
+        "paragraphs": [
+          "Questions about these terms, your order, or a custom request? Reach out — we are happy to help.",
+          "SteKir Cakes · Sacramento, CA · Cottage Food Operation",
+          "These terms were last updated in May 2026. We may revise this page from time to time; continued use of our ordering services constitutes acceptance of the current version."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "pageTitle": "Privacy Policy",
+    "pageIntro": "How we handle your personal information when you browse, order, or create an account on SteKir Cakes.",
+    "onThisPage": "On this page",
+    "contactForm": "Contact form",
+    "footerCtaTitle": "Questions about your data?",
+    "footerCtaText": "Email us to request access, correction, or deletion of your personal information.",
+    "emailUs": "Email Us",
+    "readTerms": "Read Terms",
+    "sections": [
+      {
+        "id": "overview",
+        "title": "Overview",
+        "paragraphs": [
+          "SteKir Cakes (“we,” “us”) respects your privacy. This policy explains what personal information we collect when you use our website, place an order, or create an account, and how we use and protect that information.",
+          "By using our site or submitting an order, you agree to the practices described here. If you do not agree, please do not use our ordering services."
+        ]
+      },
+      {
+        "id": "data-we-collect",
+        "title": "What Data We Collect",
+        "paragraphs": [
+          "We collect only the information needed to fulfill your cake orders, communicate with you, and improve your experience on our site."
+        ],
+        "listItems": [
+          "Contact details: name, email address, and phone number.",
+          "Delivery information: street address, city, ZIP code, preferred delivery date, time window, and special instructions (when you choose delivery).",
+          "Order details: cake selections, weight, tiers, inscriptions, decoration notes, payment method preference, and order history.",
+          "Account information: if you create an account, we store your profile details linked to your login via our authentication provider.",
+          "Communications: messages you send through our contact form or by email, text, or phone.",
+          "Technical data: basic server logs (such as IP address and browser type) used for security and troubleshooting — not for advertising profiles."
+        ]
+      },
+      {
+        "id": "how-we-use-data",
+        "title": "How We Use Your Data",
+        "paragraphs": [
+          "We use your information solely to operate our bakery and serve you. We do not sell your personal data to third parties."
+        ],
+        "listItems": [
+          "Process and fulfill cake orders, including confirmation calls or texts.",
+          "Send order confirmations, payment instructions, and delivery updates by email or SMS.",
+          "Respond to questions, custom design requests, and support inquiries.",
+          "Maintain your order history when you are logged in to your account.",
+          "Comply with legal obligations and protect against fraud or abuse of our services."
+        ]
+      },
+      {
+        "id": "sharing",
+        "title": "Sharing With Third Parties",
+        "paragraphs": [
+          "We do not sell, rent, or trade your personal information. We share data only with trusted service providers who help us run the business, and only as needed to perform their function."
+        ],
+        "listItems": [
+          "Email delivery (e.g., order confirmations) through our transactional email provider.",
+          "Hosting, database, and authentication services that store order and account data securely.",
+          "Payment coordination is handled directly between you and us (Zelle, Venmo, or cash) — we do not store credit card numbers on our website.",
+          "We may disclose information if required by law or to protect the rights, safety, or property of our customers and business."
+        ]
+      },
+      {
+        "id": "cookies",
+        "title": "Cookies & Local Storage",
+        "paragraphs": [
+          "Our site uses minimal cookies and browser storage. We do not use advertising or cross-site tracking cookies."
+        ],
+        "listItems": [
+          "Shopping cart contents may be stored in your browser’s local storage so your selections persist between visits.",
+          "Session cookies may be used if you log in to your account, managed by our authentication provider.",
+          "You can clear local storage and cookies through your browser settings; doing so may empty your cart or sign you out."
+        ]
+      },
+      {
+        "id": "retention-security",
+        "title": "Retention & Security",
+        "paragraphs": [
+          "We retain order and contact records for as long as needed to fulfill orders, resolve disputes, and meet bookkeeping or legal requirements.",
+          "We apply reasonable technical and organizational measures to protect your data. No online service can guarantee absolute security; please use a strong, unique password if you create an account."
+        ]
+      },
+      {
+        "id": "your-rights",
+        "title": "Your Rights & Data Deletion",
+        "paragraphs": [
+          "Depending on where you live, you may have rights to access, correct, or delete personal information we hold about you.",
+          "California residents may have additional rights under the California Consumer Privacy Act (CCPA), including the right to know what we collect and to request deletion, subject to certain exceptions (such as records we must keep to complete an order or for tax purposes)."
+        ],
+        "listItems": [
+          "To request a copy of your data, correct inaccurate information, or ask us to delete your account and associated records, contact us using the details below.",
+          "We will respond within a reasonable timeframe. Deletion requests may be limited where we are required to retain information for legal or operational reasons."
+        ]
+      },
+      {
+        "id": "children",
+        "title": "Children’s Privacy",
+        "paragraphs": [
+          "Our services are not directed at children under 13. We do not knowingly collect personal information from children. If you believe we have received such information, please contact us so we can delete it."
+        ]
+      },
+      {
+        "id": "contact",
+        "title": "Contact Us",
+        "paragraphs": [
+          "Questions about this privacy policy or a data request? Reach out — we will help you promptly.",
+          "SteKir Cakes · Sacramento, CA · Cottage Food Operation",
+          "This policy was last updated in May 2026. We may update this page from time to time; material changes will be reflected here with an updated date."
+        ]
+      }
+    ]
+  },
+  "reviews": {
+    "filters": {
+      "all": "All Cakes",
+      "napoleon": "Napoleon",
+      "medovik": "Medovik",
+      "smetannik": "Smetannik",
+      "mannik": "Mannik"
+    },
+    "pageTitle": "What Our Customers Say",
+    "pageIntro": "Honest feedback from families and celebrations across Sacramento, Folsom, Roseville, and beyond",
+    "basedOn": "Based on {count} customer review",
+    "basedOnPlural": "Based on {count} customer reviews",
+    "trustNote": "Every review is from a real order in the Sacramento area. Thank you for trusting us with your celebrations.",
+    "noReviews": "No reviews for this cake yet. Be the first to share your experience!",
+    "photoBy": "Photo shared by {name}",
+    "items": [
+      {
+        "id": "1",
+        "quote": "The Napoleon was absolutely stunning — flaky layers and the cream was divine. Our anniversary guests couldn't stop raving about it!",
+        "name": "Maria K.",
+        "occasion": "Anniversary cake",
+        "cakeSlug": "napoleon"
+      },
+      {
+        "id": "2",
+        "quote": "Ordered a Medovik for my daughter's birthday and it was the hit of the party. So moist and not too sweet — exactly what we wanted.",
+        "name": "James T.",
+        "occasion": "Birthday cake",
+        "cakeSlug": "medovik"
+      },
+      {
+        "id": "3",
+        "quote": "Fresh, beautiful, and delivered right on time to Folsom. The Smetannik tasted like something from my grandmother's kitchen.",
+        "name": "Elena P.",
+        "occasion": "Family celebration",
+        "cakeSlug": "smetannik"
+      },
+      {
+        "id": "4",
+        "quote": "We get a Mannik every few months — it's our go-to for weekend gatherings. Light, tender, and always perfect.",
+        "name": "David R.",
+        "occasion": "Everyday treat",
+        "cakeSlug": "mannik"
+      },
+      {
+        "id": "5",
+        "quote": "Professional service from start to finish. They confirmed every detail by text and the cake looked even better in person.",
+        "name": "Sarah M.",
+        "occasion": "Holiday party",
+        "cakeSlug": "medovik"
+      },
+      {
+        "id": "6",
+        "quote": "Best Napoleon I've had outside of Europe. The layers were impossibly thin and crisp. Worth every penny for our wedding anniversary.",
+        "name": "Olga V.",
+        "occasion": "Wedding anniversary",
+        "cakeSlug": "napoleon"
+      },
+      {
+        "id": "7",
+        "quote": "The Medovik was a showstopper at our office party. Several coworkers asked for the bakery's contact info the same day.",
+        "name": "Michael B.",
+        "occasion": "Office celebration",
+        "cakeSlug": "medovik"
+      },
+      {
+        "id": "8",
+        "quote": "Light, tangy, and not overly sweet — the Smetannik was perfect for our brunch gathering in Roseville.",
+        "name": "Jennifer L.",
+        "occasion": "Brunch gathering",
+        "cakeSlug": "smetannik"
+      },
+      {
+        "id": "9",
+        "quote": "My kids loved the Mannik! Great texture and just the right amount of sweetness. We'll definitely order again.",
+        "name": "Chris H.",
+        "occasion": "Kids' birthday",
+        "cakeSlug": "mannik"
+      },
+      {
+        "id": "10",
+        "quote": "Delivered to Elk Grove on time and still perfectly chilled. The Napoleon held up beautifully for our family dinner.",
+        "name": "Nina S.",
+        "occasion": "Family dinner",
+        "cakeSlug": "napoleon"
+      },
+      {
+        "id": "11",
+        "quote": "Honey layers melted in your mouth. This Medovik reminded me of cakes from my childhood in Ukraine.",
+        "name": "Andrei M.",
+        "occasion": "Heritage celebration",
+        "cakeSlug": "medovik"
+      },
+      {
+        "id": "12",
+        "quote": "Ordered a 3 lb Smetannik for a baby shower — elegant, delicious, and beautifully presented. Highly recommend!",
+        "name": "Rachel W.",
+        "occasion": "Baby shower",
+        "cakeSlug": "smetannik"
+      }
+    ]
+  },
+  "gallery": {
+    "items": [
+      {
+        "id": "napoleon-1",
+        "alt": "Layered Napoleon cake with flaky pastry and custard cream"
+      },
+      {
+        "id": "napoleon-2",
+        "alt": "Close-up of crisp Napoleon pastry layers"
+      },
+      {
+        "id": "napoleon-3",
+        "alt": "Classic mille-feuille Napoleon slices on a plate"
+      },
+      {
+        "id": "napoleon-4",
+        "alt": "Golden flaky pastry dessert with powdered sugar"
+      },
+      {
+        "id": "medovik-1",
+        "alt": "Honey Medovik cake with sour cream frosting"
+      },
+      {
+        "id": "medovik-2",
+        "alt": "Slice of layered honey sponge cake"
+      },
+      {
+        "id": "medovik-3",
+        "alt": "Medovik slice showing thin honey layers"
+      },
+      {
+        "id": "medovik-4",
+        "alt": "Whole honey cake decorated with fresh flowers"
+      },
+      {
+        "id": "smetannik-1",
+        "alt": "Light sour cream Smetannik cake slice"
+      },
+      {
+        "id": "smetannik-2",
+        "alt": "Fluffy sponge cake with creamy filling"
+      },
+      {
+        "id": "smetannik-3",
+        "alt": "Elegant white cream cake for a celebration"
+      },
+      {
+        "id": "smetannik-4",
+        "alt": "Whole sour cream layer cake on a stand"
+      },
+      {
+        "id": "mannik-1",
+        "alt": "Rustic semolina Mannik cake with golden crumb"
+      },
+      {
+        "id": "mannik-2",
+        "alt": "Simple home-style cake with tender texture"
+      },
+      {
+        "id": "mannik-3",
+        "alt": "Semolina cake slice on a ceramic plate"
+      },
+      {
+        "id": "mannik-4",
+        "alt": "Comforting everyday cake with light glaze"
+      },
+      {
+        "id": "custom-1",
+        "alt": "Custom tiered celebration cake with elegant piping"
+      },
+      {
+        "id": "custom-2",
+        "alt": "Birthday cake with candles and custom decoration"
+      },
+      {
+        "id": "custom-3",
+        "alt": "Custom chocolate cake topped with fresh berries"
+      },
+      {
+        "id": "custom-4",
+        "alt": "Assorted custom pastries and dessert display"
+      }
+    ]
+  },
+  "contact": {
+    "pageTitle": "Get in Touch",
+    "pageIntro": "We are here to help with custom orders, delivery questions, and special celebrations",
+    "reachUs": "Reach Us",
+    "reachIntro": "Questions about a custom design, wedding cake, or delivery? We would love to hear from you.",
+    "businessHours": "Business Hours",
+    "hoursNote": "Orders are baked fresh to your schedule — please allow at least 3 days notice for standard cakes.",
+    "sendMessage": "Send a Message",
+    "formIntro": "Wedding inquiries, custom designs, or anything else — tell us what you are planning.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "phoneHint": "So we can call or text you back",
+    "placeholders": {
+      "name": "Your name",
+      "email": "you@example.com",
+      "phone": "(916) 555-0123",
+      "message": "Tell us about your event, preferred cake, delivery date, or any questions..."
+    },
+    "successTitle": "Message sent!",
+    "successText": "Thank you for reaching out. We will get back to you within one business day — usually much sooner.",
+    "deliveryZone": "Delivery Zone",
+    "deliveryZoneIntro": "We deliver fresh cakes within 30 miles of Carmichael, CA (95608). Delivery is $10 within 15 miles and $20 for 15–30 miles.",
+    "radiusLabel": "30-mile delivery radius",
+    "centerLabel": "Carmichael, CA (95608)",
+    "areasTitle": "Areas we serve",
+    "channels": {
+      "phone": {
+        "label": "Phone",
+        "description": "Call or text for quick questions about your order"
+      },
+      "email": {
+        "label": "Email",
+        "description": "We reply within one business day"
+      },
+      "instagram": {
+        "label": "Instagram",
+        "description": "See our latest creations and behind-the-scenes"
+      },
+      "sms": {
+        "label": "Text Message",
+        "value": "Send us a text",
+        "description": "Fastest way to reach us about custom orders"
+      },
+      "whatsapp": {
+        "label": "WhatsApp",
+        "value": "Chat on WhatsApp",
+        "description": "Message us anytime — we will respond during business hours"
+      }
+    },
+    "hours": [
+      {
+        "days": "Mon – Sat",
+        "hours": "9:00 AM – 7:00 PM"
+      },
+      {
+        "days": "Sunday",
+        "hours": "10:00 AM – 4:00 PM"
+      }
+    ],
+    "areas": [
+      "Sacramento",
+      "Carmichael",
+      "Folsom",
+      "Roseville",
+      "El Dorado Hills",
+      "Elk Grove",
+      "Rancho Cordova",
+      "Fair Oaks",
+      "Citrus Heights",
+      "Orangevale"
+    ]
+  },
+  "home": {
+    "hero": {
+      "accent": "Sacramento's home bakery",
+      "title": "Homemade Cakes, Made to Order",
+      "subtitle": "Crafted with love in Sacramento. Delivering to Folsom, Roseville, El Dorado Hills & beyond.",
+      "browseCakes": "Browse Cakes",
+      "howItWorks": "How It Works",
+      "imageAlt": "Layered Napoleon cake with golden pastry and cream",
+      "scrollLabel": "Scroll to learn more"
+    },
+    "trust": {
+      "aria": "Why customers trust us",
+      "items": [
+        "All-natural ingredients",
+        "Any size, any occasion",
+        "Local delivery",
+        "Made from scratch"
+      ]
+    },
+    "ourCakes": {
+      "title": "Choose Your Cake",
+      "subtitle": "Classic Eastern European recipes, reimagined for every celebration"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "Three simple steps to your perfect cake",
+      "steps": [
+        {
+          "title": "Choose & Customize",
+          "text": "Pick your cake, size, and add a personal message for the perfect celebration."
+        },
+        {
+          "title": "We Confirm & Bake",
+          "text": "We'll call or text to confirm details and bake fresh to order just for you."
+        },
+        {
+          "title": "Fresh Delivery",
+          "text": "Delivered to your door in Sacramento and surrounding areas on your chosen date."
+        }
+      ]
+    },
+    "galleryTeaser": {
+      "title": "Made with Love",
+      "subtitle": "A glimpse of cakes we've crafted for Sacramento celebrations"
+    },
+    "reviews": {
+      "title": "What Our Customers Say",
+      "subtitle": "Real reviews from Sacramento-area celebrations",
+      "prev": "Previous reviews",
+      "next": "Next reviews"
+    },
+    "cta": {
+      "title": "Ready to order your perfect cake?",
+      "subtitle": "Order at least 3 days in advance. Weekend orders fill quickly!"
+    }
+  },
+  "catalog": {
+    "pageTitle": "Our Cakes",
+    "pageSubtitle": "Classic Eastern European recipes, reimagined for every celebration",
+    "detailsSr": "Cake details",
+    "youMightLove": "You Might Also Love",
+    "relatedSubtitle": "Explore more of our handcrafted favorites",
+    "imageAlt": "{name} cake",
+    "configurator": {
+      "weight": "Weight",
+      "tiers": "Number of tiers",
+      "inscription": "Inscription on cake",
+      "deliveryDate": "Preferred delivery date",
+      "decorationNotes": "Decoration notes",
+      "inscriptionOptional": "Optional, max 40 characters",
+      "inscriptionPlaceholder": "Happy Birthday, Anna!",
+      "notesPlaceholder": "Any special wishes for decoration, flavors, or design?",
+      "custom": "Custom",
+      "customWeight": "Custom weight in pounds",
+      "weightPreset": "{weight} lbs",
+      "estimatedPrice": "Estimated price",
+      "priceFormula": "{weight} lbs × {price}/lb",
+      "deliveryFees": "Delivery: $10 within 15 miles | $20 up to 30 miles",
+      "questionsText": "Questions? Text us",
+      "selectDate": "Please select a delivery date ({days} {dayLabel} notice required).",
+      "dateAfter": "Please choose a date on or after {date} ({days} {dayLabel} notice required).",
+      "day": "day",
+      "days": "days",
+      "thumbAria": "View image {index} of {total}",
+      "thumbsLabel": "Product image thumbnails"
+    },
+    "galleryPage": {
+      "title": "Made with Love",
+      "subtitle": "A collection of cakes we've crafted for birthdays, weddings, holidays, and everyday joy across Sacramento"
+    }
+  },
+  "cart": {
+    "pageTitle": "Your Cart",
+    "readySingle": "{count} custom order ready for checkout",
+    "readyPlural": "{count} custom orders ready for checkout",
+    "emptyTitle": "No cakes yet",
+    "emptyText": "Browse our catalog and customize a cake made fresh to order for your celebration.",
+    "summaryTitle": "Order Summary",
+    "deliveryNote": "Delivery fee is $10 within 15 miles and $20 up to 30 miles. Your exact fee is calculated at checkout based on your address.",
+    "itemDelivery": "Delivery: {date}",
+    "itemInscription": "Inscription: \"{text}\"",
+    "itemNotes": "Notes: {text}",
+    "each": "{price} each",
+    "qtyAria": "Quantity for {name}",
+    "decrease": "Decrease quantity of {name}",
+    "increase": "Increase quantity of {name}",
+    "remove": "Remove {name} from cart"
+  },
+  "checkout": {
+    "pageTitle": "Checkout",
+    "pageIntro": "Complete your order in three quick steps. We'll confirm details by phone or text.",
+    "stepOf": "Step {step} of 3",
+    "steps": {
+      "contact": "Contact",
+      "delivery": "Delivery",
+      "review": "Review"
+    },
+    "step1": {
+      "title": "Contact Information",
+      "intro": "We'll use your phone to confirm order details and delivery timing.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone number",
+      "email": "Email address",
+      "phoneHint": "Required for order confirmation call or text",
+      "phonePlaceholder": "(916) 555-0192",
+      "errors": {
+        "firstName": "First name is required.",
+        "lastName": "Last name is required.",
+        "phone": "Enter a valid phone number.",
+        "email": "Enter a valid email address."
+      }
+    },
+    "step2": {
+      "title": "Delivery Details",
+      "intro": "Choose delivery or pickup, then set your preferred date and time window.",
+      "method": "Delivery method",
+      "deliveryOption": "Delivery",
+      "deliveryHint": "$10 within 15 miles, $20 up to 30 miles",
+      "pickupOption": "Pickup",
+      "pickupHint": "Free pickup after confirmation",
+      "street": "Street address",
+      "city": "City",
+      "zip": "ZIP code",
+      "dateDelivery": "Delivery date",
+      "datePickup": "Pickup date",
+      "timeWindow": "Time window",
+      "instructions": "Special instructions (optional)",
+      "instructionsPlaceholder": "Gate code, parking details, landmark, or pickup note",
+      "windows": {
+        "morning": "Morning (9am-12pm)",
+        "afternoon": "Afternoon (12pm-5pm)",
+        "evening": "Evening (5pm-8pm)"
+      },
+      "fees": {
+        "pickup": "Free pickup after confirmation",
+        "estimate10": "Estimated delivery: $10 (confirm ZIP for exact fee)",
+        "invalidZip": "Enter a valid ZIP to confirm delivery fee.",
+        "within15": "Delivery within 15 miles: $10",
+        "within30": "Delivery 15–30 miles: $20",
+        "outside": "This ZIP may be outside our 30-mile delivery zone. Contact us to confirm."
+      },
+      "errors": {
+        "date": "Please choose a date.",
+        "window": "Please select a time window.",
+        "street": "Enter your street address.",
+        "city": "Enter your city.",
+        "zip": "Enter a valid 5-digit ZIP."
+      }
+    },
+    "step3": {
+      "title": "Review & Payment",
+      "intro": "Confirm your order details and choose how you want to pay your deposit.",
+      "lineItem": "{weight} lbs, {tiers} {tierLabel}, inscription: \"{inscription}\"",
+      "lineDate": "{type} on {date}",
+      "depositNote": "A 50% deposit ({amount}) is required to confirm your order. We will send payment instructions via text/email after review.",
+      "agreeTerms": "I agree to the Terms & Conditions.",
+      "errors": {
+        "payment": "Please select a payment method.",
+        "terms": "You must agree to the Terms & Conditions.",
+        "submit": "Unable to place your order right now. Please try again.",
+        "generic": "Something went wrong. Please try again in a moment."
+      }
+    }
+  },
+  "account": {
+    "login": {
+      "title": "My Account",
+      "intro": "Sign in to view your orders and track your cake status.",
+      "passwordTab": "Password",
+      "magicTab": "Magic Link",
+      "email": "Email",
+      "password": "Password",
+      "emailHintOrder": "Use the email you ordered with.",
+      "emailHintMagic": "We will send a secure sign-in link to this email.",
+      "emailPlaceholder": "you@example.com",
+      "signingIn": "Signing in...",
+      "sendMagic": "Send Magic Link",
+      "magicSent": "Magic link sent. Check your inbox to continue.",
+      "supabaseMissing": "Supabase is not configured yet. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY."
+    },
+    "sidebar": {
+      "account": "Account",
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "profile": "Profile"
+    },
+    "welcome": "Welcome back",
+    "dashboard": {
+      "totalOrders": "Total Orders",
+      "activeOrders": "Active Orders",
+      "loyalty": "Loyalty Points",
+      "quickLinks": "Quick links"
+    },
+    "orders": {
+      "emptyTitle": "No orders yet",
+      "emptyText": "Once you place your first cake order, your history will appear here.",
+      "headers": {
+        "number": "Order #",
+        "cake": "Cake",
+        "weight": "Weight",
+        "date": "Delivery Date",
+        "total": "Total",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "viewDetails": "View details",
+      "customWeight": "Custom weight"
+    },
+    "orderDetail": {
+      "title": "Order #{number}",
+      "details": "Order details",
+      "statusTracker": "Status tracker",
+      "cakeItems": "Cake items",
+      "deliveryPayment": "Delivery & payment",
+      "deliveryType": "Delivery type",
+      "date": "Date",
+      "timeWindow": "Time window",
+      "address": "Delivery address",
+      "instructions": "Instructions:",
+      "help": "Need help with this order?",
+      "helpText": "Contact us if you need to adjust delivery details or have design questions."
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "baking": "Baking",
+      "outForDelivery": "Out for Delivery",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled",
+      "tracker": {
+        "received": "Order Received",
+        "confirmed": "Confirmed",
+        "baking": "Baking",
+        "outForDelivery": "Out for Delivery",
+        "delivered": "Delivered",
+        "cancelled": "This order has been cancelled."
+      }
+    },
+    "profile": {
+      "title": "Profile details",
+      "intro": "Update your contact and default delivery info.",
+      "fullName": "Full name",
+      "phone": "Phone",
+      "defaultAddress": "Default delivery address",
+      "addressHint": "Optional — pre-fills checkout when you order delivery.",
+      "changePassword": "Change password",
+      "passwordHint": "Password sign-in only. Magic-link users can set a password here.",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "deleteTitle": "Delete account",
+      "deleteText": "Permanently remove your account and profile. Order history may be retained for bakery records.",
+      "messages": {
+        "profileUpdated": "Profile updated successfully.",
+        "passwordUpdated": "Password updated successfully.",
+        "passwordLength": "New password must be at least 8 characters.",
+        "passwordMismatch": "New passwords do not match.",
+        "wrongPassword": "Current password is incorrect.",
+        "notConfigured": "Account service is not configured.",
+        "deleteFailed": "Unable to delete account."
+      },
+      "deleteConfirm": "Delete your account permanently? This cannot be undone. Active orders may still be fulfilled per our terms."
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Our Story",
+      "subtitle": "Made with love in Sacramento",
+      "imageAlt": "Baker preparing a fresh cake in a warm home kitchen"
+    },
+    "story": {
+      "title": "From Our Kitchen to Yours",
+      "subtitle": "A home bakery rooted in family tradition and California warmth",
+      "p1": "SteKir Cakes began at our family table — recipes passed down through generations of Eastern European baking, now shared with neighbors across Sacramento.",
+      "p2": "Every cake is baked fresh to order in our licensed home kitchen. No freezers, no shortcuts — just butter, honey, cream, and the patience that layered cakes deserve."
+    },
+    "why": {
+      "title": "Why Choose Us",
+      "subtitle": "Small-batch baking with big-hearted service",
+      "items": [
+        {
+          "title": "Fresh Daily",
+          "text": "Every cake is baked to order — never pulled from a freezer or sitting on a shelf."
+        },
+        {
+          "title": "No Preservatives",
+          "text": "Simple, honest ingredients you can pronounce. Real butter, eggs, honey, and cream."
+        },
+        {
+          "title": "Custom Sizes",
+          "text": "From intimate gatherings to large celebrations — choose the weight and tiers that fit your event."
+        },
+        {
+          "title": "Local Delivery",
+          "text": "We deliver across Sacramento and surrounding suburbs, fresh to your door on your chosen date."
+        }
+      ]
+    },
+    "baker": {
+      "title": "Meet the Baker",
+      "subtitle": "The hands and heart behind every layer",
+      "name": "Anna",
+      "role": "Founder & Head Baker",
+      "imageAlt": "Anna, founder and head baker of SteKir Cakes",
+      "p1": "Anna grew up watching her mother and grandmother stack honey layers and fold Napoleon pastry — skills she brings to every order today.",
+      "p2": "She believes celebration cakes should taste like memory: familiar, generous, and made with care you can feel in every bite."
+    },
+    "certs": {
+      "title": "Certified & Insured",
+      "intro": "We operate under Sacramento County cottage food regulations with the licenses and insurance your celebration deserves.",
+      "cottageTitle": "Sacramento County",
+      "cottageSubtitle": "Cottage Food License",
+      "cottageText": "Registered and approved for direct-to-customer sales under California cottage food law.",
+      "insuredTitle": "Insured & Certified",
+      "insuredSubtitle": "Fully Covered",
+      "insuredText": "Liability insurance in place for your peace of mind at every celebration we serve."
+    }
+  },
+  "reviewsForm": {
+    "title": "Share Your Experience",
+    "intro": "Reviews are moderated before publishing. Sign in optional — name and email are required for guests.",
+    "yourName": "Your name",
+    "email": "Email",
+    "emailHint": "Not shown publicly.",
+    "cake": "Which cake did you order?",
+    "selectCake": "Select a cake",
+    "rating": "Your rating",
+    "ratingHint": "Tap a star to rate",
+    "occasion": "Occasion (optional)",
+    "review": "Your review",
+    "occasionPlaceholder": "Birthday cake, anniversary, etc.",
+    "reviewPlaceholder": "Tell us what you loved about your cake...",
+    "thankYou": "Thank you! Your review was submitted and will appear after approval.",
+    "submitFailed": "Unable to submit review.",
+    "starsAria": "Rate your experience from 1 to 5 stars",
+    "starLabel": "{count} star",
+    "starsLabel": "{count} stars"
+  },
+  "orderSuccess": {
+    "thankYou": "Thank you, {name}!",
+    "received": "Your order has been received. We'll be in touch shortly.",
+    "fallbackOrder": "SAC-00001",
+    "pickupDate": "Pickup date",
+    "deliveryDate": "Delivery date",
+    "nextTitle": "What happens next?",
+    "steps": [
+      {
+        "title": "We'll reach out soon",
+        "text": "You'll receive a text or call within a few hours to confirm your order details."
+      },
+      {
+        "title": "Send your deposit",
+        "text": "A 50% deposit is required to confirm your order. We'll text you payment instructions."
+      },
+      {
+        "title": "Fresh delivery on your date",
+        "text": "Your cake will be baked fresh and delivered right to your door on the chosen date."
+      }
+    ],
+    "signInTrack": "Sign In to Track Order",
+    "questions": "Questions? Text or call us at (916) 555-0192 — we're happy to help."
+  },
+  "api": {
+    "firstName": "Please enter your first name.",
+    "lastName": "Please enter your last name.",
+    "phone": "Please enter a valid phone number.",
+    "email": "Please enter a valid email address.",
+    "deliveryType": "Please select delivery or pickup.",
+    "deliveryDate": "Please select a delivery date.",
+    "deliveryWindow": "Please select a delivery window.",
+    "street": "Please enter your street address.",
+    "city": "Please enter your city.",
+    "zip": "Please enter a valid ZIP code.",
+    "payment": "Please select a payment method.",
+    "terms": "You must agree to the terms and conditions.",
+    "items": "Your cart is empty.",
+    "invalidItem": "Invalid cart item.",
+    "supabase": "Order service is not configured.",
+    "emailFailed": "Order placed but confirmation email could not be sent.",
+    "contactName": "Please enter your name.",
+    "contactEmail": "Please enter a valid email address.",
+    "contactMessage": "Please enter a message.",
+    "reviewName": "Please enter your name.",
+    "reviewEmail": "Please enter a valid email address.",
+    "reviewCake": "Please select a cake.",
+    "reviewRating": "Please select a rating.",
+    "reviewText": "Please enter your review."
+  },
+  "emails": {
+    "customerSubject": "Your SteKir Cakes order request — #{orderNumber}",
+    "ownerSubject": "New order request #{orderNumber}",
+    "greeting": "Hi {name},",
+    "received": "Thank you for your order request! We received the details below and will contact you shortly to confirm.",
+    "deposit": "A 50% deposit is required to confirm your order. We will send payment instructions after review.",
+    "orderDetails": "Order details",
+    "newOrder": "New cake order request",
+    "review": "Please review and confirm this order in the admin panel."
+  }
+}

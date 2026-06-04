@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 type ProductGalleryProps = {
   images: string[];
@@ -9,6 +10,7 @@ type ProductGalleryProps = {
 };
 
 export function ProductGallery({ images, alt }: ProductGalleryProps) {
+  const t = useTranslations("catalog.configurator");
   const [activeIndex, setActiveIndex] = useState(0);
   const activeImage = images[activeIndex] ?? images[0];
 
@@ -26,14 +28,14 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
       </div>
 
       {images.length > 1 ? (
-        <div className="flex gap-3" role="list" aria-label="Product image thumbnails">
+        <div className="flex gap-3" role="list" aria-label={t("thumbsLabel")}>
           {images.map((image, index) => (
             <button
               key={image}
               type="button"
               role="listitem"
               onClick={() => setActiveIndex(index)}
-              aria-label={`View image ${index + 1} of ${images.length}`}
+              aria-label={t("thumbAria", { index: index + 1, total: images.length })}
               aria-current={activeIndex === index ? "true" : undefined}
               className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
                 activeIndex === index
@@ -41,13 +43,7 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
                   : "border-border opacity-80 hover:border-primary/50 hover:opacity-100"
               }`}
             >
-              <Image
-                src={image}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="80px"
-              />
+              <Image src={image} alt="" fill className="object-cover" sizes="80px" />
             </button>
           ))}
         </div>

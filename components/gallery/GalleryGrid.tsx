@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { GalleryLightbox } from "@/components/gallery/GalleryLightbox";
 import {
   filterGalleryImages,
-  galleryFilters,
+  getGalleryFilters,
   type GalleryFilter,
   type GalleryImage,
 } from "@/lib/data/gallery";
@@ -17,12 +18,15 @@ const heightClasses: Record<GalleryImage["height"], string> = {
 };
 
 export function GalleryGrid() {
+  const locale = useLocale();
+  const t = useTranslations("galleryFilters");
+  const galleryFilters = useMemo(() => getGalleryFilters(locale), [locale]);
   const [activeFilter, setActiveFilter] = useState<GalleryFilter>("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const filteredImages = useMemo(
-    () => filterGalleryImages(activeFilter),
-    [activeFilter],
+    () => filterGalleryImages(activeFilter, locale),
+    [activeFilter, locale],
   );
 
   const openLightbox = (index: number) => setLightboxIndex(index);
@@ -38,7 +42,7 @@ export function GalleryGrid() {
       <div
         className="mb-10 flex flex-wrap gap-2"
         role="tablist"
-        aria-label="Filter gallery by cake type"
+        aria-label={t("filterAria")}
       >
         {galleryFilters.map((filter) => {
           const isActive = activeFilter === filter.id;
@@ -64,7 +68,7 @@ export function GalleryGrid() {
 
       {filteredImages.length === 0 ? (
         <p className="rounded-2xl border border-border bg-surface px-6 py-12 text-center text-text-muted">
-          No photos in this category yet. Check back soon!
+          {t("noPhotos")}
         </p>
       ) : (
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
@@ -74,7 +78,7 @@ export function GalleryGrid() {
               type="button"
               onClick={() => openLightbox(index)}
               className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover focus-visible:outline-offset-4"
-              aria-label={`View photo: ${image.alt}`}
+              aria-label={t("viewPhoto", { alt: image.alt })}
             >
               <div className={`relative w-full ${heightClasses[image.height]}`}>
                 <Image

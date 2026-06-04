@@ -1,24 +1,28 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { CakeCard } from "@/components/shared/CakeCard";
 import {
   cakeMatchesOccasion,
-  occasionFilters,
+  getOccasionFilters,
   type OccasionFilter,
 } from "@/lib/data/catalog-filters";
-import { cakes, getStartingPrice, type Cake } from "@/lib/data/cakes";
+import { getStartingPrice, type Cake } from "@/lib/data/cakes";
 
 type CatalogGridProps = {
   allCakes: Cake[];
 };
 
 export function CatalogGrid({ allCakes }: CatalogGridProps) {
+  const locale = useLocale();
+  const t = useTranslations("catalogFilters");
+  const tc = useTranslations("common");
+  const occasionFilters = useMemo(() => getOccasionFilters(locale), [locale]);
   const [activeFilter, setActiveFilter] = useState<OccasionFilter>("all");
 
   const filteredCakes = useMemo(
-    () =>
-      allCakes.filter((cake) => cakeMatchesOccasion(cake.tags, activeFilter)),
+    () => allCakes.filter((cake) => cakeMatchesOccasion(cake.tags, activeFilter)),
     [allCakes, activeFilter],
   );
 
@@ -27,7 +31,7 @@ export function CatalogGrid({ allCakes }: CatalogGridProps) {
       <div
         className="mb-10 flex flex-wrap gap-2"
         role="tablist"
-        aria-label="Filter cakes by occasion"
+        aria-label={t("filterAria")}
       >
         {occasionFilters.map((filter) => {
           const isActive = activeFilter === filter.id;
@@ -53,7 +57,7 @@ export function CatalogGrid({ allCakes }: CatalogGridProps) {
 
       {filteredCakes.length === 0 ? (
         <p className="rounded-2xl border border-border bg-surface px-6 py-12 text-center text-text-muted">
-          No cakes match this occasion. Try another filter or browse all cakes.
+          {t("noMatch")}
         </p>
       ) : (
         <div className="grid gap-8 md:grid-cols-2">
@@ -65,7 +69,7 @@ export function CatalogGrid({ allCakes }: CatalogGridProps) {
               tagline={cake.tagline}
               image={cake.image}
               startingPrice={getStartingPrice(cake)}
-              ctaLabel="Customize & Order"
+              ctaLabel={tc("customizeOrder")}
             />
           ))}
         </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { Breadcrumb } from "@/components/catalog/Breadcrumb";
 import { Step1Contact, type ContactFormValues } from "@/components/checkout/Step1Contact";
 import {
@@ -36,6 +37,13 @@ function isEmailValid(email: string): boolean {
 
 export function CheckoutContent() {
   const router = useRouter();
+  const t = useTranslations("checkout");
+  const t1 = useTranslations("checkout.step1.errors");
+  const t2 = useTranslations("checkout.step2.errors");
+  const t2fees = useTranslations("checkout.step2.fees");
+  const t3 = useTranslations("checkout.step3.errors");
+  const tc = useTranslations("common");
+  const locale = useLocale();
   const { items, subtotal, clearCart } = useCart();
 
   const [isHydrated, setIsHydrated] = useState(false);
@@ -94,20 +102,32 @@ export function CheckoutContent() {
       return {
         fee: 0,
         tier: "near" as const,
-        message: "Free pickup after confirmation",
+        message: t2fees("pickup"),
       };
     }
 
     if (deliveryValues.deliveryZip.trim().length === 5) {
-      return calculateDeliveryFee(deliveryValues.deliveryZip);
+      const result = calculateDeliveryFee(deliveryValues.deliveryZip);
+      const messageByTier: Record<string, string> = {
+        near: t2fees("within15"),
+        far: t2fees("within30"),
+        unsupported: t2fees("outside"),
+      };
+      const invalidZip = !/^\d{5}$/.test(deliveryValues.deliveryZip.trim());
+      return {
+        ...result,
+        message: invalidZip
+          ? t2fees("invalidZip")
+          : (messageByTier[result.tier] ?? result.message),
+      };
     }
 
     return {
       fee: ESTIMATED_DELIVERY_FEE,
       tier: "near" as const,
-      message: "Estimated delivery: $10 (confirm ZIP for exact fee)",
+      message: t2fees("estimate10"),
     };
-  }, [deliveryValues.deliveryType, deliveryValues.deliveryZip]);
+  }, [deliveryValues.deliveryType, deliveryValues.deliveryZip, t2fees]);
 
   const deliveryFee = deliveryFeeInfo.fee;
   const total = subtotal + deliveryFee;
@@ -127,16 +147,16 @@ export function CheckoutContent() {
     const nextErrors: ContactFormErrors = {};
 
     if (contactValues.firstName.trim().length < 2) {
-      nextErrors.firstName = "First name is required.";
+      nextErrors.firstName = t1("firstName");
     }
     if (contactValues.lastName.trim().length < 2) {
-      nextErrors.lastName = "Last name is required.";
+      nextErrors.lastName = t1("lastName");
     }
     if (contactValues.phone.trim().length < 7) {
-      nextErrors.phone = "Enter a valid phone number.";
+      nextErrors.phone = t1("phone");
     }
     if (!isEmailValid(contactValues.email.trim())) {
-      nextErrors.email = "Enter a valid email address.";
+      nextErrors.email = t1("email");
     }
 
     setContactErrors(nextErrors);
@@ -147,22 +167,22 @@ export function CheckoutContent() {
     const nextErrors: DeliveryFormErrors = {};
 
     if (!deliveryValues.deliveryDate) {
-      nextErrors.deliveryDate = "Please choose a date.";
+      nextErrors.deliveryDate = t2("date");
     }
 
     if (!deliveryValues.deliveryWindow) {
-      nextErrors.deliveryWindow = "Please select a time window.";
+      nextErrors.deliveryWindow = t2("window");
     }
 
     if (deliveryValues.deliveryType === "delivery") {
       if (deliveryValues.deliveryAddress.trim().length < 5) {
-        nextErrors.deliveryAddress = "Enter your street address.";
+        nextErrors.deliveryAddress = t2("street");
       }
       if (deliveryValues.deliveryCity.trim().length < 2) {
-        nextErrors.deliveryCity = "Enter your city.";
+        nextErrors.deliveryCity = t2("city");
       }
       if (!/^\d{5}$/.test(deliveryValues.deliveryZip.trim())) {
-        nextErrors.deliveryZip = "Enter a valid 5-digit ZIP.";
+        nextErrors.deliveryZip = t2("zip");
       } else if (deliveryFeeInfo.tier === "unsupported") {
         nextErrors.deliveryZip = deliveryFeeInfo.message;
       }
@@ -176,10 +196,10 @@ export function CheckoutContent() {
     const nextErrors: ReviewFormErrors = {};
 
     if (!paymentMethod) {
-      nextErrors.paymentMethod = "Please select a payment method.";
+      nextErrors.paymentMethod = t3("payment");
     }
     if (!agreeToTerms) {
-      nextErrors.terms = "You must agree to the Terms & Conditions.";
+      nextErrors.terms = t3("terms");
     }
 
     setReviewErrors(nextErrors);
@@ -215,6 +235,7 @@ export function CheckoutContent() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          locale,
           ...contactValues,
           ...deliveryValues,
           paymentMethod,
@@ -238,7 +259,7 @@ export function CheckoutContent() {
 
       const data = (await response.json()) as { orderNumber?: string; error?: string };
       if (!response.ok || !data.orderNumber) {
-        setSubmitError(data.error ?? "Unable to place your order right now. Please try again.");
+        setSubmitError(data.error ?? t3("submit"));
         return;
       }
 
@@ -248,7 +269,7 @@ export function CheckoutContent() {
       const search = new URLSearchParams({
         name: contactValues.firstName,
         orderNumber: data.orderNumber,
-        cake: firstItem?.name ?? "Custom Cake",
+        cake: firstItem?.name ?? tc("customCake"),
         weight: firstItem?.weightLbs ? String(firstItem.weightLbs) : "",
         date: deliveryValues.deliveryDate,
         total: total.toFixed(2),
@@ -259,7 +280,7 @@ export function CheckoutContent() {
 
       router.push(`/order-success?${search.toString()}`);
     } catch {
-      setSubmitError("Something went wrong. Please try again in a moment.");
+      setSubmitError(t3("generic"));
     } finally {
       setIsSubmitting(false);
     }
@@ -277,17 +298,17 @@ export function CheckoutContent() {
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
       <Breadcrumb
         items={[
-          { label: "Home", href: "/" },
-          { label: "Cart", href: "/cart" },
-          { label: "Checkout" },
+          { label: tc("home"), href: "/" },
+          { label: tc("cart"), href: "/cart" },
+          { label: tc("checkout") },
         ]}
       />
 
       <div className="mb-8">
-        <h1 className="font-display text-4xl font-semibold text-text sm:text-5xl">Checkout</h1>
-        <p className="mt-3 text-lg text-text-muted">
-          Complete your order in three quick steps. We&rsquo;ll confirm details by phone or text.
-        </p>
+        <h1 className="font-display text-4xl font-semibold text-text sm:text-5xl">
+          {t("pageTitle")}
+        </h1>
+        <p className="mt-3 text-lg text-text-muted">{t("pageIntro")}</p>
       </div>
 
       <StepIndicator currentStep={step} />
@@ -339,14 +360,14 @@ export function CheckoutContent() {
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-between">
         <Button variant="ghost" onClick={handleBack} disabled={step === 1 || isSubmitting}>
-          Back
+          {tc("back")}
         </Button>
 
         {step < 3 ? (
-          <Button onClick={handleNext}>Continue</Button>
+          <Button onClick={handleNext}>{tc("continue")}</Button>
         ) : (
           <Button onClick={handleSubmit} disabled={isSubmitting}>
-            {isSubmitting ? "Placing Order..." : "Place Order"}
+            {isSubmitting ? tc("placingOrder") : tc("placeOrder")}
           </Button>
         )}
       </div>

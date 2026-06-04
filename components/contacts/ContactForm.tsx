@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
 
@@ -21,6 +22,9 @@ const initialState: ContactFormState = {
 };
 
 export function ContactForm() {
+  const t = useTranslations("contact");
+  const tc = useTranslations("common");
+  const locale = useLocale();
   const [form, setForm] = useState<ContactFormState>(initialState);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,13 +42,13 @@ export function ContactForm() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, locale }),
       });
 
       const data = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        throw new Error(data.error ?? "Something went wrong. Please try again.");
+        throw new Error(data.error ?? tc("somethingWrong"));
       }
 
       setForm(initialState);
@@ -52,7 +56,7 @@ export function ContactForm() {
     } catch (error) {
       setStatus("error");
       setErrorMessage(
-        error instanceof Error ? error.message : "Something went wrong. Please try again.",
+        error instanceof Error ? error.message : tc("somethingWrong"),
       );
     }
   }
@@ -69,13 +73,10 @@ export function ContactForm() {
         >
           ✓
         </div>
-        <h2 className="mt-5 font-display text-2xl font-semibold text-text">Message sent!</h2>
-        <p className="mx-auto mt-3 max-w-sm text-text-muted">
-          Thank you for reaching out. We will get back to you within one business day — usually much
-          sooner.
-        </p>
+        <h2 className="mt-5 font-display text-2xl font-semibold text-text">{t("successTitle")}</h2>
+        <p className="mx-auto mt-3 max-w-sm text-text-muted">{t("successText")}</p>
         <Button className="mt-6" onClick={() => setStatus("idle")} variant="ghost">
-          Send another message
+          {tc("sendAnotherMessage")}
         </Button>
       </div>
     );
@@ -87,13 +88,11 @@ export function ContactForm() {
       className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-8"
       noValidate
     >
-      <h2 className="font-display text-2xl font-semibold text-text">Send a Message</h2>
-      <p className="mt-2 text-text-muted">
-        Wedding inquiries, custom designs, or anything else — tell us what you are planning.
-      </p>
+      <h2 className="font-display text-2xl font-semibold text-text">{t("sendMessage")}</h2>
+      <p className="mt-2 text-text-muted">{t("formIntro")}</p>
 
       <div className="mt-6 space-y-5">
-        <FormField label="Name" htmlFor="contact-name">
+        <FormField label={t("name")} htmlFor="contact-name">
           <input
             id="contact-name"
             name="name"
@@ -103,11 +102,11 @@ export function ContactForm() {
             value={form.name}
             onChange={(event) => updateField("name", event.target.value)}
             className={formInputClassName()}
-            placeholder="Your name"
+            placeholder={t("placeholders.name")}
           />
         </FormField>
 
-        <FormField label="Email" htmlFor="contact-email">
+        <FormField label={t("email")} htmlFor="contact-email">
           <input
             id="contact-email"
             name="email"
@@ -117,11 +116,11 @@ export function ContactForm() {
             value={form.email}
             onChange={(event) => updateField("email", event.target.value)}
             className={formInputClassName()}
-            placeholder="you@example.com"
+            placeholder={t("placeholders.email")}
           />
         </FormField>
 
-        <FormField label="Phone" htmlFor="contact-phone" hint="So we can call or text you back">
+        <FormField label={t("phone")} htmlFor="contact-phone" hint={t("phoneHint")}>
           <input
             id="contact-phone"
             name="phone"
@@ -131,11 +130,11 @@ export function ContactForm() {
             value={form.phone}
             onChange={(event) => updateField("phone", event.target.value)}
             className={formInputClassName()}
-            placeholder="(916) 555-0123"
+            placeholder={t("placeholders.phone")}
           />
         </FormField>
 
-        <FormField label="Message" htmlFor="contact-message">
+        <FormField label={t("message")} htmlFor="contact-message">
           <textarea
             id="contact-message"
             name="message"
@@ -144,13 +143,16 @@ export function ContactForm() {
             value={form.message}
             onChange={(event) => updateField("message", event.target.value)}
             className={formInputClassName("resize-y min-h-[120px]")}
-            placeholder="Tell us about your event, preferred cake, delivery date, or any questions..."
+            placeholder={t("placeholders.message")}
           />
         </FormField>
       </div>
 
       {status === "error" && errorMessage ? (
-        <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+        <p
+          className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+          role="alert"
+        >
           {errorMessage}
         </p>
       ) : null}
@@ -159,9 +161,9 @@ export function ContactForm() {
         type="submit"
         className="mt-6 w-full"
         disabled={status === "submitting"}
-        aria-label={status === "submitting" ? "Sending message" : "Send message"}
+        aria-label={status === "submitting" ? tc("sending") : tc("sendMessage")}
       >
-        {status === "submitting" ? "Sending..." : "Send Message"}
+        {status === "submitting" ? tc("sending") : tc("sendMessage")}
       </Button>
     </form>
   );

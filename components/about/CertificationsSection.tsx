@@ -1,7 +1,11 @@
 import { Award, ShieldCheck } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 
-export function CertificationsSection() {
+export async function CertificationsSection() {
+  const t = await getTranslations("about.certs");
+  const tc = await getTranslations("common");
+
   return (
     <section
       className="border-t border-border bg-surface py-20"
@@ -13,13 +17,9 @@ export function CertificationsSection() {
             id="certifications-heading"
             className="font-display text-3xl font-semibold text-text sm:text-4xl"
           >
-            Certified &amp; Insured
+            {t("title")}
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-text-muted">
-            We operate under Sacramento County cottage food regulations, so you
-            can order with confidence knowing our kitchen meets local health and
-            safety standards.
-          </p>
+          <p className="mt-4 text-lg leading-relaxed text-text-muted">{t("intro")}</p>
         </div>
 
         <div className="mx-auto mt-12 grid max-w-2xl gap-6 sm:grid-cols-2">
@@ -27,31 +27,23 @@ export function CertificationsSection() {
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
               <Award className="h-8 w-8" aria-hidden="true" />
             </div>
-            <p className="mt-5 font-display text-lg font-semibold text-text">
-              Sacramento County
-            </p>
-            <p className="mt-1 text-sm font-medium text-primary">Cottage Food License</p>
-            <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Registered and approved for direct-to-customer sales under California
-              cottage food law.
-            </p>
+            <p className="mt-5 font-display text-lg font-semibold text-text">{t("cottageTitle")}</p>
+            <p className="mt-1 text-sm font-medium text-primary">{t("cottageSubtitle")}</p>
+            <p className="mt-3 text-sm leading-relaxed text-text-muted">{t("cottageText")}</p>
           </div>
 
           <div className="flex flex-col items-center rounded-2xl border border-border bg-bg px-6 py-10 text-center shadow-soft">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
               <ShieldCheck className="h-8 w-8" aria-hidden="true" />
             </div>
-            <p className="mt-5 font-display text-lg font-semibold text-text">Insured &amp; Certified</p>
-            <p className="mt-1 text-sm font-medium text-primary">Fully Covered</p>
-            <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Liability insurance in place for your peace of mind at every
-              celebration we serve.
-            </p>
+            <p className="mt-5 font-display text-lg font-semibold text-text">{t("insuredTitle")}</p>
+            <p className="mt-1 text-sm font-medium text-primary">{t("insuredSubtitle")}</p>
+            <p className="mt-3 text-sm leading-relaxed text-text-muted">{t("insuredText")}</p>
           </div>
         </div>
 
         <div className="mt-12 text-center">
-          <Button href="/catalog">Browse Our Cakes</Button>
+          <Button href="/catalog">{tc("browseOurCakes")}</Button>
         </div>
       </div>
     </section>

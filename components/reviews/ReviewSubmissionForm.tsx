@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { StarRating } from "@/components/shared/StarRating";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
-import { cakes } from "@/lib/data/cakes";
+import { getCakes } from "@/lib/data/cakes";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export function ReviewSubmissionForm() {
+  const locale = useLocale();
+  const t = useTranslations("reviewsForm");
+  const tc = useTranslations("common");
+  const cakes = useMemo(() => getCakes(locale), [locale]);
   const [reviewerName, setReviewerName] = useState("");
   const [reviewerEmail, setReviewerEmail] = useState("");
   const [cakeSlug, setCakeSlug] = useState("");
@@ -42,6 +47,7 @@ export function ReviewSubmissionForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          locale,
           reviewerName,
           reviewerEmail,
           cakeSlug,
@@ -55,15 +61,12 @@ export function ReviewSubmissionForm() {
 
       if (!response.ok) {
         setStatus("error");
-        setMessage(data.error ?? "Unable to submit review.");
+        setMessage(data.error ?? t("submitFailed"));
         return;
       }
 
       setStatus("success");
-      setMessage(
-        data.message ??
-          "Thank you! Your review was submitted and will appear after approval.",
-      );
+      setMessage(data.message ?? t("thankYou"));
       setReviewerName("");
       setReviewerEmail("");
       setCakeSlug("");
@@ -72,16 +75,14 @@ export function ReviewSubmissionForm() {
       setBody("");
     } catch {
       setStatus("error");
-      setMessage("Something went wrong. Please try again.");
+      setMessage(tc("somethingWrong"));
     }
   }
 
   return (
     <section className="mt-16 rounded-2xl border border-border bg-surface p-6 shadow-card sm:p-8">
-      <h2 className="font-display text-2xl font-semibold text-text">Share Your Experience</h2>
-      <p className="mt-2 text-sm text-text-muted">
-        Reviews are moderated before publishing. Sign in optional — name and email are required for guests.
-      </p>
+      <h2 className="font-display text-2xl font-semibold text-text">{t("title")}</h2>
+      <p className="mt-2 text-sm text-text-muted">{t("intro")}</p>
 
       {status === "success" ? (
         <p className="mt-6 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm text-primary-dark">
@@ -90,7 +91,7 @@ export function ReviewSubmissionForm() {
       ) : (
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
           <div className="grid gap-5 sm:grid-cols-2">
-            <FormField label="Your name" htmlFor="review-name">
+            <FormField label={t("yourName")} htmlFor="review-name">
               <input
                 id="review-name"
                 type="text"
@@ -102,7 +103,7 @@ export function ReviewSubmissionForm() {
               />
             </FormField>
 
-            <FormField label="Email" htmlFor="review-email" hint="Not shown publicly.">
+            <FormField label={t("email")} htmlFor="review-email" hint={t("emailHint")}>
               <input
                 id="review-email"
                 type="email"
@@ -114,7 +115,7 @@ export function ReviewSubmissionForm() {
             </FormField>
           </div>
 
-          <FormField label="Which cake did you order?" htmlFor="review-cake">
+          <FormField label={t("cake")} htmlFor="review-cake">
             <select
               id="review-cake"
               value={cakeSlug}
@@ -122,7 +123,7 @@ export function ReviewSubmissionForm() {
               className={formInputClassName()}
               required
             >
-              <option value="">Select a cake</option>
+              <option value="">{t("selectCake")}</option>
               {cakes.map((cake) => (
                 <option key={cake.slug} value={cake.slug}>
                   {cake.name}
@@ -131,31 +132,31 @@ export function ReviewSubmissionForm() {
             </select>
           </FormField>
 
-          <FormField label="Your rating" htmlFor="review-rating">
+          <FormField label={t("rating")} htmlFor="review-rating">
             <StarRating
               mode="input"
               rating={rating}
               onChange={setRating}
               size="lg"
-              aria-label="Rate your experience from 1 to 5 stars"
+              aria-label={t("starsAria")}
             />
             {rating === 0 ? (
-              <p className="mt-2 text-xs text-text-muted">Tap a star to rate</p>
+              <p className="mt-2 text-xs text-text-muted">{t("ratingHint")}</p>
             ) : null}
           </FormField>
 
-          <FormField label="Occasion (optional)" htmlFor="review-occasion">
+          <FormField label={t("occasion")} htmlFor="review-occasion">
             <input
               id="review-occasion"
               type="text"
               value={occasion}
               onChange={(event) => setOccasion(event.target.value)}
               className={formInputClassName()}
-              placeholder="Birthday cake, anniversary, etc."
+              placeholder={t("occasionPlaceholder")}
             />
           </FormField>
 
-          <FormField label="Your review" htmlFor="review-body">
+          <FormField label={t("review")} htmlFor="review-body">
             <textarea
               id="review-body"
               rows={5}
@@ -164,7 +165,7 @@ export function ReviewSubmissionForm() {
               className={formInputClassName("resize-y")}
               required
               minLength={20}
-              placeholder="Tell us what you loved about your cake..."
+              placeholder={t("reviewPlaceholder")}
             />
           </FormField>
 
@@ -173,7 +174,7 @@ export function ReviewSubmissionForm() {
           ) : null}
 
           <Button type="submit" disabled={status === "submitting" || rating === 0}>
-            {status === "submitting" ? "Submitting..." : "Submit Review"}
+            {status === "submitting" ? tc("submitting") : tc("submitReview")}
           </Button>
         </form>
       )}

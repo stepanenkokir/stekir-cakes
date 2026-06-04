@@ -2,10 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getApiMessages, resolveLocale } from "@/lib/i18n/api";
+import { getMessages } from "@/lib/i18n/messages";
 
 const ALLOWED_CAKE_SLUGS = ["napoleon", "medovik", "smetannik", "mannik"] as const;
 
 type ReviewPayload = {
+  locale?: string;
   reviewerName?: string;
   reviewerEmail?: string;
   cakeSlug?: string;
@@ -58,6 +61,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
+  const locale = resolveLocale(body.locale);
+  const messages = getMessages(locale);
+  const api = getApiMessages(body.locale);
+
   const reviewerName = body.reviewerName?.trim() ?? "";
   const reviewerEmail = body.reviewerEmail?.trim() ?? "";
   const cakeSlug = body.cakeSlug?.trim() ?? "";
@@ -67,34 +74,28 @@ export async function POST(request: Request) {
   const userId = await getUserId();
 
   if (reviewerName.length < 2) {
-    return NextResponse.json({ error: "Please enter your name." }, { status: 400 });
+    return NextResponse.json({ error: api.reviewName }, { status: 400 });
   }
 
   if (!userId && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(reviewerEmail)) {
-    return NextResponse.json({ error: "Please enter a valid email." }, { status: 400 });
+    return NextResponse.json({ error: api.reviewEmail }, { status: 400 });
   }
 
   if (!ALLOWED_CAKE_SLUGS.includes(cakeSlug as (typeof ALLOWED_CAKE_SLUGS)[number])) {
-    return NextResponse.json({ error: "Please select which cake you ordered." }, { status: 400 });
+    return NextResponse.json({ error: api.reviewCake }, { status: 400 });
   }
 
   if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
-    return NextResponse.json({ error: "Please select a star rating." }, { status: 400 });
+    return NextResponse.json({ error: api.reviewRating }, { status: 400 });
   }
 
   if (reviewBody.length < 20) {
-    return NextResponse.json(
-      { error: "Please write at least a few sentences about your experience." },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: api.reviewText }, { status: 400 });
   }
 
   const env = getSupabaseEnv();
   if (!env) {
-    return NextResponse.json(
-      { error: "Review service is not configured. Please try again later." },
-      { status: 503 },
-    );
+    return NextResponse.json({ error: api.supabase }, { status: 503 });
   }
 
   const adminClient = createClient(env.url, env.serviceRoleKey, {
@@ -114,14 +115,13 @@ export async function POST(request: Request) {
   if (error) {
     console.error("Review insert failed:", error);
     return NextResponse.json(
-      { error: "Unable to submit your review right now. Please try again." },
+      { error: messages.reviewsForm.submitFailed },
       { status: 500 },
     );
   }
 
   return NextResponse.json({
     success: true,
-    message:
-      "Thank you! Your review was submitted and will appear after our team approves it.",
+    message: messages.reviewsForm.thankYou,
   });
 }

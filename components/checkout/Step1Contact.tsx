@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
 
 export type ContactFormValues = {
@@ -14,15 +17,20 @@ type Step1ContactProps = {
 };
 
 export function Step1Contact({ values, errors, onChange }: Step1ContactProps) {
+  const t = useTranslations("checkout.step1");
+
   return (
     <section className="rounded-2xl border border-border bg-surface p-6 shadow-card sm:p-8">
-      <h2 className="font-display text-2xl font-semibold text-text">Contact Information</h2>
-      <p className="mt-2 text-sm text-text-muted">
-        We&rsquo;ll use your phone to confirm order details and delivery timing.
-      </p>
+      <h2 className="font-display text-2xl font-semibold text-text">{t("title")}</h2>
+      <p className="mt-2 text-sm text-text-muted">{t("intro")}</p>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <FormField label="First name" htmlFor="checkout-first-name" hint={errors?.firstName} hintTone="danger">
+        <FormField
+          label={t("firstName")}
+          htmlFor="checkout-first-name"
+          hint={errors?.firstName}
+          hintTone="danger"
+        >
           <input
             id="checkout-first-name"
             autoComplete="given-name"
@@ -33,7 +41,12 @@ export function Step1Contact({ values, errors, onChange }: Step1ContactProps) {
           />
         </FormField>
 
-        <FormField label="Last name" htmlFor="checkout-last-name" hint={errors?.lastName} hintTone="danger">
+        <FormField
+          label={t("lastName")}
+          htmlFor="checkout-last-name"
+          hint={errors?.lastName}
+          hintTone="danger"
+        >
           <input
             id="checkout-last-name"
             autoComplete="family-name"
@@ -45,9 +58,9 @@ export function Step1Contact({ values, errors, onChange }: Step1ContactProps) {
         </FormField>
 
         <FormField
-          label="Phone number"
+          label={t("phone")}
           htmlFor="checkout-phone"
-          hint={errors?.phone ?? "Required for order confirmation call or text"}
+          hint={errors?.phone ?? t("phoneHint")}
           hintTone={errors?.phone ? "danger" : "muted"}
         >
           <input
@@ -57,12 +70,17 @@ export function Step1Contact({ values, errors, onChange }: Step1ContactProps) {
             value={values.phone}
             onChange={(event) => onChange("phone", event.target.value)}
             className={formInputClassName()}
-            placeholder="(916) 555-0192"
+            placeholder={t("phonePlaceholder")}
             required
           />
         </FormField>
 
-        <FormField label="Email address" htmlFor="checkout-email" hint={errors?.email} hintTone="danger">
+        <FormField
+          label={t("email")}
+          htmlFor="checkout-email"
+          hint={errors?.email}
+          hintTone="danger"
+        >
           <input
             id="checkout-email"
             type="email"

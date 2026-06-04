@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import { StarRating } from "@/components/shared/StarRating";
 import { formatReviewDate, getReviewCakeName, type Review } from "@/lib/data/reviews";
 
@@ -23,6 +26,8 @@ export function ReviewCard({
   date,
   photoUrl,
 }: ReviewCardProps) {
+  const locale = useLocale();
+  const t = useTranslations("reviews");
   const isGrid = variant === "grid";
 
   return (
@@ -37,7 +42,7 @@ export function ReviewCard({
         <div className={`relative w-full ${isGrid ? "aspect-[16/10]" : "aspect-[4/3]"}`}>
           <Image
             src={photoUrl}
-            alt={`Photo shared by ${name}`}
+            alt={t("photoBy", { name })}
             fill
             className="object-cover"
             sizes={isGrid ? "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" : "320px"}
@@ -45,7 +50,7 @@ export function ReviewCard({
         </div>
       ) : null}
 
-      <div className={`flex flex-1 flex-col ${isGrid ? "p-6" : "p-6"}`}>
+      <div className="flex flex-1 flex-col p-6">
         <StarRating rating={rating} size="sm" />
 
         <blockquote className="mt-4 flex-1 text-base leading-relaxed text-text">
@@ -55,12 +60,12 @@ export function ReviewCard({
         <div className="mt-6 border-t border-border/60 pt-4">
           <p className="font-medium text-text">{name}</p>
           {date ? (
-            <p className="mt-0.5 text-xs text-text-muted">{formatReviewDate(date)}</p>
+            <p className="mt-0.5 text-xs text-text-muted">{formatReviewDate(date, locale)}</p>
           ) : null}
           <p className="mt-1 text-sm text-text-muted">{occasion}</p>
           {cakeSlug && isGrid ? (
             <p className="mt-2 text-xs font-medium uppercase tracking-wide text-primary-dark">
-              {getReviewCakeName(cakeSlug)}
+              {getReviewCakeName(cakeSlug, locale)}
             </p>
           ) : null}
         </div>

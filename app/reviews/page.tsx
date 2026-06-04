@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 export default function ReviewsRedirectPage() {
-  redirect("/catalog/reviews");
+  redirect({ href: "/catalog/reviews", locale: routing.defaultLocale });
 }

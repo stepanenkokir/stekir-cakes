@@ -1,27 +1,30 @@
 "use client";
 
-import Link from "next/link";
-import { LogOut, Menu, ShoppingBag, UserRound, X } from "lucide-react";
+import { Menu, LogOut, ShoppingBag, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { useCart } from "@/lib/cart/CartProvider";
 import type { Session } from "@supabase/supabase-js";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
-const navLinks = [
-  { href: "/catalog", label: "Our Cakes" },
-  { href: "/catalog/gallery", label: "Gallery" },
-  { href: "/catalog/about", label: "About" },
-  { href: "/contacts", label: "Contact" },
-];
-
 export function Header() {
+  const t = useTranslations("nav");
+  const tc = useTranslations("common");
   const { itemCount } = useCart();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const navLinks = [
+    { href: "/catalog" as const, label: t("ourCakes") },
+    { href: "/catalog/gallery" as const, label: t("gallery") },
+    { href: "/catalog/about" as const, label: t("about") },
+    { href: "/contacts" as const, label: t("contact") },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 8);
@@ -88,12 +91,12 @@ export function Header() {
             href="/"
             className="font-accent text-3xl text-primary transition-colors hover:text-primary-dark sm:text-4xl"
           >
-            SteKir Cakes
+            {tc("brand")}
           </Link>
 
           <nav
             className="hidden items-center gap-8 md:flex"
-            aria-label="Main navigation"
+            aria-label={t("mainNav")}
           >
             {navLinks.map((link) => (
               <Link
@@ -106,11 +109,13 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <LanguageSwitcher className="hidden sm:block" />
+
             <Link
               href="/cart"
               className="relative rounded-full p-2 text-text transition-colors hover:bg-surface hover:text-primary-dark"
-              aria-label={`Shopping cart, ${itemCount} items`}
+              aria-label={t("cartAria", { count: itemCount })}
             >
               <ShoppingBag className="h-5 w-5" />
               {itemCount > 0 ? (
@@ -121,13 +126,13 @@ export function Header() {
             </Link>
 
             <Button href="/catalog" size="sm" className="hidden sm:inline-flex">
-              Order Now
+              {tc("orderNow")}
             </Button>
 
             <Link
               href={isAuthenticated ? "/account" : "/account/login"}
               className="rounded-full p-2 text-text transition-colors hover:bg-surface hover:text-primary-dark"
-              aria-label={isAuthenticated ? "Go to my account" : "Sign in to account"}
+              aria-label={isAuthenticated ? t("accountAria") : t("signInAria")}
             >
               <UserRound className="h-5 w-5" />
             </Link>
@@ -136,7 +141,7 @@ export function Header() {
               type="button"
               className="rounded-full p-2 text-text transition-colors hover:bg-surface md:hidden"
               onClick={() => setIsMenuOpen(true)}
-              aria-label="Open menu"
+              aria-label={t("openMenu")}
               aria-expanded={isMenuOpen}
             >
               <Menu className="h-6 w-6" />
@@ -151,22 +156,22 @@ export function Header() {
             type="button"
             className="absolute inset-0 bg-text/40 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
-            aria-label="Close menu overlay"
+            aria-label={t("closeOverlay")}
           />
           <div className="absolute right-0 top-0 flex h-full w-[min(100%,20rem)] flex-col bg-bg shadow-card-hover">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <span className="font-accent text-2xl text-primary">SteKir Cakes</span>
+              <span className="font-accent text-2xl text-primary">{tc("brand")}</span>
               <button
                 type="button"
                 className="rounded-full p-2 text-text hover:bg-surface"
                 onClick={() => setIsMenuOpen(false)}
-                aria-label="Close menu"
+                aria-label={t("closeMenu")}
               >
                 <X className="h-6 w-6" />
               </button>
             </div>
 
-            <nav className="flex flex-1 flex-col gap-1 px-5 py-6" aria-label="Mobile navigation">
+            <nav className="flex flex-1 flex-col gap-1 px-5 py-6" aria-label={t("mobileNav")}>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -182,14 +187,15 @@ export function Header() {
                 className="rounded-xl px-3 py-3 text-lg font-medium text-text transition-colors hover:bg-surface hover:text-primary-dark"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {isAuthenticated ? "My Account" : "Sign In"}
+                {isAuthenticated ? tc("myAccount") : tc("signIn")}
               </Link>
             </nav>
 
             <div className="border-t border-border px-5 py-6">
+              <LanguageSwitcher className="mb-4" />
               <div className="flex flex-col gap-3">
                 <Button href="/catalog" className="w-full" onClick={() => setIsMenuOpen(false)}>
-                  Order Now
+                  {tc("orderNow")}
                 </Button>
                 {isAuthenticated ? (
                   <button
@@ -198,7 +204,7 @@ export function Header() {
                     onClick={handleSignOut}
                   >
                     <LogOut className="h-4 w-4" />
-                    Sign Out
+                    {tc("signOut")}
                   </button>
                 ) : null}
               </div>

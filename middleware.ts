@@ -1,5 +1,10 @@
+import createIntlMiddleware from "next-intl/middleware";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { routing } from "@/i18n/routing";
+import { stripLocalePrefix } from "@/lib/i18n/locale";
+
+const intlMiddleware = createIntlMiddleware(routing);
 
 function getSupabaseEnv() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -13,17 +18,22 @@ function getSupabaseEnv() {
 }
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
+  const intlResponse = intlMiddleware(request);
+
+  const pathname = request.nextUrl.pathname;
+  const pathWithoutLocale = stripLocalePrefix(pathname);
+
+  if (!pathWithoutLocale.startsWith("/account")) {
+    return intlResponse;
+  }
 
   const supabaseEnv = getSupabaseEnv();
   if (!supabaseEnv) {
-    return response;
+    return intlResponse;
   }
+
   const { url, anonKey } = supabaseEnv;
+  let response = intlResponse;
 
   const supabase = createServerClient(url, anonKey, {
     cookies: {
@@ -52,22 +62,22 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isLoginPage = request.nextUrl.pathname === "/account/login";
+  const locale = pathname.split("/")[1] ?? routing.defaultLocale;
+  const loginPath = `/${locale}/account/login`;
+  const isLoginPage = pathWithoutLocale === "/account/login";
 
   if (!user && !isLoginPage) {
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/account/login";
-    redirectUrl.searchParams.set(
-      "next",
-      `${request.nextUrl.pathname}${request.nextUrl.search}`,
-    );
+    redirectUrl.pathname = loginPath;
+    redirectUrl.searchParams.set("next", pathname + request.nextUrl.search);
     return NextResponse.redirect(redirectUrl);
   }
 
   if (user && isLoginPage) {
     const redirectUrl = request.nextUrl.clone();
     const nextPath = request.nextUrl.searchParams.get("next");
-    redirectUrl.pathname = nextPath && nextPath.startsWith("/") ? nextPath : "/account";
+    redirectUrl.pathname =
+      nextPath && nextPath.startsWith("/") ? nextPath : `/${locale}/account`;
     redirectUrl.search = "";
     return NextResponse.redirect(redirectUrl);
   }
@@ -76,5 +86,13 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/account/:path*", "/admin/:path*"],
+  matcher: [
+    "/",
+    "/(en|es|ru|uk)/:path*",
+    "/about",
+    "/faq",
+    "/terms",
+    "/reviews",
+    "/gallery",
+  ],
 };

@@ -5,6 +5,9 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { calculateDeliveryFee } from "@/lib/delivery";
 import { BAKERY_EMAIL } from "@/lib/data/contact";
+import { getApiMessages, getEmailMessages, resolveLocale } from "@/lib/i18n/api";
+import { getMessages } from "@/lib/i18n/messages";
+import type { Messages } from "@/lib/i18n/messages";
 
 type DeliveryType = "delivery" | "pickup";
 type DeliveryWindow = "morning" | "afternoon" | "evening";
@@ -22,6 +25,7 @@ type CartItemPayload = {
 };
 
 type OrderPayload = {
+  locale?: string;
   firstName?: string;
   lastName?: string;
   phone?: string;
@@ -41,6 +45,9 @@ type OrderPayload = {
   total?: number;
   depositAmount?: number;
 };
+
+type ApiMessages = Messages["api"];
+type EmailMessages = Messages["emails"];
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DELIVERY_ZIP_PATTERN = /^\d{5}$/;
@@ -72,7 +79,12 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function validatePayload(payload: OrderPayload) {
+function validatePayload(
+  payload: OrderPayload,
+  api: ApiMessages,
+  feeOutside: string,
+  orderSubmitError: string,
+) {
   const firstName = sanitizeText(payload.firstName);
   const lastName = sanitizeText(payload.lastName);
   const phone = sanitizeText(payload.phone);
@@ -93,84 +105,84 @@ function validatePayload(payload: OrderPayload) {
   const depositAmount = Number(payload.depositAmount ?? 0);
 
   if (firstName.length < 2) {
-    return { error: "Please enter your first name." };
+    return { error: api.firstName };
   }
 
   if (lastName.length < 2) {
-    return { error: "Please enter your last name." };
+    return { error: api.lastName };
   }
 
   if (phone.length < 7) {
-    return { error: "Please enter a valid phone number." };
+    return { error: api.phone };
   }
 
   if (!EMAIL_PATTERN.test(email)) {
-    return { error: "Please enter a valid email address." };
+    return { error: api.email };
   }
 
   if (!deliveryType || !ALLOWED_DELIVERY_TYPES.includes(deliveryType)) {
-    return { error: "Please select delivery or pickup." };
+    return { error: api.deliveryType };
   }
 
   if (!deliveryDate) {
-    return { error: "Please select a delivery date." };
+    return { error: api.deliveryDate };
   }
 
   if (!deliveryWindow || !ALLOWED_DELIVERY_WINDOWS.includes(deliveryWindow)) {
-    return { error: "Please select a delivery window." };
+    return { error: api.deliveryWindow };
   }
 
   if (deliveryType === "delivery") {
     if (deliveryAddress.length < 5) {
-      return { error: "Please enter a valid delivery address." };
+      return { error: api.street };
     }
 
     if (deliveryCity.length < 2) {
-      return { error: "Please enter a valid city." };
+      return { error: api.city };
     }
 
     if (!DELIVERY_ZIP_PATTERN.test(deliveryZip)) {
-      return { error: "Please enter a valid 5-digit ZIP code." };
+      return { error: api.zip };
     }
 
     const feeResult = calculateDeliveryFee(deliveryZip);
     if (feeResult.tier === "unsupported") {
-      return { error: feeResult.message };
+      return { error: feeOutside };
     }
 
     if (Math.abs(deliveryFee - feeResult.fee) > 0.01) {
-      return { error: "Delivery fee does not match the selected ZIP code." };
+      return { error: api.zip };
     }
   } else if (deliveryFee !== 0) {
-    return { error: "Pickup orders should not include a delivery fee." };
+    return { error: api.invalidItem };
   }
 
   if (!paymentMethod || !ALLOWED_PAYMENT_METHODS.includes(paymentMethod)) {
-    return { error: "Please select a payment method." };
+    return { error: api.payment };
   }
 
   if (!agreeToTerms) {
-    return { error: "Please agree to the Terms & Conditions." };
+    return { error: api.terms };
   }
 
   if (!Array.isArray(items) || items.length === 0) {
-    return { error: "Your cart is empty." };
+    return { error: api.items };
   }
 
   if (!Number.isFinite(subtotal) || subtotal <= 0) {
-    return { error: "Invalid order subtotal." };
+    return { error: api.invalidItem };
   }
 
   if (!Number.isFinite(deliveryFee) || deliveryFee < 0) {
-    return { error: "Invalid delivery fee." };
+    return { error: api.invalidItem };
   }
 
   if (!Number.isFinite(total) || total <= 0) {
-    return { error: "Invalid order total." };
+    return { error: api.invalidItem };
   }
 
   if (!Number.isFinite(depositAmount) || depositAmount <= 0) {
-    return { error: "Invalid deposit amount." };
+    return { error: api.invalidItem };
   }
 
   const normalizedItems = items.map((item) => {
@@ -190,6 +202,10 @@ function validatePayload(payload: OrderPayload) {
       subtotal: Number.isFinite(subtotalValue) ? subtotalValue : 0,
     };
   });
+
+  if (normalizedItems.some((item) => !item.name || item.unit_price <= 0)) {
+    return { error: orderSubmitError };
+  }
 
   return {
     firstName,
@@ -236,6 +252,7 @@ async function getUserId() {
 }
 
 async function sendOrderEmails(params: {
+  emails: EmailMessages;
   orderNumber: string;
   fullName: string;
   phone: string;
@@ -250,6 +267,8 @@ async function sendOrderEmails(params: {
   depositAmount: number;
   itemSummaryText: string;
   ownerAddressSummary: string;
+  pickupLabel: string;
+  deliveryLabel: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   const ownerEmail = process.env.OWNER_EMAIL ?? BAKERY_EMAIL;
@@ -261,54 +280,45 @@ async function sendOrderEmails(params: {
   }
 
   const resend = new Resend(apiKey);
-  const paymentLabel = params.paymentMethod === "cash" ? "Cash on Delivery" : params.paymentMethod.toUpperCase();
-  const deliveryLabel = params.deliveryType === "pickup" ? "Pickup" : "Delivery";
+  const { emails } = params;
+  const deliveryLabel =
+    params.deliveryType === "pickup" ? params.pickupLabel : params.deliveryLabel;
+  const paymentLabel =
+    params.paymentMethod === "cash"
+      ? params.paymentMethod
+      : params.paymentMethod.toUpperCase();
 
-  const customerSubject = `We received your order ${params.orderNumber}`;
-  const ownerSubject = `New cake order ${params.orderNumber}`;
+  const customerSubject = emails.customerSubject.replace("{orderNumber}", params.orderNumber);
+  const ownerSubject = emails.ownerSubject.replace("{orderNumber}", params.orderNumber);
 
   const customerText = [
-    `Hi ${params.fullName},`,
+    emails.greeting.replace("{name}", params.fullName),
     "",
-    `Thank you for your order with SteKir Cakes!`,
-    `Order number: ${params.orderNumber}`,
+    emails.received,
     "",
-    "Order details:",
+    emails.deposit,
+    "",
+    `${emails.orderDetails}:`,
     params.itemSummaryText,
     "",
-    `${deliveryLabel} date: ${params.deliveryDate}`,
-    `Time window: ${params.deliveryWindow}`,
-    `Payment method: ${paymentLabel}`,
-    "",
-    `Subtotal: $${params.subtotal.toFixed(2)}`,
-    `Delivery fee: $${params.deliveryFee.toFixed(2)}`,
-    `Total: $${params.total.toFixed(2)}`,
-    `Deposit due (50%): $${params.depositAmount.toFixed(2)}`,
-    "",
-    "We'll contact you shortly to confirm details and payment instructions.",
+    `${deliveryLabel}: ${params.deliveryDate}`,
+    `${params.deliveryWindow}`,
+    `$${params.subtotal.toFixed(2)} / $${params.deliveryFee.toFixed(2)} / $${params.total.toFixed(2)}`,
+    `$${params.depositAmount.toFixed(2)}`,
   ].join("\n");
 
   const ownerText = [
-    "New order received",
+    emails.newOrder,
     "",
-    `Order number: ${params.orderNumber}`,
-    `Customer: ${params.fullName}`,
-    `Phone: ${params.phone}`,
-    `Email: ${params.email}`,
-    "",
-    "Items:",
+    `${emails.orderDetails}:`,
     params.itemSummaryText,
     "",
-    `Type: ${deliveryLabel}`,
-    `Address: ${params.ownerAddressSummary}`,
-    `Date: ${params.deliveryDate}`,
-    `Window: ${params.deliveryWindow}`,
-    `Payment method: ${paymentLabel}`,
+    `${params.fullName} | ${params.phone} | ${params.email}`,
+    `${deliveryLabel}: ${params.ownerAddressSummary}`,
+    `${params.deliveryDate} | ${params.deliveryWindow} | ${paymentLabel}`,
+    `$${params.total.toFixed(2)} (${params.depositAmount.toFixed(2)})`,
     "",
-    `Subtotal: $${params.subtotal.toFixed(2)}`,
-    `Delivery fee: $${params.deliveryFee.toFixed(2)}`,
-    `Total: $${params.total.toFixed(2)}`,
-    `Deposit (50%): $${params.depositAmount.toFixed(2)}`,
+    emails.review,
   ].join("\n");
 
   const [customerResult, ownerResult] = await Promise.all([
@@ -318,18 +328,11 @@ async function sendOrderEmails(params: {
       subject: customerSubject,
       text: customerText,
       html: `
-        <h2>Thank you for your order!</h2>
-        <p>Hi ${escapeHtml(params.fullName)},</p>
-        <p>Your order <strong>${escapeHtml(params.orderNumber)}</strong> has been received.</p>
-        <p><strong>Order details:</strong><br />${escapeHtml(params.itemSummaryText).replace(/\n/g, "<br />")}</p>
-        <p><strong>${escapeHtml(deliveryLabel)} date:</strong> ${escapeHtml(params.deliveryDate)}</p>
-        <p><strong>Time window:</strong> ${escapeHtml(params.deliveryWindow)}</p>
-        <p><strong>Payment method:</strong> ${escapeHtml(paymentLabel)}</p>
-        <p><strong>Subtotal:</strong> $${params.subtotal.toFixed(2)}<br />
-        <strong>Delivery fee:</strong> $${params.deliveryFee.toFixed(2)}<br />
-        <strong>Total:</strong> $${params.total.toFixed(2)}<br />
-        <strong>Deposit due (50%):</strong> $${params.depositAmount.toFixed(2)}</p>
-        <p>We will contact you shortly to confirm everything.</p>
+        <p>${escapeHtml(emails.greeting.replace("{name}", params.fullName))}</p>
+        <p>${escapeHtml(emails.received)}</p>
+        <p>${escapeHtml(emails.deposit)}</p>
+        <p><strong>${escapeHtml(emails.orderDetails)}:</strong><br />${escapeHtml(params.itemSummaryText).replace(/\n/g, "<br />")}</p>
+        <p>${escapeHtml(deliveryLabel)}: ${escapeHtml(params.deliveryDate)}</p>
       `,
     }),
     resend.emails.send({
@@ -339,21 +342,10 @@ async function sendOrderEmails(params: {
       subject: ownerSubject,
       text: ownerText,
       html: `
-        <h2>New order received</h2>
-        <p><strong>Order number:</strong> ${escapeHtml(params.orderNumber)}</p>
-        <p><strong>Customer:</strong> ${escapeHtml(params.fullName)}<br />
-        <strong>Phone:</strong> ${escapeHtml(params.phone)}<br />
-        <strong>Email:</strong> ${escapeHtml(params.email)}</p>
-        <p><strong>Items:</strong><br />${escapeHtml(params.itemSummaryText).replace(/\n/g, "<br />")}</p>
-        <p><strong>Type:</strong> ${escapeHtml(deliveryLabel)}<br />
-        <strong>Address:</strong> ${escapeHtml(params.ownerAddressSummary)}<br />
-        <strong>Date:</strong> ${escapeHtml(params.deliveryDate)}<br />
-        <strong>Window:</strong> ${escapeHtml(params.deliveryWindow)}<br />
-        <strong>Payment method:</strong> ${escapeHtml(paymentLabel)}</p>
-        <p><strong>Subtotal:</strong> $${params.subtotal.toFixed(2)}<br />
-        <strong>Delivery fee:</strong> $${params.deliveryFee.toFixed(2)}<br />
-        <strong>Total:</strong> $${params.total.toFixed(2)}<br />
-        <strong>Deposit (50%):</strong> $${params.depositAmount.toFixed(2)}</p>
+        <h2>${escapeHtml(emails.newOrder)}</h2>
+        <p>${escapeHtml(emails.review)}</p>
+        <p><strong>${escapeHtml(emails.orderDetails)}:</strong><br />${escapeHtml(params.itemSummaryText).replace(/\n/g, "<br />")}</p>
+        <p>${escapeHtml(params.fullName)} | ${escapeHtml(params.phone)} | ${escapeHtml(params.email)}</p>
       `,
     }),
   ]);
@@ -372,31 +364,43 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const validated = validatePayload(body);
+  const locale = resolveLocale(body.locale);
+  const messages = getMessages(locale);
+  const api = getApiMessages(body.locale);
+  const emails = getEmailMessages(body.locale);
+
+  const validated = validatePayload(
+    body,
+    api,
+    messages.checkout.step2.fees.outside,
+    messages.checkout.step3.errors.submit,
+  );
+
   if ("error" in validated) {
     return NextResponse.json({ error: validated.error }, { status: 400 });
   }
 
   const env = getSupabaseEnv();
   if (!env) {
-    return NextResponse.json(
-      { error: "Order service is not configured. Please try again later." },
-      { status: 503 },
-    );
+    return NextResponse.json({ error: api.supabase }, { status: 503 });
   }
 
   const customerName = `${validated.firstName} ${validated.lastName}`.trim();
   const userId = await getUserId();
   const ownerAddressSummary =
     validated.deliveryType === "pickup"
-      ? "Pickup"
+      ? messages.common.pickup
       : `${validated.deliveryAddress}, ${validated.deliveryCity}, ${validated.deliveryZip}`;
 
   const itemsSummaryText = validated.items
     .map((item, index) => {
-      const name = item.name || "Custom cake";
-      const weight = item.weight_lbs ? `${item.weight_lbs} lbs` : "custom weight";
-      const tiers = item.tiers ? `${item.tiers} tier${item.tiers > 1 ? "s" : ""}` : "1 tier";
+      const name = item.name || messages.common.customCake;
+      const weight = item.weight_lbs
+        ? messages.common.lbs.replace("{weight}", String(item.weight_lbs))
+        : messages.account.orders.customWeight;
+      const tiers = item.tiers
+        ? `${item.tiers} ${item.tiers > 1 ? messages.common.tiers : messages.common.tier}`
+        : `1 ${messages.common.tier}`;
       const subtotal = item.subtotal ?? 0;
       return `${index + 1}. ${name} — ${weight}, ${tiers}, $${subtotal.toFixed(2)}`;
     })
@@ -435,7 +439,7 @@ export async function POST(request: Request) {
   if (error || !insertedOrder?.order_number) {
     console.error("Order insert failed:", error);
     return NextResponse.json(
-      { error: "Unable to place your order right now. Please try again." },
+      { error: messages.checkout.step3.errors.submit },
       { status: 500 },
     );
   }
@@ -444,6 +448,7 @@ export async function POST(request: Request) {
 
   try {
     await sendOrderEmails({
+      emails,
       orderNumber,
       fullName: customerName,
       phone: validated.phone,
@@ -458,6 +463,8 @@ export async function POST(request: Request) {
       depositAmount: validated.depositAmount,
       itemSummaryText: itemsSummaryText,
       ownerAddressSummary,
+      pickupLabel: messages.common.pickup,
+      deliveryLabel: messages.common.delivery,
     });
   } catch (emailError) {
     console.error("Order placed but email failed:", emailError);

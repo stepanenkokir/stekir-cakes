@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { AdminNav } from "@/components/admin/AdminNav";
+import { routing } from "@/i18n/routing";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
@@ -9,8 +10,10 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     data: { user },
   } = await supabase.auth.getUser();
 
+  const defaultLocale = routing.defaultLocale;
+
   if (!user) {
-    redirect("/account/login?next=/admin");
+    redirect(`/${defaultLocale}/account/login?next=/admin`);
   }
 
   const { data: profile } = await supabase
@@ -20,7 +23,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     .maybeSingle<{ role: string | null; full_name: string | null }>();
 
   if (profile?.role !== "admin") {
-    redirect("/");
+    redirect(`/${defaultLocale}`);
   }
 
   const displayName = profile?.full_name?.trim() || user.email || "Admin";
