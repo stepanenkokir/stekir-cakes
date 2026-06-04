@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 export default function FaqRedirectPage() {
-  redirect("/catalog/faq");
+  redirect({ href: "/catalog/faq", locale: routing.defaultLocale });
 }

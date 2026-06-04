@@ -1,34 +1,39 @@
-import Link from "next/link";
-import { AtSign, Mail, Phone } from "lucide-react";
+"use client";
 
-const footerLinks = [
-  { href: "/", label: "Home" },
-  { href: "/catalog", label: "Catalog" },
-  { href: "/catalog/gallery", label: "Gallery" },
-  { href: "/catalog/about", label: "About" },
-  { href: "/catalog/reviews", label: "Reviews" },
-  { href: "/catalog/faq", label: "FAQ" },
-  { href: "/catalog/terms", label: "Terms" },
-  { href: "/privacy", label: "Privacy" },
-];
+import { AtSign, Mail, Phone } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export function Footer() {
+  const t = useTranslations("footer");
+  const tc = useTranslations("common");
+
+  const footerLinks = [
+    { href: "/" as const, label: tc("home") },
+    { href: "/catalog" as const, label: tc("catalog") },
+    { href: "/catalog/gallery" as const, label: tc("gallery") },
+    { href: "/catalog/about" as const, label: tc("about") },
+    { href: "/catalog/reviews" as const, label: tc("reviews") },
+    { href: "/catalog/faq" as const, label: tc("faq") },
+    { href: "/catalog/terms" as const, label: tc("terms") },
+    { href: "/privacy" as const, label: tc("privacy") },
+  ];
+
   return (
     <footer className="border-t border-border bg-surface">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <Link href="/" className="font-accent text-3xl text-primary">
-              SteKir Cakes
+              {tc("brand")}
             </Link>
-            <p className="mt-4 max-w-sm leading-relaxed text-text-muted">
-              Homemade Eastern European cakes in Sacramento — baked fresh to order
-              for every celebration.
-            </p>
+            <p className="mt-4 max-w-sm leading-relaxed text-text-muted">{t("tagline")}</p>
           </div>
 
           <div>
-            <h3 className="font-display text-lg font-semibold text-text">Quick Links</h3>
+            <h3 className="font-display text-lg font-semibold text-text">
+              {t("quickLinks")}
+            </h3>
             <ul className="mt-4 grid grid-cols-2 gap-2">
               {footerLinks.map((link) => (
                 <li key={link.href}>
@@ -44,7 +49,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-display text-lg font-semibold text-text">Contact</h3>
+            <h3 className="font-display text-lg font-semibold text-text">{t("contact")}</h3>
             <ul className="mt-4 space-y-3 text-sm text-text-muted">
               <li>
                 <a
@@ -81,12 +86,11 @@ export function Footer() {
 
         <div className="mt-12 border-t border-border pt-8">
           <p className="text-center text-sm leading-relaxed text-text-muted">
-            Serving Sacramento, Carmichael, Folsom, Roseville, El Dorado Hills,
-            Elk Grove &amp; Rancho Cordova
+            {t("serviceArea")}
           </p>
           <p className="mt-3 text-center text-sm text-text-muted">
             <span suppressHydrationWarning>
-              © {new Date().getFullYear()} SteKir Cakes. All rights reserved.
+              {t("copyright", { year: new Date().getFullYear() })}
             </span>
           </p>
         </div>

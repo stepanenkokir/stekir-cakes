@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import type { GalleryImage } from "@/lib/data/gallery";
 
 type GalleryLightboxProps = {
@@ -18,6 +19,7 @@ export function GalleryLightbox({
   onClose,
   onNavigate,
 }: GalleryLightboxProps) {
+  const t = useTranslations("galleryFilters");
   const activeImage = images[activeIndex];
   const hasPrevious = activeIndex > 0;
   const hasNext = activeIndex < images.length - 1;
@@ -63,25 +65,25 @@ export function GalleryLightbox({
       className="fixed inset-0 z-[70] flex items-center justify-center bg-text/85 p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
-      aria-label="Gallery image viewer"
+      aria-label={t("lightboxTitle")}
     >
       <button
         type="button"
         className="absolute inset-0 cursor-default"
         onClick={onClose}
-        aria-label="Close gallery viewer"
+        aria-label={t("closeViewer")}
       />
 
       <div className="relative z-10 flex w-full max-w-5xl flex-col">
         <div className="mb-4 flex items-center justify-between gap-4">
           <p className="text-sm text-white/80">
-            {activeIndex + 1} of {images.length}
+            {t("counter", { current: activeIndex + 1, total: images.length })}
           </p>
           <button
             type="button"
             onClick={onClose}
             className="rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
-            aria-label="Close"
+            aria-label={t("close")}
           >
             <X className="h-6 w-6" />
           </button>
@@ -102,7 +104,7 @@ export function GalleryLightbox({
               type="button"
               onClick={goPrevious}
               className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/15 p-2 text-white transition-colors hover:bg-white/25"
-              aria-label="Previous image"
+              aria-label={t("prev")}
             >
               <ChevronLeft className="h-6 w-6" />
             </button>
@@ -113,7 +115,7 @@ export function GalleryLightbox({
               type="button"
               onClick={goNext}
               className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/15 p-2 text-white transition-colors hover:bg-white/25"
-              aria-label="Next image"
+              aria-label={t("next")}
             >
               <ChevronRight className="h-6 w-6" />
             </button>

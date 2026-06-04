@@ -1,6 +1,7 @@
 "use client";
 
 import { Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type StarRatingSize = "sm" | "md" | "lg";
 
@@ -32,6 +33,7 @@ const sizeClasses: Record<StarRatingSize, string> = {
 };
 
 export function StarRating(props: StarRatingProps) {
+  const t = useTranslations("reviewsForm");
   const max = props.max ?? 5;
   const size = props.size ?? "md";
   const starClass = sizeClasses[size];
@@ -40,7 +42,7 @@ export function StarRating(props: StarRatingProps) {
   const rounded = Math.round(rating * 10) / 10;
 
   if (isInput) {
-    const label = props["aria-label"] ?? "Select star rating";
+    const label = props["aria-label"] ?? t("starsAria");
 
     return (
       <div
@@ -58,7 +60,7 @@ export function StarRating(props: StarRatingProps) {
               type="button"
               role="radio"
               aria-checked={filled}
-              aria-label={`${value} star${value === 1 ? "" : "s"}`}
+              aria-label={value === 1 ? t("starLabel", { count: value }) : t("starsLabel", { count: value })}
               onClick={() => props.onChange(value)}
               className="rounded p-0.5 transition-colors hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
@@ -79,7 +81,7 @@ export function StarRating(props: StarRatingProps) {
       <div
         className="flex gap-0.5"
         role="img"
-        aria-label={`${rounded} out of ${max} stars`}
+        aria-label={t("starsLabel", { count: rounded })}
       >
         {Array.from({ length: max }).map((_, index) => {
           const filled = index < Math.floor(rating);

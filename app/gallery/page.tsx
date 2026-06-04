@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 export default function GalleryRedirectPage() {
-  redirect("/catalog/gallery");
+  redirect({ href: "/catalog/gallery", locale: routing.defaultLocale });
 }

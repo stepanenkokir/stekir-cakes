@@ -1,7 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
@@ -11,6 +13,8 @@ type LoginMode = "password" | "magic-link";
 export function AccountLoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const t = useTranslations("account.login");
+  const tc = useTranslations("common");
   const nextPath = useMemo(() => {
     const param = searchParams.get("next");
     return param && param.startsWith("/") ? param : "/account";
@@ -32,9 +36,7 @@ export function AccountLoginForm() {
     const supabase = getSupabaseBrowserClientOrNull();
     if (!supabase) {
       setIsLoading(false);
-      setErrorMessage(
-        "Supabase is not configured yet. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.",
-      );
+      setErrorMessage(t("supabaseMissing"));
       return;
     }
     const { error } = await supabase.auth.signInWithPassword({
@@ -62,9 +64,7 @@ export function AccountLoginForm() {
     const supabase = getSupabaseBrowserClientOrNull();
     if (!supabase) {
       setIsLoading(false);
-      setErrorMessage(
-        "Supabase is not configured yet. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.",
-      );
+      setErrorMessage(t("supabaseMissing"));
       return;
     }
     const redirectTo = new URL(nextPath, window.location.origin).toString();
@@ -80,16 +80,14 @@ export function AccountLoginForm() {
       return;
     }
 
-    setSuccessMessage("Magic link sent. Check your inbox to continue.");
+    setSuccessMessage(t("magicSent"));
   }
 
   return (
     <main className="min-h-screen bg-bg px-4 py-14 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-md rounded-3xl border border-border bg-surface p-8 shadow-card">
-        <h1 className="font-display text-3xl text-text">My Account</h1>
-        <p className="mt-2 text-sm text-text-muted">
-          Sign in to view your orders and track your cake status.
-        </p>
+        <h1 className="font-display text-3xl text-text">{t("title")}</h1>
+        <p className="mt-2 text-sm text-text-muted">{t("intro")}</p>
 
         <div className="mt-6 grid grid-cols-2 rounded-full border border-border bg-bg p-1">
           <button
@@ -101,7 +99,7 @@ export function AccountLoginForm() {
             }`}
             onClick={() => setMode("password")}
           >
-            Password
+            {t("passwordTab")}
           </button>
           <button
             type="button"
@@ -112,26 +110,26 @@ export function AccountLoginForm() {
             }`}
             onClick={() => setMode("magic-link")}
           >
-            Magic Link
+            {t("magicTab")}
           </button>
         </div>
 
         {mode === "password" ? (
           <form onSubmit={handlePasswordSignIn} className="mt-6 space-y-5">
-            <FormField label="Email" htmlFor="email" hint="Use the email you ordered with.">
+            <FormField label={t("email")} htmlFor="email" hint={t("emailHintOrder")}>
               <input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 className={formInputClassName()}
-                placeholder="you@example.com"
+                placeholder={t("emailPlaceholder")}
                 autoComplete="email"
                 required
               />
             </FormField>
 
-            <FormField label="Password" htmlFor="password">
+            <FormField label={t("password")} htmlFor="password">
               <input
                 id="password"
                 type="password"
@@ -147,23 +145,19 @@ export function AccountLoginForm() {
             {successMessage ? <p className="text-sm text-primary-dark">{successMessage}</p> : null}
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Signing in..." : "Sign In"}
+              {isLoading ? t("signingIn") : tc("signIn")}
             </Button>
           </form>
         ) : (
           <form onSubmit={handleMagicLink} className="mt-6 space-y-5">
-            <FormField
-              label="Email"
-              htmlFor="magic-email"
-              hint="We will send a secure sign-in link to this email."
-            >
+            <FormField label={t("email")} htmlFor="magic-email" hint={t("emailHintMagic")}>
               <input
                 id="magic-email"
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 className={formInputClassName()}
-                placeholder="you@example.com"
+                placeholder={t("emailPlaceholder")}
                 autoComplete="email"
                 required
               />
@@ -173,7 +167,7 @@ export function AccountLoginForm() {
             {successMessage ? <p className="text-sm text-primary-dark">{successMessage}</p> : null}
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Sending..." : "Send Magic Link"}
+              {isLoading ? tc("sending") : t("sendMagic")}
             </Button>
           </form>
         )}

@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
 import { useCart } from "@/lib/cart/CartProvider";
+import { formatCurrency } from "@/lib/cart/format";
 import { BAKERY_PHONE } from "@/lib/constants";
 import type { Cake } from "@/lib/data/cakes";
 
@@ -23,6 +25,9 @@ function getMinDeliveryDate(noticeDays: number): string {
 }
 
 export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
+  const locale = useLocale();
+  const t = useTranslations("catalog.configurator");
+  const tc = useTranslations("common");
   const { addItem } = useCart();
   const [weight, setWeight] = useState<number>(cake.minWeight);
   const [isCustomWeight, setIsCustomWeight] = useState(false);
@@ -45,12 +50,12 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
 
   const totalPrice = effectiveWeight * cake.pricePerPound;
 
-  const noticeLabel = `${cake.noticeDays} ${cake.noticeDays === 1 ? "day" : "days"} notice required`;
+  const dayLabel = cake.noticeDays === 1 ? t("day") : t("days");
 
   const deliveryDateError = !deliveryDate
-    ? `Please select a delivery date (${noticeLabel}).`
+    ? t("selectDate", { days: cake.noticeDays, dayLabel })
     : minDeliveryDate && deliveryDate < minDeliveryDate
-      ? `Please choose a date on or after ${minDeliveryDate} (${noticeLabel}).`
+      ? t("dateAfter", { date: minDeliveryDate, days: cake.noticeDays, dayLabel })
       : "";
 
   const isDeliveryDateValid = !deliveryDateError;
@@ -94,7 +99,7 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
       </div>
 
       <div className="space-y-6">
-        <FormField label="Weight" htmlFor="weight-custom">
+        <FormField label={t("weight")} htmlFor="weight-custom">
           <div className="flex flex-wrap gap-2">
             {WEIGHT_PRESETS.map((preset) => (
               <button
@@ -107,7 +112,7 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
                     : "border-border bg-bg text-text hover:border-primary"
                 }`}
               >
-                {preset} lbs
+                {t("weightPreset", { weight: preset })}
               </button>
             ))}
             <button
@@ -119,7 +124,7 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
                   : "border-border bg-bg text-text hover:border-primary"
               }`}
             >
-              Custom
+              {t("custom")}
             </button>
           </div>
           {isCustomWeight ? (
@@ -131,12 +136,12 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
               value={customWeight}
               onChange={(event) => setCustomWeight(event.target.value)}
               className={formInputClassName("mt-2")}
-              aria-label="Custom weight in pounds"
+              aria-label={t("customWeight")}
             />
           ) : null}
         </FormField>
 
-        <FormField label="Number of tiers" htmlFor="tiers-1">
+        <FormField label={t("tiers")} htmlFor="tiers-1">
           <div className="flex gap-2">
             {[1, 2, 3].map((tier) => (
               <button
@@ -157,9 +162,9 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
         </FormField>
 
         <FormField
-          label="Inscription on cake"
+          label={t("inscription")}
           htmlFor="inscription"
-          hint="Optional, max 40 characters"
+          hint={t("inscriptionOptional")}
         >
           <input
             id="inscription"
@@ -167,13 +172,13 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
             maxLength={40}
             value={inscription}
             onChange={(event) => setInscription(event.target.value)}
-            placeholder="Happy Birthday, Anna!"
+            placeholder={t("inscriptionPlaceholder")}
             className={formInputClassName()}
           />
         </FormField>
 
         <FormField
-          label="Preferred delivery date"
+          label={t("deliveryDate")}
           htmlFor="delivery-date"
           hint={deliveryDateError || undefined}
           hintTone={deliveryDateError ? "danger" : "muted"}
@@ -189,11 +194,7 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
           />
         </FormField>
 
-        <FormField
-          label="Decoration notes"
-          htmlFor="decoration-notes"
-          hint="Any special wishes for decoration, flavors, or design?"
-        >
+        <FormField label={t("decorationNotes")} htmlFor="decoration-notes" hint={t("notesPlaceholder")}>
           <textarea
             id="decoration-notes"
             rows={3}
@@ -204,18 +205,19 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
         </FormField>
 
         <div className="rounded-xl bg-bg px-4 py-5 text-center">
-          <p className="text-sm text-text-muted">Estimated price</p>
+          <p className="text-sm text-text-muted">{t("estimatedPrice")}</p>
           <p className="mt-1 font-display text-4xl font-semibold text-primary-dark">
-            ${totalPrice.toFixed(2)}
+            {formatCurrency(totalPrice, locale)}
           </p>
           <p className="mt-1 text-xs text-text-muted">
-            {effectiveWeight} lbs × ${cake.pricePerPound}/lb
+            {t("priceFormula", {
+              weight: effectiveWeight,
+              price: cake.pricePerPound,
+            })}
           </p>
         </div>
 
-        <p className="text-center text-xs text-text-muted">
-          Delivery: $10 within 15 miles | $20 up to 30 miles
-        </p>
+        <p className="text-center text-xs text-text-muted">{t("deliveryFees")}</p>
 
         <Button
           type="button"
@@ -223,7 +225,7 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
           disabled={!isDeliveryDateValid || isAdded}
           onClick={handleAddToCart}
         >
-          {isAdded ? "Added to Cart!" : "Add to Cart"}
+          {isAdded ? tc("addedToCart") : tc("addToCart")}
         </Button>
 
         <p className="text-center text-sm">
@@ -231,7 +233,7 @@ export function OrderConfigurator({ cake }: OrderConfiguratorProps) {
             href={`sms:${BAKERY_PHONE}`}
             className="text-primary-dark underline-offset-2 transition-colors hover:text-primary hover:underline"
           >
-            Questions? Text us
+            {t("questionsText")}
           </a>
         </p>
       </div>

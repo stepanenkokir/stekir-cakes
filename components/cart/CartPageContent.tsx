@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Breadcrumb } from "@/components/catalog/Breadcrumb";
 import { CartItem } from "@/components/cart/CartItem";
 import { EmptyCart } from "@/components/cart/EmptyCart";
@@ -11,6 +12,9 @@ import { formatCurrency } from "@/lib/cart/format";
 import { ESTIMATED_DELIVERY_FEE } from "@/lib/constants";
 
 export function CartPageContent() {
+  const locale = useLocale();
+  const t = useTranslations("cart");
+  const tc = useTranslations("common");
   const { items, subtotal, removeItem, updateQuantity } = useCart();
   const [isHydrated, setIsHydrated] = useState(false);
 
@@ -40,16 +44,18 @@ export function CartPageContent() {
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
       <Breadcrumb
         items={[
-          { label: "Home", href: "/" },
-          { label: "Cart" },
+          { label: tc("home"), href: "/" },
+          { label: tc("cart") },
         ]}
       />
 
       <SectionHeading
-        title="Your Cart"
+        title={t("pageTitle")}
         subtitle={
           items.length > 0
-            ? `${items.length} custom ${items.length === 1 ? "order" : "orders"} ready for checkout`
+            ? items.length === 1
+              ? t("readySingle", { count: items.length })
+              : t("readyPlural", { count: items.length })
             : undefined
         }
         align="left"
@@ -72,42 +78,39 @@ export function CartPageContent() {
 
           <aside className="lg:col-span-1">
             <div className="rounded-2xl border border-border bg-surface p-6 shadow-card lg:sticky lg:top-24">
-              <h2 className="font-display text-xl font-semibold text-text">Order Summary</h2>
+              <h2 className="font-display text-xl font-semibold text-text">{t("summaryTitle")}</h2>
 
               <dl className="mt-6 space-y-3 text-sm">
                 <div className="flex justify-between gap-4">
-                  <dt className="text-text-muted">Subtotal</dt>
+                  <dt className="text-text-muted">{tc("subtotal")}</dt>
                   <dd className="font-medium tabular-nums text-text">
-                    {formatCurrency(subtotal)}
+                    {formatCurrency(subtotal, locale)}
                   </dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="text-text-muted">Est. delivery</dt>
+                  <dt className="text-text-muted">{tc("estDelivery")}</dt>
                   <dd className="font-medium tabular-nums text-text">
-                    {formatCurrency(ESTIMATED_DELIVERY_FEE)}
+                    {formatCurrency(ESTIMATED_DELIVERY_FEE, locale)}
                   </dd>
                 </div>
                 <div className="border-t border-border pt-3">
                   <div className="flex justify-between gap-4">
-                    <dt className="font-medium text-text">Estimated total</dt>
+                    <dt className="font-medium text-text">{tc("estimatedTotal")}</dt>
                     <dd className="font-display text-xl font-semibold tabular-nums text-primary-dark">
-                      {formatCurrency(estimatedTotal)}
+                      {formatCurrency(estimatedTotal, locale)}
                     </dd>
                   </div>
                 </div>
               </dl>
 
-              <p className="mt-4 text-xs leading-relaxed text-text-muted">
-                Delivery fee is $10 within 15 miles and $20 up to 30 miles. Your exact fee
-                is calculated at checkout based on your address.
-              </p>
+              <p className="mt-4 text-xs leading-relaxed text-text-muted">{t("deliveryNote")}</p>
 
               <div className="mt-6 space-y-3">
                 <Button href="/checkout" className="w-full">
-                  Proceed to Checkout
+                  {tc("proceedCheckout")}
                 </Button>
                 <Button href="/catalog" variant="ghost" className="w-full">
-                  Continue Shopping
+                  {tc("continueShopping")}
                 </Button>
               </div>
             </div>

@@ -1,22 +1,25 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-const NAV_ITEMS = [
-  { href: "/account", label: "Dashboard" },
-  { href: "/account/orders", label: "Orders" },
-  { href: "/account/profile", label: "Profile" },
-];
+import { Link, usePathname } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export function AccountSidebar() {
   const pathname = usePathname();
+  const t = useTranslations("account.sidebar");
+
+  const navItems = [
+    { href: "/account" as const, label: t("dashboard") },
+    { href: "/account/orders" as const, label: t("orders") },
+    { href: "/account/profile" as const, label: t("profile") },
+  ];
 
   return (
     <aside className="rounded-2xl border border-border bg-surface p-4 shadow-soft">
-      <p className="px-2 text-xs font-semibold uppercase tracking-wide text-text-muted">Account</p>
-      <nav className="mt-3 flex flex-col gap-1" aria-label="Account navigation">
-        {NAV_ITEMS.map((item) => {
+      <p className="px-2 text-xs font-semibold uppercase tracking-wide text-text-muted">
+        {t("account")}
+      </p>
+      <nav className="mt-3 flex flex-col gap-1" aria-label={t("account")}>
+        {navItems.map((item) => {
           const isActive =
             pathname === item.href ||
             (item.href !== "/account" && pathname.startsWith(`${item.href}/`));

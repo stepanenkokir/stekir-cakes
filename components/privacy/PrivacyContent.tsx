@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { AtSign, Mail, Phone } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import type { PrivacySection } from "@/lib/data/privacy";
 import { privacyContact } from "@/lib/data/privacy";
 
@@ -7,15 +8,17 @@ type PrivacyContentProps = {
   sections: PrivacySection[];
 };
 
-export function PrivacyContent({ sections }: PrivacyContentProps) {
+export async function PrivacyContent({ sections }: PrivacyContentProps) {
+  const t = await getTranslations("privacy");
+
   return (
     <div className="lg:grid lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] lg:gap-12">
       <nav
-        aria-label="Privacy policy sections"
+        aria-label={t("pageTitle")}
         className="mb-10 hidden lg:sticky lg:top-28 lg:mb-0 lg:block lg:self-start"
       >
         <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-          On this page
+          {t("onThisPage")}
         </p>
         <ul className="mt-4 space-y-2 border-l border-border pl-4">
           {sections.map((section) => (
@@ -96,7 +99,7 @@ export function PrivacyContent({ sections }: PrivacyContentProps) {
                     href="/contacts"
                     className="inline-flex font-medium text-primary transition-colors hover:text-primary-dark"
                   >
-                    Contact form →
+                    {t("contactForm")} →
                   </Link>
                 </li>
               </ul>

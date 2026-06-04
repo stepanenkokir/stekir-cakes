@@ -1,14 +1,18 @@
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { siteImages } from "@/lib/images";
 
-export function HeroSection() {
+export async function HeroSection() {
+  const t = await getTranslations("home.hero");
+  const tc = await getTranslations("common");
+
   return (
     <section className="relative flex min-h-[90vh] items-end overflow-hidden">
       <Image
         src={siteImages.homeHero}
-        alt="Layered Napoleon cake with golden pastry and cream"
+        alt={t("imageAlt")}
         fill
         priority
         className="object-cover"
@@ -19,23 +23,25 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-24 pt-32 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="font-accent mb-4 text-2xl text-accent sm:text-3xl">
-            Sacramento&apos;s home bakery
-          </p>
+          <p className="font-accent mb-4 text-2xl text-accent sm:text-3xl">{t("accent")}</p>
           <h1 className="font-display text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Homemade Cakes, Made to Order
+            {t("title")}
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/90 sm:text-xl">
-            Crafted with love in Sacramento. Delivering to Folsom, Roseville, El
-            Dorado Hills &amp; beyond.
+            {t("subtitle")}
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Button href="/catalog" size="lg">
-              Browse Cakes
+              {tc("browseCakes")}
             </Button>
-            <Button href="#how-it-works" variant="ghost" size="lg" className="border-white/40 text-white hover:border-white hover:bg-white/10 hover:text-white">
-              How It Works
+            <Button
+              href="#how-it-works"
+              variant="ghost"
+              size="lg"
+              className="border-white/40 text-white hover:border-white hover:bg-white/10 hover:text-white"
+            >
+              {t("howItWorks")}
             </Button>
           </div>
         </div>
@@ -44,7 +50,7 @@ export function HeroSection() {
       <a
         href="#trust-bar"
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white/80 transition-colors hover:text-white"
-        aria-label="Scroll to learn more"
+        aria-label={t("scrollLabel")}
       >
         <ChevronDown className="animate-bounce-subtle h-8 w-8" />
       </a>

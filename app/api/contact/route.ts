@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { BAKERY_EMAIL } from "@/lib/data/contact";
+import { getApiMessages, resolveLocale } from "@/lib/i18n/api";
+import { getMessages } from "@/lib/i18n/messages";
+import type { Messages } from "@/lib/i18n/messages";
 
 type ContactPayload = {
+  locale?: string;
   name?: string;
   email?: string;
   phone?: string;
@@ -11,29 +15,37 @@ type ContactPayload = {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function validatePayload(body: ContactPayload) {
+function validatePayload(body: ContactPayload, api: Messages["api"]) {
   const name = body.name?.trim() ?? "";
   const email = body.email?.trim() ?? "";
   const phone = body.phone?.trim() ?? "";
   const message = body.message?.trim() ?? "";
 
   if (name.length < 2) {
-    return { error: "Please enter your name." };
+    return { error: api.contactName };
   }
 
   if (!EMAIL_PATTERN.test(email)) {
-    return { error: "Please enter a valid email address." };
+    return { error: api.contactEmail };
   }
 
   if (phone.length < 7) {
-    return { error: "Please enter a valid phone number." };
+    return { error: api.phone };
   }
 
   if (message.length < 10) {
-    return { error: "Please enter a message of at least 10 characters." };
+    return { error: api.contactMessage };
   }
 
   return { name, email, phone, message };
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 export async function POST(request: Request) {
@@ -45,7 +57,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const validated = validatePayload(body);
+  const locale = resolveLocale(body.locale);
+  const messages = getMessages(locale);
+  const api = getApiMessages(body.locale);
+  const validated = validatePayload(body, api);
 
   if ("error" in validated) {
     return NextResponse.json({ error: validated.error }, { status: 400 });
@@ -59,35 +74,33 @@ export async function POST(request: Request) {
 
   if (!apiKey) {
     console.error("RESEND_API_KEY is not configured.");
-    return NextResponse.json(
-      { error: "Email service is not configured. Please call or text us directly." },
-      { status: 503 },
-    );
+    return NextResponse.json({ error: api.supabase }, { status: 503 });
   }
 
   const resend = new Resend(apiKey);
+  const subject = `${messages.contact.sendMessage}: ${name}`;
 
   const { error } = await resend.emails.send({
     from: fromEmail,
     to: ownerEmail,
     replyTo: email,
-    subject: `Contact form: ${name}`,
+    subject,
     text: [
-      "New contact form submission",
+      messages.emails.newOrder,
       "",
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Phone: ${phone}`,
+      `${messages.contact.name}: ${name}`,
+      `${messages.contact.email}: ${email}`,
+      `${messages.contact.phone}: ${phone}`,
       "",
-      "Message:",
+      `${messages.contact.message}:`,
       message,
     ].join("\n"),
     html: `
-      <h2>New contact form submission</h2>
-      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-      <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
-      <p><strong>Message:</strong></p>
+      <h2>${escapeHtml(messages.contact.sendMessage)}</h2>
+      <p><strong>${escapeHtml(messages.contact.name)}:</strong> ${escapeHtml(name)}</p>
+      <p><strong>${escapeHtml(messages.contact.email)}:</strong> ${escapeHtml(email)}</p>
+      <p><strong>${escapeHtml(messages.contact.phone)}:</strong> ${escapeHtml(phone)}</p>
+      <p><strong>${escapeHtml(messages.contact.message)}:</strong></p>
       <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
     `,
   });
@@ -95,18 +108,10 @@ export async function POST(request: Request) {
   if (error) {
     console.error("Resend error:", error);
     return NextResponse.json(
-      { error: "Unable to send your message right now. Please try again later." },
+      { error: messages.common.somethingWrong },
       { status: 502 },
     );
   }
 
   return NextResponse.json({ success: true });
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
 }

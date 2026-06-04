@@ -1,7 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
@@ -22,6 +23,9 @@ export function ProfileForm({
   initialDefaultAddress,
 }: ProfileFormProps) {
   const router = useRouter();
+  const t = useTranslations("account.profile");
+  const tLogin = useTranslations("account.login");
+  const tc = useTranslations("common");
   const [fullName, setFullName] = useState(initialFullName);
   const [phone, setPhone] = useState(initialPhone);
   const [defaultAddress, setDefaultAddress] = useState(initialDefaultAddress);
@@ -43,7 +47,7 @@ export function ProfileForm({
     const supabase = getSupabaseBrowserClientOrNull();
     if (!supabase) {
       setIsSavingProfile(false);
-      setErrorMessage("Account service is not configured.");
+      setErrorMessage(t("messages.notConfigured"));
       return;
     }
 
@@ -63,7 +67,7 @@ export function ProfileForm({
       return;
     }
 
-    setStatusMessage("Profile updated successfully.");
+    setStatusMessage(t("messages.profileUpdated"));
     router.refresh();
   }
 
@@ -73,12 +77,12 @@ export function ProfileForm({
     setStatusMessage(null);
 
     if (newPassword.length < 8) {
-      setErrorMessage("New password must be at least 8 characters.");
+      setErrorMessage(t("messages.passwordLength"));
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setErrorMessage("New passwords do not match.");
+      setErrorMessage(t("messages.passwordMismatch"));
       return;
     }
 
@@ -87,7 +91,7 @@ export function ProfileForm({
     const supabase = getSupabaseBrowserClientOrNull();
     if (!supabase) {
       setIsSavingPassword(false);
-      setErrorMessage("Account service is not configured.");
+      setErrorMessage(t("messages.notConfigured"));
       return;
     }
 
@@ -98,7 +102,7 @@ export function ProfileForm({
 
     if (signInError) {
       setIsSavingPassword(false);
-      setErrorMessage("Current password is incorrect.");
+      setErrorMessage(t("messages.wrongPassword"));
       return;
     }
 
@@ -114,13 +118,11 @@ export function ProfileForm({
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
-    setStatusMessage("Password updated successfully.");
+    setStatusMessage(t("messages.passwordUpdated"));
   }
 
   async function handleDeleteAccount() {
-    const confirmed = window.confirm(
-      "Delete your account permanently? This cannot be undone. Active orders may still be fulfilled per our terms.",
-    );
+    const confirmed = window.confirm(t("deleteConfirm"));
 
     if (!confirmed) {
       return;
@@ -135,7 +137,7 @@ export function ProfileForm({
       const data = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        setErrorMessage(data.error ?? "Unable to delete account.");
+        setErrorMessage(data.error ?? t("messages.deleteFailed"));
         return;
       }
 
@@ -147,7 +149,7 @@ export function ProfileForm({
       router.replace("/");
       router.refresh();
     } catch {
-      setErrorMessage("Unable to delete account. Please try again.");
+      setErrorMessage(t("messages.deleteFailed"));
     } finally {
       setIsDeleting(false);
     }
@@ -170,11 +172,11 @@ export function ProfileForm({
         onSubmit={handleSaveProfile}
         className="rounded-2xl border border-border bg-surface p-6 shadow-soft"
       >
-        <h2 className="font-display text-2xl text-text">Profile details</h2>
-        <p className="mt-1 text-sm text-text-muted">Update your contact and default delivery info.</p>
+        <h2 className="font-display text-2xl text-text">{t("title")}</h2>
+        <p className="mt-1 text-sm text-text-muted">{t("intro")}</p>
 
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          <FormField label="Email" htmlFor="profile-email">
+          <FormField label={tLogin("email")} htmlFor="profile-email">
             <input
               id="profile-email"
               type="email"
@@ -184,7 +186,7 @@ export function ProfileForm({
             />
           </FormField>
 
-          <FormField label="Full name" htmlFor="profile-full-name">
+          <FormField label={t("fullName")} htmlFor="profile-full-name">
             <input
               id="profile-full-name"
               type="text"
@@ -195,7 +197,7 @@ export function ProfileForm({
             />
           </FormField>
 
-          <FormField label="Phone" htmlFor="profile-phone">
+          <FormField label={t("phone")} htmlFor="profile-phone">
             <input
               id="profile-phone"
               type="tel"
@@ -208,9 +210,9 @@ export function ProfileForm({
 
           <div className="sm:col-span-2">
             <FormField
-              label="Default delivery address"
+              label={t("defaultAddress")}
               htmlFor="profile-default-address"
-              hint="Optional — pre-fills checkout when you order delivery."
+              hint={t("addressHint")}
             >
               <textarea
                 id="profile-default-address"
@@ -224,7 +226,7 @@ export function ProfileForm({
         </div>
 
         <Button type="submit" className="mt-6" disabled={isSavingProfile}>
-          {isSavingProfile ? "Saving..." : "Save Profile"}
+          {isSavingProfile ? tc("saving") : tc("saveProfile")}
         </Button>
       </form>
 
@@ -232,13 +234,11 @@ export function ProfileForm({
         onSubmit={handleChangePassword}
         className="rounded-2xl border border-border bg-surface p-6 shadow-soft"
       >
-        <h2 className="font-display text-2xl text-text">Change password</h2>
-        <p className="mt-1 text-sm text-text-muted">
-          Password sign-in only. Magic-link users can set a password here.
-        </p>
+        <h2 className="font-display text-2xl text-text">{t("changePassword")}</h2>
+        <p className="mt-1 text-sm text-text-muted">{t("passwordHint")}</p>
 
         <div className="mt-6 grid max-w-md gap-5">
-          <FormField label="Current password" htmlFor="profile-current-password">
+          <FormField label={t("currentPassword")} htmlFor="profile-current-password">
             <input
               id="profile-current-password"
               type="password"
@@ -250,7 +250,7 @@ export function ProfileForm({
             />
           </FormField>
 
-          <FormField label="New password" htmlFor="profile-new-password">
+          <FormField label={t("newPassword")} htmlFor="profile-new-password">
             <input
               id="profile-new-password"
               type="password"
@@ -263,7 +263,7 @@ export function ProfileForm({
             />
           </FormField>
 
-          <FormField label="Confirm new password" htmlFor="profile-confirm-password">
+          <FormField label={t("confirmPassword")} htmlFor="profile-confirm-password">
             <input
               id="profile-confirm-password"
               type="password"
@@ -278,15 +278,13 @@ export function ProfileForm({
         </div>
 
         <Button type="submit" className="mt-6" disabled={isSavingPassword}>
-          {isSavingPassword ? "Updating..." : "Update Password"}
+          {isSavingPassword ? tc("updating") : tc("updatePassword")}
         </Button>
       </form>
 
       <section className="rounded-2xl border border-red-200 bg-red-50/40 p-6">
-        <h2 className="font-display text-2xl text-text">Delete account</h2>
-        <p className="mt-2 text-sm text-text-muted">
-          Permanently remove your account and profile. Order history may be retained for bakery records.
-        </p>
+        <h2 className="font-display text-2xl text-text">{t("deleteTitle")}</h2>
+        <p className="mt-2 text-sm text-text-muted">{t("deleteText")}</p>
         <Button
           type="button"
           variant="ghost"
@@ -294,7 +292,7 @@ export function ProfileForm({
           onClick={handleDeleteAccount}
           disabled={isDeleting}
         >
-          {isDeleting ? "Deleting..." : "Delete Account"}
+          {isDeleting ? tc("deleting") : tc("deleteAccount")}
         </Button>
       </section>
     </div>
