@@ -1,3 +1,5 @@
+import { catalogImagePath } from "@/lib/images";
+
 export type Cake = {
   slug: string;
   name: string;
@@ -28,11 +30,10 @@ export const cakes: Cake[] = [
     servings: "1 lb feeds approx. 3–4 people",
     prepTime: "3 days notice required",
     noticeDays: 3,
-    image:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+    image: catalogImagePath("napoleon", 1),
     images: [
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1621303837174-897873a273d1?auto=format&fit=crop&w=800&q=80",
+      catalogImagePath("napoleon", 1),
+      catalogImagePath("napoleon", 2),
     ],
     storageInstructions:
       "Refrigerate in the box. Best consumed within 3 days. Napoleon improves with 1 day of refrigeration.",
@@ -50,11 +51,10 @@ export const cakes: Cake[] = [
     servings: "1 lb feeds approx. 3–4 people",
     prepTime: "3 days notice required",
     noticeDays: 3,
-    image:
-      "https://images.unsplash.com/photo-1725275648140-5326d32dbe21?auto=format&fit=crop&w=800&q=80",
+    image: catalogImagePath("medovik", 1),
     images: [
-      "https://images.unsplash.com/photo-1725275648140-5326d32dbe21?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1624000961428-eeece184988b?auto=format&fit=crop&w=800&q=80",
+      catalogImagePath("medovik", 1),
+      catalogImagePath("medovik", 2),
     ],
     storageInstructions:
       "Refrigerate in the box. Best consumed within 3 days for optimal freshness and texture.",
@@ -72,11 +72,10 @@ export const cakes: Cake[] = [
     servings: "1 lb feeds approx. 3–4 people",
     prepTime: "2 days notice required",
     noticeDays: 2,
-    image:
-      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80",
+    image: catalogImagePath("smetannik", 1),
     images: [
-      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80",
+      catalogImagePath("smetannik", 1),
+      catalogImagePath("smetannik", 2),
     ],
     storageInstructions:
       "Refrigerate in the box. Best consumed within 3 days. Let sit at room temperature for 15 minutes before serving.",
@@ -94,11 +93,10 @@ export const cakes: Cake[] = [
     servings: "1 lb feeds approx. 3–4 people",
     prepTime: "2 days notice required",
     noticeDays: 2,
-    image:
-      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80",
+    image: catalogImagePath("mannik", 1),
     images: [
-      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80",
+      catalogImagePath("mannik", 1),
+      catalogImagePath("mannik", 2),
     ],
     storageInstructions:
       "Store covered at room temperature for up to 2 days, or refrigerate for up to 4 days. Best enjoyed within 2 days.",

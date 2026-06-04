@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-
-const heroImage =
-  "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=80";
+import { siteImages } from "@/lib/images";
 
 export function HeroSection() {
   return (
     <section className="relative flex min-h-[90vh] items-end overflow-hidden">
       <Image
-        src={heroImage}
+        src={siteImages.homeHero}
         alt="Layered Napoleon cake with golden pastry and cream"
         fill
         priority

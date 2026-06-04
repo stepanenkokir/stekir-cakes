@@ -1,0 +1,172 @@
+[
+  {
+    "target": "site/home-hero.webp",
+    "source": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80",
+    "width": 1600
+  },
+  {
+    "target": "site/about-hero.webp",
+    "source": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1600&q=80",
+    "width": 1600
+  },
+  {
+    "target": "site/baker-portrait.webp",
+    "source": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "catalog/napoleon-01.webp",
+    "source": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "catalog/napoleon-02.webp",
+    "source": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "catalog/medovik-01.webp",
+    "source": "https://images.unsplash.com/photo-1725275648140-5326d32dbe21?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "catalog/medovik-02.webp",
+    "source": "https://images.unsplash.com/photo-1624000961428-eeece184988b?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "catalog/smetannik-01.webp",
+    "source": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "catalog/smetannik-02.webp",
+    "source": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "catalog/mannik-01.webp",
+    "source": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "catalog/mannik-02.webp",
+    "source": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/napoleon-1.webp",
+    "source": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/napoleon-2.webp",
+    "source": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/napoleon-3.webp",
+    "source": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/napoleon-4.webp",
+    "source": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/medovik-1.webp",
+    "source": "https://images.unsplash.com/photo-1725275648140-5326d32dbe21?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/medovik-2.webp",
+    "source": "https://images.unsplash.com/photo-1624000961428-eeece184988b?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/medovik-3.webp",
+    "source": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/medovik-4.webp",
+    "source": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/smetannik-1.webp",
+    "source": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/smetannik-2.webp",
+    "source": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/smetannik-3.webp",
+    "source": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/smetannik-4.webp",
+    "source": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/mannik-1.webp",
+    "source": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/mannik-2.webp",
+    "source": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/mannik-3.webp",
+    "source": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/mannik-4.webp",
+    "source": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/custom-1.webp",
+    "source": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/custom-2.webp",
+    "source": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/custom-3.webp",
+    "source": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "gallery/custom-4.webp",
+    "source": "https://images.unsplash.com/photo-1586985289906-406988974504?auto=format&fit=crop&w=1200&q=80",
+    "width": 1200
+  },
+  {
+    "target": "reviews/review-1.webp",
+    "source": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+    "width": 800
+  },
+  {
+    "target": "reviews/review-5.webp",
+    "source": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80",
+    "width": 800
+  },
+  {
+    "target": "reviews/review-9.webp",
+    "source": "https://images.unsplash.com/photo-1586985289906-406988974504?auto=format&fit=crop&w=800&q=80",
+    "width": 800
+  }
+]

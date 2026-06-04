@@ -1,3 +1,5 @@
+import { reviewImagePath } from "@/lib/images";
+
 export type ReviewCakeSlug = "napoleon" | "medovik" | "smetannik" | "mannik";
 
 export type ReviewFilter = "all" | ReviewCakeSlug;
@@ -42,8 +44,7 @@ export const reviews: Review[] = [
     occasion: "Anniversary cake",
     cakeSlug: "napoleon",
     date: "2025-04-12",
-    photoUrl:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80",
+    photoUrl: reviewImagePath("1"),
   },
   {
     id: "2",
@@ -84,8 +85,7 @@ export const reviews: Review[] = [
     occasion: "Holiday party",
     cakeSlug: "medovik",
     date: "2025-01-08",
-    photoUrl:
-      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80",
+    photoUrl: reviewImagePath("5"),
   },
   {
     id: "6",
@@ -126,8 +126,7 @@ export const reviews: Review[] = [
     occasion: "Kids' birthday",
     cakeSlug: "mannik",
     date: "2024-09-18",
-    photoUrl:
-      "https://images.unsplash.com/photo-1586985289906-406988974504?auto=format&fit=crop&w=600&q=80",
+    photoUrl: reviewImagePath("9"),
   },
   {
     id: "10",

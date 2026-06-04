@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-
-const bakerImage =
-  "https://images.unsplash.com/photo-1583394294304-6d0454237422?auto=format&fit=crop&w=800&q=80";
+import { siteImages } from "@/lib/images";
 
 export function MeetTheBakerSection() {
   return (
@@ -17,7 +15,7 @@ export function MeetTheBakerSection() {
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card">
             <Image
-              src={bakerImage}
+              src={siteImages.bakerPortrait}
               alt="Anna, founder and head baker of SteKir Cakes"
               fill
               className="object-cover"

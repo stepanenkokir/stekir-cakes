@@ -1,13 +1,11 @@
 import Image from "next/image";
-
-const heroImage =
-  "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1920&q=80";
+import { siteImages } from "@/lib/images";
 
 export function AboutHero() {
   return (
     <section className="relative flex min-h-[55vh] items-end overflow-hidden sm:min-h-[60vh]">
       <Image
-        src={heroImage}
+        src={siteImages.aboutHero}
         alt="Baker preparing a fresh cake in a warm home kitchen"
         fill
         priority
