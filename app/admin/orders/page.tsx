@@ -3,11 +3,13 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function AdminOrdersPage() {
   const supabase = await createSupabaseServerClient();
-  const { data: orders = [] } = await supabase
+  const { data } = await supabase
     .from("orders")
     .select("id, order_number, customer_name, items, delivery_date, total, status, created_at")
     .order("created_at", { ascending: false })
     .returns<AdminOrderRow[]>();
+
+  const orders = data ?? [];
 
   return (
     <div className="space-y-4">

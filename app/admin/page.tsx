@@ -20,7 +20,7 @@ function getWeekStart(date: Date) {
 export default async function AdminDashboardPage() {
   const supabase = await createSupabaseServerClient();
 
-  const [{ data: orders = [] }, { count: pendingOrders = 0 }, { count: pendingReviews = 0 }] =
+  const [{ data: ordersData }, { count: pendingOrders = 0 }, { count: pendingReviews = 0 }] =
     await Promise.all([
       supabase
         .from("orders")
@@ -29,6 +29,8 @@ export default async function AdminDashboardPage() {
       supabase.from("orders").select("id", { count: "exact", head: true }).eq("status", "pending"),
       supabase.from("reviews").select("id", { count: "exact", head: true }).eq("approved", false),
     ]);
+
+  const orders = ordersData ?? [];
 
   const now = new Date();
   const weekStart = getWeekStart(now);

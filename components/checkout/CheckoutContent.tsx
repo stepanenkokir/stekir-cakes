@@ -14,6 +14,7 @@ import { Step3Review, type PaymentMethod } from "@/components/checkout/Step3Revi
 import { StepIndicator } from "@/components/checkout/StepIndicator";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/lib/cart/CartProvider";
+import { calculateDeliveryFee } from "@/lib/delivery";
 import { ESTIMATED_DELIVERY_FEE } from "@/lib/constants";
 
 type ContactFormErrors = Partial<Record<keyof ContactFormValues, string>>;
@@ -87,7 +88,28 @@ export function CheckoutContent() {
   }, [isHydrated, items, router, deliveryValues.deliveryDate]);
 
   const minDate = useMemo(() => getMinDate(2), []);
-  const deliveryFee = deliveryValues.deliveryType === "delivery" ? ESTIMATED_DELIVERY_FEE : 0;
+
+  const deliveryFeeInfo = useMemo(() => {
+    if (deliveryValues.deliveryType !== "delivery") {
+      return {
+        fee: 0,
+        tier: "near" as const,
+        message: "Free pickup after confirmation",
+      };
+    }
+
+    if (deliveryValues.deliveryZip.trim().length === 5) {
+      return calculateDeliveryFee(deliveryValues.deliveryZip);
+    }
+
+    return {
+      fee: ESTIMATED_DELIVERY_FEE,
+      tier: "near" as const,
+      message: "Estimated delivery: $10 (confirm ZIP for exact fee)",
+    };
+  }, [deliveryValues.deliveryType, deliveryValues.deliveryZip]);
+
+  const deliveryFee = deliveryFeeInfo.fee;
   const total = subtotal + deliveryFee;
   const depositAmount = Number((total * 0.5).toFixed(2));
 
@@ -141,6 +163,8 @@ export function CheckoutContent() {
       }
       if (!/^\d{5}$/.test(deliveryValues.deliveryZip.trim())) {
         nextErrors.deliveryZip = "Enter a valid 5-digit ZIP.";
+      } else if (deliveryFeeInfo.tier === "unsupported") {
+        nextErrors.deliveryZip = deliveryFeeInfo.message;
       }
     }
 
@@ -279,6 +303,7 @@ export function CheckoutContent() {
             errors={deliveryErrors}
             onChange={handleDeliveryChange}
             minDate={minDate}
+            deliveryFeeNote={deliveryFeeInfo.message}
           />
         ) : null}
 

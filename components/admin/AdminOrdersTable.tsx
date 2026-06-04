@@ -38,15 +38,28 @@ function getPrimaryItemName(items: OrderItem[] | null) {
 export function AdminOrdersTable({ initialOrders }: AdminOrdersTableProps) {
   const [orders, setOrders] = useState(initialOrders);
   const [statusFilter, setStatusFilter] = useState<"all" | OrderStatus>("all");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
   const [savingId, setSavingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const filteredOrders = useMemo(() => {
-    if (statusFilter === "all") {
-      return orders;
-    }
-    return orders.filter((order) => order.status === statusFilter);
-  }, [orders, statusFilter]);
+    return orders.filter((order) => {
+      if (statusFilter !== "all" && order.status !== statusFilter) {
+        return false;
+      }
+
+      const createdDay = order.created_at.slice(0, 10);
+      if (dateFrom && createdDay < dateFrom) {
+        return false;
+      }
+      if (dateTo && createdDay > dateTo) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [orders, statusFilter, dateFrom, dateTo]);
 
   async function updateStatus(orderId: string, status: OrderStatus) {
     setError(null);
@@ -78,23 +91,51 @@ export function AdminOrdersTable({ initialOrders }: AdminOrdersTableProps) {
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-border bg-surface p-4 shadow-soft">
-        <label htmlFor="admin-order-filter" className="text-sm text-text-muted">
-          Filter by status
-        </label>
-        <select
-          id="admin-order-filter"
-          value={statusFilter}
-          onChange={(event) => setStatusFilter(event.target.value as "all" | OrderStatus)}
-          className="rounded-xl border border-border bg-bg px-3 py-2 text-sm text-text"
-        >
-          <option value="all">All statuses</option>
-          {STATUS_OPTIONS.map((status) => (
-            <option key={status.value} value={status.value}>
-              {status.label}
-            </option>
-          ))}
-        </select>
+      <div className="flex flex-wrap items-end gap-4 rounded-2xl border border-border bg-surface p-4 shadow-soft">
+        <div>
+          <label htmlFor="admin-order-filter" className="block text-sm text-text-muted">
+            Status
+          </label>
+          <select
+            id="admin-order-filter"
+            value={statusFilter}
+            onChange={(event) => setStatusFilter(event.target.value as "all" | OrderStatus)}
+            className="mt-1 rounded-xl border border-border bg-bg px-3 py-2 text-sm text-text"
+          >
+            <option value="all">All statuses</option>
+            {STATUS_OPTIONS.map((status) => (
+              <option key={status.value} value={status.value}>
+                {status.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="admin-date-from" className="block text-sm text-text-muted">
+            Placed from
+          </label>
+          <input
+            id="admin-date-from"
+            type="date"
+            value={dateFrom}
+            onChange={(event) => setDateFrom(event.target.value)}
+            className="mt-1 rounded-xl border border-border bg-bg px-3 py-2 text-sm text-text"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="admin-date-to" className="block text-sm text-text-muted">
+            Placed to
+          </label>
+          <input
+            id="admin-date-to"
+            type="date"
+            value={dateTo}
+            onChange={(event) => setDateTo(event.target.value)}
+            className="mt-1 rounded-xl border border-border bg-bg px-3 py-2 text-sm text-text"
+          />
+        </div>
       </div>
 
       {error ? (

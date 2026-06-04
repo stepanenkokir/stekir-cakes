@@ -30,12 +30,14 @@ export default async function AccountOrdersPage() {
     return null;
   }
 
-  const { data: orders = [] } = await supabase
+  const { data } = await supabase
     .from("orders")
     .select("id, order_number, items, delivery_date, total, status")
     .eq("user_id", user.id)
     .order("delivery_date", { ascending: false })
     .returns<OrderRow[]>();
+
+  const orders = data ?? [];
 
   if (orders.length === 0) {
     return (

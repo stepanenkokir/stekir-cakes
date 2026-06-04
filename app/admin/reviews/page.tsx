@@ -3,11 +3,13 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function AdminReviewsPage() {
   const supabase = await createSupabaseServerClient();
-  const { data: reviews = [] } = await supabase
+  const { data } = await supabase
     .from("reviews")
     .select("id, reviewer_name, cake_slug, rating, occasion, body, approved, created_at")
     .order("created_at", { ascending: false })
     .returns<AdminReviewRow[]>();
+
+  const reviews = data ?? [];
 
   return (
     <div className="space-y-4">

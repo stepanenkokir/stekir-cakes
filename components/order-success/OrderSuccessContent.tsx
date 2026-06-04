@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { formatCurrency, formatDeliveryDate } from "@/lib/cart/format";
+import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 const STEPS = [
   {
@@ -73,9 +74,19 @@ function CheckmarkAnimation() {
 export function OrderSuccessContent() {
   const params = useSearchParams();
   const [mounted, setMounted] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+
+    const supabase = getSupabaseBrowserClientOrNull();
+    if (!supabase) {
+      return;
+    }
+
+    void supabase.auth.getSession().then((result) => {
+      setIsAuthenticated(Boolean(result.data.session));
+    });
   }, []);
 
   const firstName = params.get("name") ?? "Friend";
@@ -223,9 +234,15 @@ export function OrderSuccessContent() {
             mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
-          <Button href="/account/orders" size="lg">
-            View Order Status
-          </Button>
+          {isAuthenticated ? (
+            <Button href="/account/orders" size="lg">
+              View Order Status
+            </Button>
+          ) : (
+            <Button href="/account/login?next=/account/orders" size="lg">
+              Sign In to Track Order
+            </Button>
+          )}
           <Button href="/" variant="ghost" size="lg">
             Back to Home
           </Button>

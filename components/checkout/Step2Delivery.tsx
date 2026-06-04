@@ -16,11 +16,18 @@ export type DeliveryFormValues = {
 type Step2DeliveryProps = {
   values: DeliveryFormValues;
   minDate: string;
+  deliveryFeeNote?: string;
   errors?: Partial<Record<keyof DeliveryFormValues, string>>;
   onChange: (field: keyof DeliveryFormValues, value: string) => void;
 };
 
-export function Step2Delivery({ values, minDate, errors, onChange }: Step2DeliveryProps) {
+export function Step2Delivery({
+  values,
+  minDate,
+  deliveryFeeNote,
+  errors,
+  onChange,
+}: Step2DeliveryProps) {
   const isDelivery = values.deliveryType === "delivery";
 
   return (
@@ -107,6 +114,10 @@ export function Step2Delivery({ values, minDate, errors, onChange }: Step2Delive
               maxLength={5}
             />
           </FormField>
+
+          {deliveryFeeNote ? (
+            <p className="sm:col-span-2 text-sm text-text-muted">{deliveryFeeNote}</p>
+          ) : null}
         </div>
       ) : null}
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/catalog/Breadcrumb";
+import { ReviewSubmissionForm } from "@/components/reviews/ReviewSubmissionForm";
 import { ReviewsGrid } from "@/components/reviews/ReviewsGrid";
 import { ReviewsSummary } from "@/components/reviews/ReviewsSummary";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -35,6 +36,7 @@ export default function ReviewsPage() {
 
         <ReviewsSummary />
         <ReviewsGrid />
+        <ReviewSubmissionForm />
       </div>
     </main>
   );

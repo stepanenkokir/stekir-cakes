@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { AccountSidebar } from "@/components/account/AccountSidebar";
+import { linkGuestOrders } from "@/lib/account/linkGuestOrders";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function AccountLayout({ children }: { children: ReactNode }) {
@@ -11,6 +12,10 @@ export default async function AccountLayout({ children }: { children: ReactNode 
 
   if (!user) {
     redirect("/account/login");
+  }
+
+  if (user.email) {
+    await linkGuestOrders(supabase, user.id, user.email);
   }
 
   const { data: profile } = await supabase

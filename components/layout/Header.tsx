@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/lib/cart/CartProvider";
+import type { Session } from "@supabase/supabase-js";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 const navLinks = [
@@ -53,7 +54,7 @@ export function Header() {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((_event: string, session: Session | null) => {
       setIsAuthenticated(Boolean(session));
     });
 

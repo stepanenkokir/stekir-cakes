@@ -88,11 +88,13 @@ export function Step3Review({
       <fieldset className="mt-6">
         <legend className="text-sm font-medium text-text">Payment method</legend>
         <div className="mt-3 grid gap-2">
-          {[
-            { id: "zelle", label: "Zelle" },
-            { id: "venmo", label: "Venmo" },
-            { id: "cash", label: "Cash on Delivery" },
-          ].map((option) => (
+          {(
+            [
+              { id: "zelle", label: "Zelle" },
+              { id: "venmo", label: "Venmo" },
+              { id: "cash", label: "Cash on Delivery" },
+            ] as const
+          ).map((option) => (
             <label key={option.id} className="flex items-center gap-2 text-sm text-text">
               <input
                 type="radio"

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OrderStatusBar } from "@/components/account/OrderStatusBar";
 import { formatCurrency, formatDeliveryDate } from "@/lib/cart/format";
+import { BAKERY_EMAIL } from "@/lib/data/contact";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getOrderStatusPresentation, type OrderItem } from "@/lib/account/orders";
 
@@ -171,7 +172,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
             Text Us
           </a>
           <Link
-            href={`mailto:hello@sweetsacramento.com?subject=${encodeURIComponent(`Question about order ${order.order_number}`)}`}
+            href={`mailto:${BAKERY_EMAIL}?subject=${encodeURIComponent(`Question about order ${order.order_number}`)}`}
             className="rounded-full border border-border bg-bg px-5 py-2.5 text-sm font-medium text-text hover:border-primary hover:text-primary-dark"
           >
             Email Us

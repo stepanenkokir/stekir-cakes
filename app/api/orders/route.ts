@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { calculateDeliveryFee } from "@/lib/delivery";
 import { BAKERY_EMAIL } from "@/lib/data/contact";
 
 type DeliveryType = "delivery" | "pickup";
@@ -57,11 +58,6 @@ function getSupabaseEnv() {
   }
 
   return { url, anonKey, serviceRoleKey };
-}
-
-function generateOrderNumber() {
-  const code = Math.floor(10000 + Math.random() * 90000);
-  return `SAC-${code}`;
 }
 
 function sanitizeText(value: string | undefined): string {
@@ -136,6 +132,17 @@ function validatePayload(payload: OrderPayload) {
     if (!DELIVERY_ZIP_PATTERN.test(deliveryZip)) {
       return { error: "Please enter a valid 5-digit ZIP code." };
     }
+
+    const feeResult = calculateDeliveryFee(deliveryZip);
+    if (feeResult.tier === "unsupported") {
+      return { error: feeResult.message };
+    }
+
+    if (Math.abs(deliveryFee - feeResult.fee) > 0.01) {
+      return { error: "Delivery fee does not match the selected ZIP code." };
+    }
+  } else if (deliveryFee !== 0) {
+    return { error: "Pickup orders should not include a delivery fee." };
   }
 
   if (!paymentMethod || !ALLOWED_PAYMENT_METHODS.includes(paymentMethod)) {
@@ -378,7 +385,6 @@ export async function POST(request: Request) {
     );
   }
 
-  const orderNumber = generateOrderNumber();
   const customerName = `${validated.firstName} ${validated.lastName}`.trim();
   const userId = await getUserId();
   const ownerAddressSummary =
@@ -400,35 +406,41 @@ export async function POST(request: Request) {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  const { error } = await adminClient.from("orders").insert({
-    order_number: orderNumber,
-    user_id: userId,
-    customer_name: customerName,
-    customer_email: validated.email,
-    customer_phone: validated.phone,
-    items: validated.items,
-    delivery_type: validated.deliveryType,
-    delivery_address: validated.deliveryType === "delivery" ? validated.deliveryAddress : null,
-    delivery_city: validated.deliveryType === "delivery" ? validated.deliveryCity : null,
-    delivery_zip: validated.deliveryType === "delivery" ? validated.deliveryZip : null,
-    delivery_date: validated.deliveryDate,
-    delivery_window: validated.deliveryWindow,
-    delivery_instructions: validated.deliveryInstructions || null,
-    delivery_fee: validated.deliveryFee,
-    payment_method: validated.paymentMethod,
-    subtotal: validated.subtotal,
-    total: validated.total,
-    deposit_amount: validated.depositAmount,
-    status: "pending",
-  });
+  const { data: insertedOrder, error } = await adminClient
+    .from("orders")
+    .insert({
+      user_id: userId,
+      customer_name: customerName,
+      customer_email: validated.email,
+      customer_phone: validated.phone,
+      items: validated.items,
+      delivery_type: validated.deliveryType,
+      delivery_address:
+        validated.deliveryType === "delivery" ? validated.deliveryAddress : null,
+      delivery_city: validated.deliveryType === "delivery" ? validated.deliveryCity : null,
+      delivery_zip: validated.deliveryType === "delivery" ? validated.deliveryZip : null,
+      delivery_date: validated.deliveryDate,
+      delivery_window: validated.deliveryWindow,
+      delivery_instructions: validated.deliveryInstructions || null,
+      delivery_fee: validated.deliveryFee,
+      payment_method: validated.paymentMethod,
+      subtotal: validated.subtotal,
+      total: validated.total,
+      deposit_amount: validated.depositAmount,
+      status: "pending",
+    })
+    .select("order_number")
+    .single();
 
-  if (error) {
+  if (error || !insertedOrder?.order_number) {
     console.error("Order insert failed:", error);
     return NextResponse.json(
       { error: "Unable to place your order right now. Please try again." },
       { status: 500 },
     );
   }
+
+  const orderNumber = insertedOrder.order_number;
 
   try {
     await sendOrderEmails({

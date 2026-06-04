@@ -1,7 +1,7 @@
 import { Breadcrumb } from "@/components/catalog/Breadcrumb";
-import { CakeCard } from "@/components/shared/CakeCard";
+import { CatalogGrid } from "@/components/catalog/CatalogGrid";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { cakes, getStartingPrice } from "@/lib/data/cakes";
+import { cakes } from "@/lib/data/cakes";
 
 export const metadata = {
   title: "Our Cakes",
@@ -26,19 +26,7 @@ export default function CatalogPage() {
           align="left"
         />
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {cakes.map((cake) => (
-            <CakeCard
-              key={cake.slug}
-              slug={cake.slug}
-              name={cake.name}
-              tagline={cake.tagline}
-              image={cake.image}
-              startingPrice={getStartingPrice(cake)}
-              ctaLabel="Customize & Order"
-            />
-          ))}
-        </div>
+        <CatalogGrid allCakes={cakes} />
       </div>
     </main>
   );
