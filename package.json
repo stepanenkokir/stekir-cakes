@@ -10,7 +10,8 @@
     "images:fetch": "node scripts/fetch-placeholders.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "oauth:apple-config": "node scripts/print-apple-oauth-config.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

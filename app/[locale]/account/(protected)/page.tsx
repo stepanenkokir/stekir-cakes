@@ -35,7 +35,16 @@ export default async function AccountDashboardPage({ params }: PageProps) {
   }
 
   const t = await getTranslations({ locale, namespace: "account.dashboard" });
+  const ta = await getTranslations({ locale, namespace: "account" });
   const tc = await getTranslations({ locale, namespace: "common" });
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("full_name")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const displayName = profile?.full_name?.trim() || user.email || tc("customer");
 
   const { count: totalOrders = 0 } = await supabase
     .from("orders")
@@ -50,6 +59,11 @@ export default async function AccountDashboardPage({ params }: PageProps) {
 
   return (
     <div className="space-y-6">
+      <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
+        <p className="text-sm text-text-muted">{ta("welcome")}</p>
+        <h1 className="mt-1 font-display text-3xl text-text">{displayName}</h1>
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-3">
         <article className="rounded-2xl border border-border bg-surface p-5 shadow-soft">
           <p className="text-sm text-text-muted">{t("totalOrders")}</p>

@@ -1,11 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { TelegramLoginButton } from "@/components/account/TelegramLoginButton";
 import { useAuthNextPath } from "@/components/account/useAuthNextPath";
 import { buildAuthCallbackUrl } from "@/lib/account/auth-callback";
-import { getOAuthProviders, type OAuthProviderId } from "@/lib/account/oauth-providers";
+import { toLocale } from "@/lib/i18n/locale";
+import {
+  getOAuthProviders,
+  getOAuthSignInOptions,
+  type OAuthProviderId,
+} from "@/lib/account/oauth-providers";
 import { isTelegramLoginAvailable } from "@/lib/account/telegram-config";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
@@ -21,6 +26,7 @@ const providerStyles: Record<OAuthProviderId, string> = {
 export function AccountOAuthButtons() {
   const t = useTranslations("account.oauth");
   const tLogin = useTranslations("account.login");
+  const locale = useLocale();
   const nextPath = useAuthNextPath();
   const providers = getOAuthProviders();
   const telegramEnabled = isTelegramLoginAvailable();
@@ -42,10 +48,10 @@ export function AccountOAuthButtons() {
       return;
     }
 
-    const redirectTo = buildAuthCallbackUrl(nextPath);
+    const redirectTo = buildAuthCallbackUrl(nextPath, undefined, toLocale(locale));
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo },
+      options: getOAuthSignInOptions(provider, redirectTo),
     });
 
     setLoadingProvider(null);

@@ -7,6 +7,7 @@ import { AccountAuthCard } from "@/components/account/AccountAuthCard";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
 import { buildAuthCallbackUrl } from "@/lib/account/auth-callback";
+import { toLocale } from "@/lib/i18n/locale";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 export function AccountForgotPasswordForm() {
@@ -33,9 +34,8 @@ export function AccountForgotPasswordForm() {
       return;
     }
 
-    const resetNextPath = `/${locale}/account/reset-password`;
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: buildAuthCallbackUrl(resetNextPath),
+      redirectTo: buildAuthCallbackUrl("/account/reset-password", undefined, toLocale(locale)),
     });
 
     setIsLoading(false);

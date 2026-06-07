@@ -71,6 +71,7 @@ export default async function AccountOrdersPage({ params }: PageProps) {
   }
 
   const t = await getTranslations({ locale, namespace: "account.orders" });
+  const ts = await getTranslations({ locale, namespace: "account.sidebar" });
   const tStatus = await getTranslations({ locale, namespace: "account.status" });
   const tc = await getTranslations({ locale, namespace: "common" });
 
@@ -85,23 +86,28 @@ export default async function AccountOrdersPage({ params }: PageProps) {
 
   if (orders.length === 0) {
     return (
-      <div className="rounded-2xl border border-border bg-surface p-8 text-center shadow-soft">
-        <h2 className="font-display text-2xl text-text">{t("emptyTitle")}</h2>
-        <p className="mt-2 text-text-muted">{t("emptyText")}</p>
-        <Link
-          href="/catalog"
-          className="mt-5 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-dark"
-        >
-          {tc("browseCakes")}
-        </Link>
+      <div className="space-y-6">
+        <h1 className="font-display text-3xl text-text">{ts("orders")}</h1>
+        <div className="rounded-2xl border border-border bg-surface p-8 text-center shadow-soft">
+          <h2 className="font-display text-2xl text-text">{t("emptyTitle")}</h2>
+          <p className="mt-2 text-text-muted">{t("emptyText")}</p>
+          <Link
+            href="/catalog"
+            className="mt-5 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-dark"
+          >
+            {tc("browseCakes")}
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
-      <div className="overflow-x-auto">
-        <table className="min-w-full text-sm">
+    <div className="space-y-6">
+      <h1 className="font-display text-3xl text-text">{ts("orders")}</h1>
+      <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm">
           <thead className="border-b border-border bg-bg/60 text-left text-text-muted">
             <tr>
               <th className="px-4 py-3 font-medium">{t("headers.number")}</th>
@@ -156,6 +162,7 @@ export default async function AccountOrdersPage({ params }: PageProps) {
             })}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

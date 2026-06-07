@@ -9,10 +9,11 @@ import { AccountOAuthButtons } from "@/components/account/AccountOAuthButtons";
 import { useAuthNextPath } from "@/components/account/useAuthNextPath";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
-import { buildAuthCallbackUrl } from "@/lib/account/auth-callback";
+import { OTP_TOKEN_LENGTH } from "@/lib/account/auth-callback";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 type LoginMode = "password" | "magic-link";
+type OtpStep = "email" | "code";
 
 export function AccountLoginForm() {
   const router = useRouter();
@@ -23,11 +24,27 @@ export function AccountLoginForm() {
   const callbackError = useMemo(() => searchParams.get("error"), [searchParams]);
 
   const [mode, setMode] = useState<LoginMode>("password");
+  const [otpStep, setOtpStep] = useState<OtpStep>("email");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [otpCode, setOtpCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  function resetOtpFlow() {
+    setOtpStep("email");
+    setOtpCode("");
+  }
+
+  function handleModeChange(nextMode: LoginMode) {
+    setMode(nextMode);
+    setErrorMessage(null);
+    setSuccessMessage(null);
+    if (nextMode === "password") {
+      resetOtpFlow();
+    }
+  }
 
   async function handlePasswordSignIn(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,7 +74,43 @@ export function AccountLoginForm() {
     router.refresh();
   }
 
-  async function handleMagicLink(event: React.FormEvent<HTMLFormElement>) {
+  async function sendOtpCode() {
+    const supabase = getSupabaseBrowserClientOrNull();
+    if (!supabase) {
+      setErrorMessage(t("supabaseMissing"));
+      return false;
+    }
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email.trim(),
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+      return false;
+    }
+
+    return true;
+  }
+
+  async function handleSendOtp(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setErrorMessage(null);
+    setSuccessMessage(null);
+    setIsLoading(true);
+
+    const sent = await sendOtpCode();
+    setIsLoading(false);
+
+    if (!sent) {
+      return;
+    }
+
+    setOtpStep("code");
+    setSuccessMessage(t("magicSent"));
+  }
+
+  async function handleVerifyOtp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMessage(null);
     setSuccessMessage(null);
@@ -69,19 +122,35 @@ export function AccountLoginForm() {
       setErrorMessage(t("supabaseMissing"));
       return;
     }
-    const { error } = await supabase.auth.signInWithOtp({
+
+    const { error } = await supabase.auth.verifyOtp({
       email: email.trim(),
-      options: { emailRedirectTo: buildAuthCallbackUrl(nextPath) },
+      token: otpCode.trim(),
+      type: "email",
     });
 
     setIsLoading(false);
 
     if (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error.message || t("otpInvalid"));
       return;
     }
 
-    setSuccessMessage(t("magicSent"));
+    router.replace(nextPath);
+    router.refresh();
+  }
+
+  async function handleResendOtp() {
+    setErrorMessage(null);
+    setSuccessMessage(null);
+    setIsLoading(true);
+
+    const sent = await sendOtpCode();
+    setIsLoading(false);
+
+    if (sent) {
+      setSuccessMessage(t("magicSent"));
+    }
   }
 
   return (
@@ -110,7 +179,7 @@ export function AccountLoginForm() {
               ? "bg-primary text-white"
               : "text-text-muted hover:text-primary-dark"
           }`}
-          onClick={() => setMode("password")}
+          onClick={() => handleModeChange("password")}
         >
           {t("passwordTab")}
         </button>
@@ -121,7 +190,7 @@ export function AccountLoginForm() {
               ? "bg-primary text-white"
               : "text-text-muted hover:text-primary-dark"
           }`}
-          onClick={() => setMode("magic-link")}
+          onClick={() => handleModeChange("magic-link")}
         >
           {t("magicTab")}
         </button>
@@ -171,8 +240,8 @@ export function AccountLoginForm() {
             {isLoading ? t("signingIn") : tc("signIn")}
           </Button>
         </form>
-      ) : (
-        <form onSubmit={handleMagicLink} className="mt-6 space-y-5">
+      ) : otpStep === "email" ? (
+        <form onSubmit={handleSendOtp} className="mt-6 space-y-5">
           <FormField label={t("email")} htmlFor="magic-email" hint={t("emailHintMagic")}>
             <input
               id="magic-email"
@@ -192,6 +261,70 @@ export function AccountLoginForm() {
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? tc("sending") : t("sendMagic")}
           </Button>
+        </form>
+      ) : (
+        <form onSubmit={handleVerifyOtp} className="mt-6 space-y-5">
+          <FormField label={t("email")} htmlFor="magic-email-readonly">
+            <input
+              id="magic-email-readonly"
+              type="email"
+              value={email}
+              className={formInputClassName()}
+              readOnly
+            />
+          </FormField>
+
+          <FormField label={t("otpCode")} htmlFor="otp-code" hint={t("emailHintMagic")}>
+            <input
+              id="otp-code"
+              type="text"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              value={otpCode}
+              onChange={(event) =>
+                setOtpCode(event.target.value.replace(/\D/g, "").slice(0, OTP_TOKEN_LENGTH))
+              }
+              className={formInputClassName()}
+              placeholder={t("otpPlaceholder")}
+              pattern={`\\d{${OTP_TOKEN_LENGTH}}`}
+              maxLength={OTP_TOKEN_LENGTH}
+              required
+            />
+          </FormField>
+
+          {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
+          {successMessage ? <p className="text-sm text-primary-dark">{successMessage}</p> : null}
+
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isLoading || otpCode.length !== OTP_TOKEN_LENGTH}
+          >
+            {isLoading ? t("verifying") : t("verifyCode")}
+          </Button>
+
+          <div className="flex items-center justify-between text-sm">
+            <button
+              type="button"
+              className="font-medium text-primary-dark hover:underline disabled:opacity-60"
+              disabled={isLoading}
+              onClick={() => {
+                resetOtpFlow();
+                setErrorMessage(null);
+                setSuccessMessage(null);
+              }}
+            >
+              {t("changeEmail")}
+            </button>
+            <button
+              type="button"
+              className="font-medium text-primary-dark hover:underline disabled:opacity-60"
+              disabled={isLoading}
+              onClick={() => void handleResendOtp()}
+            >
+              {t("resendCode")}
+            </button>
+          </div>
         </form>
       )}
     </AccountAuthCard>

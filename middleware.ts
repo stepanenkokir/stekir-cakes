@@ -6,7 +6,8 @@ import {
   isAuthEntryAccountPath,
   isPublicAccountPath,
 } from "@/lib/account/auth-paths";
-import { stripLocalePrefix } from "@/lib/i18n/locale";
+import { toLocalePath } from "@/lib/account/auth-callback";
+import { stripLocalePrefix, toLocale } from "@/lib/i18n/locale";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -81,7 +82,9 @@ export async function middleware(request: NextRequest) {
     const redirectUrl = request.nextUrl.clone();
     const nextPath = request.nextUrl.searchParams.get("next");
     redirectUrl.pathname =
-      nextPath && nextPath.startsWith("/") ? nextPath : `/${locale}/account`;
+      nextPath && nextPath.startsWith("/")
+        ? toLocalePath(nextPath, toLocale(locale))
+        : `/${locale}/account`;
     redirectUrl.search = "";
     return NextResponse.redirect(redirectUrl);
   }

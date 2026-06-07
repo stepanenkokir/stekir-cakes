@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { getRequestOrigin, getSafeNextPath } from "@/lib/account/auth-callback";
 
 function getSupabaseEnv() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -12,23 +13,27 @@ function getSupabaseEnv() {
   return { url, anonKey };
 }
 
-function getSafeNextPath(next: string | null): string {
-  if (next && next.startsWith("/") && !next.startsWith("//")) {
-    return next;
-  }
-  return "/en/account";
+function buildLoginRedirect(request: NextRequest, errorCode: string) {
+  const origin = getRequestOrigin(request);
+  const loginUrl = new URL("/en/account/login", origin);
+  loginUrl.searchParams.set("error", errorCode);
+  return NextResponse.redirect(loginUrl);
 }
 
 export async function GET(request: NextRequest) {
   const env = getSupabaseEnv();
-  const { searchParams, origin } = request.nextUrl;
+  const { searchParams } = request.nextUrl;
   const code = searchParams.get("code");
+  const oauthError = searchParams.get("error");
   const nextPath = getSafeNextPath(searchParams.get("next"));
+  const origin = getRequestOrigin(request);
+
+  if (oauthError) {
+    return buildLoginRedirect(request, oauthError);
+  }
 
   if (!env || !code) {
-    const loginUrl = new URL("/en/account/login", origin);
-    loginUrl.searchParams.set("error", "auth_callback_failed");
-    return NextResponse.redirect(loginUrl);
+    return buildLoginRedirect(request, "auth_callback_failed");
   }
 
   const redirectUrl = new URL(nextPath, origin);
@@ -50,9 +55,7 @@ export async function GET(request: NextRequest) {
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    const loginUrl = new URL("/en/account/login", origin);
-    loginUrl.searchParams.set("error", "auth_callback_failed");
-    return NextResponse.redirect(loginUrl);
+    return buildLoginRedirect(request, "auth_callback_failed");
   }
 
   return response;

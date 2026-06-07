@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, LogOut, ShoppingBag, UserRound, X } from "lucide-react";
+import { LayoutDashboard, LogOut, Menu, Package, ShoppingBag, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
@@ -9,11 +9,13 @@ import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useCart } from "@/lib/cart/CartProvider";
 import type { Session } from "@supabase/supabase-js";
+import { AccountMenu } from "@/components/account/AccountMenu";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 export function Header() {
   const t = useTranslations("nav");
   const tc = useTranslations("common");
+  const ta = useTranslations("account.sidebar");
   const { itemCount } = useCart();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -135,13 +137,17 @@ export function Header() {
               {tc("orderNow")}
             </Button>
 
-            <Link
-              href={isAuthenticated ? "/account" : "/account/login"}
-              className="rounded-full p-2 text-text transition-colors hover:bg-surface hover:text-primary-dark"
-              aria-label={isAuthenticated ? t("accountAria") : t("signInAria")}
-            >
-              <UserRound className="h-5 w-5" />
-            </Link>
+            {isAuthenticated ? (
+              <AccountMenu />
+            ) : (
+              <Link
+                href="/account/login"
+                className="rounded-full p-2 text-text transition-colors hover:bg-surface hover:text-primary-dark"
+                aria-label={t("signInAria")}
+              >
+                <UserRound className="h-5 w-5" />
+              </Link>
+            )}
 
             <button
               type="button"
@@ -188,13 +194,45 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href={isAuthenticated ? "/account" : "/account/login"}
-                className="rounded-xl px-3 py-3 text-lg font-medium text-text transition-colors hover:bg-surface hover:text-primary-dark"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {isAuthenticated ? tc("myAccount") : tc("signIn")}
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
+                    {ta("account")}
+                  </p>
+                  <Link
+                    href="/account"
+                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-lg font-medium text-text transition-colors hover:bg-surface hover:text-primary-dark"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <LayoutDashboard className="h-5 w-5 text-text-muted" aria-hidden />
+                    {ta("dashboard")}
+                  </Link>
+                  <Link
+                    href="/account/orders"
+                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-lg font-medium text-text transition-colors hover:bg-surface hover:text-primary-dark"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Package className="h-5 w-5 text-text-muted" aria-hidden />
+                    {ta("orders")}
+                  </Link>
+                  <Link
+                    href="/account/profile"
+                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-lg font-medium text-text transition-colors hover:bg-surface hover:text-primary-dark"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <UserRound className="h-5 w-5 text-text-muted" aria-hidden />
+                    {ta("profile")}
+                  </Link>
+                </>
+              ) : (
+                <Link
+                  href="/account/login"
+                  className="rounded-xl px-3 py-3 text-lg font-medium text-text transition-colors hover:bg-surface hover:text-primary-dark"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {tc("signIn")}
+                </Link>
+              )}
             </nav>
 
             <div className="border-t border-border px-5 py-6">

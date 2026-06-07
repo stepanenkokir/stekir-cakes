@@ -5,6 +5,11 @@ export type OAuthProviderConfig = {
   labelKey: OAuthProviderId;
 };
 
+export type OAuthSignInOptions = {
+  redirectTo: string;
+  scopes?: string;
+};
+
 export function getOAuthProviders(): OAuthProviderConfig[] {
   const providers: OAuthProviderConfig[] = [{ id: "google", labelKey: "google" }];
 
@@ -17,4 +22,30 @@ export function getOAuthProviders(): OAuthProviderConfig[] {
   }
 
   return providers;
+}
+
+export function getOAuthSignInOptions(
+  provider: OAuthProviderId,
+  redirectTo: string,
+): OAuthSignInOptions {
+  const options: OAuthSignInOptions = { redirectTo };
+
+  if (provider === "apple") {
+    options.scopes = "name email";
+  }
+
+  return options;
+}
+
+export function getSupabaseAppleCallbackUrl(supabaseUrl: string): string | null {
+  try {
+    const { hostname } = new URL(supabaseUrl);
+    const projectRef = hostname.split(".")[0];
+    if (!projectRef) {
+      return null;
+    }
+    return `https://${projectRef}.supabase.co/auth/v1/callback`;
+  } catch {
+    return null;
+  }
 }

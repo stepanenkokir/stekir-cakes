@@ -1,0 +1,12 @@
+<!--
+  Supabase Dashboard → Authentication → Email Templates → Magic Link
+
+  Replace the default template with this OTP version so sign-in codes work
+  on the same device where the user requested login (PKCE-safe).
+
+  Required variable: {{ .Token }}
+-->
+<h2>Sign in code</h2>
+<p>Your one-time sign-in code:</p>
+<p><strong>{{ .Token }}</strong></p>
+<p>This code expires soon. Enter it on the device where you requested sign-in.</p>

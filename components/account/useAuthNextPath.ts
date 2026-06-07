@@ -2,17 +2,16 @@
 
 import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import { useLocale } from "next-intl";
+import { stripLocalePrefix } from "@/lib/i18n/locale";
 
 export function useAuthNextPath() {
   const searchParams = useSearchParams();
-  const locale = useLocale();
 
   return useMemo(() => {
     const param = searchParams.get("next");
-    if (param && param.startsWith("/")) {
-      return param;
+    if (param && param.startsWith("/") && !param.startsWith("//")) {
+      return stripLocalePrefix(param);
     }
-    return `/${locale}/account`;
-  }, [searchParams, locale]);
+    return "/account";
+  }, [searchParams]);
 }

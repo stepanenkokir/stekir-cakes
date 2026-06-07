@@ -2,17 +2,19 @@
 
 import { useState } from "react";
 import { Link, useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { AccountAuthCard } from "@/components/account/AccountAuthCard";
 import { AccountOAuthButtons } from "@/components/account/AccountOAuthButtons";
 import { useAuthNextPath } from "@/components/account/useAuthNextPath";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
 import { buildAuthCallbackUrl, isPasswordStrongEnough } from "@/lib/account/auth-callback";
+import { toLocale } from "@/lib/i18n/locale";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 export function AccountRegisterForm() {
   const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations("account.register");
   const tLogin = useTranslations("account.login");
   const tc = useTranslations("common");
@@ -55,7 +57,7 @@ export function AccountRegisterForm() {
       password,
       options: {
         data: { full_name: fullName.trim() },
-        emailRedirectTo: buildAuthCallbackUrl(nextPath),
+        emailRedirectTo: buildAuthCallbackUrl(nextPath, undefined, toLocale(locale)),
       },
     });
 
