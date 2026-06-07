@@ -127,6 +127,20 @@ create table if not exists reviews (
 -- 5. Row Level Security
 -- ---------------------------------------------------------------
 
+-- Admin checks must bypass profiles RLS to avoid infinite recursion.
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role = 'admin'
+  );
+$$;
+
 alter table profiles enable row level security;
 alter table orders   enable row level security;
 alter table reviews  enable row level security;
@@ -142,12 +156,7 @@ create policy "profiles: owner update"
 
 create policy "profiles: admin read all"
   on profiles for select
-  using (
-    exists (
-      select 1 from profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
+  using (is_admin());
 
 -- orders: owner sees own orders; admin sees all; insert allowed for authenticated + anon (guest checkout)
 create policy "orders: owner read"
@@ -160,12 +169,7 @@ create policy "orders: insert authenticated"
 
 create policy "orders: admin full access"
   on orders for all
-  using (
-    exists (
-      select 1 from profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
+  using (is_admin());
 
 -- reviews: approved reviews are public; owner can read own; admin can do everything
 create policy "reviews: public read approved"
@@ -182,9 +186,4 @@ create policy "reviews: insert authenticated"
 
 create policy "reviews: admin full access"
   on reviews for all
-  using (
-    exists (
-      select 1 from profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
+  using (is_admin());
