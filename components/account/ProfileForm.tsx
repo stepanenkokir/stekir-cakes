@@ -1,5 +1,6 @@
 "use client";
 
+import { LogOut } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
@@ -36,6 +37,7 @@ export function ProfileForm({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isSavingPassword, setIsSavingPassword] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   async function handleSaveProfile(event: React.FormEvent<HTMLFormElement>) {
@@ -119,6 +121,24 @@ export function ProfileForm({
     setNewPassword("");
     setConfirmPassword("");
     setStatusMessage(t("messages.passwordUpdated"));
+  }
+
+  async function handleSignOut() {
+    setErrorMessage(null);
+    setStatusMessage(null);
+    setIsSigningOut(true);
+
+    const supabase = getSupabaseBrowserClientOrNull();
+    if (!supabase) {
+      setIsSigningOut(false);
+      setErrorMessage(t("messages.notConfigured"));
+      return;
+    }
+
+    await supabase.auth.signOut();
+    setIsSigningOut(false);
+    router.push("/account/login");
+    router.refresh();
   }
 
   async function handleDeleteAccount() {
@@ -281,6 +301,21 @@ export function ProfileForm({
           {isSavingPassword ? tc("updating") : tc("updatePassword")}
         </Button>
       </form>
+
+      <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
+        <h2 className="font-display text-2xl text-text">{t("sessionTitle")}</h2>
+        <p className="mt-2 text-sm text-text-muted">{t("sessionText")}</p>
+        <Button
+          type="button"
+          variant="ghost"
+          className="mt-4 gap-2"
+          onClick={handleSignOut}
+          disabled={isSigningOut}
+        >
+          <LogOut className="h-4 w-4" />
+          {isSigningOut ? t("signingOut") : tc("signOut")}
+        </Button>
+      </section>
 
       <section className="rounded-2xl border border-red-200 bg-red-50/40 p-6">
         <h2 className="font-display text-2xl text-text">{t("deleteTitle")}</h2>

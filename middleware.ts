@@ -2,6 +2,10 @@ import createIntlMiddleware from "next-intl/middleware";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "@/i18n/routing";
+import {
+  isAuthEntryAccountPath,
+  isPublicAccountPath,
+} from "@/lib/account/auth-paths";
 import { stripLocalePrefix } from "@/lib/i18n/locale";
 
 const intlMiddleware = createIntlMiddleware(routing);
@@ -64,16 +68,16 @@ export async function middleware(request: NextRequest) {
 
   const locale = pathname.split("/")[1] ?? routing.defaultLocale;
   const loginPath = `/${locale}/account/login`;
-  const isLoginPage = pathWithoutLocale === "/account/login";
+  const isPublicAccountPage = isPublicAccountPath(pathWithoutLocale);
 
-  if (!user && !isLoginPage) {
+  if (!user && !isPublicAccountPage) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = loginPath;
     redirectUrl.searchParams.set("next", pathname + request.nextUrl.search);
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (user && isLoginPage) {
+  if (user && isAuthEntryAccountPath(pathWithoutLocale)) {
     const redirectUrl = request.nextUrl.clone();
     const nextPath = request.nextUrl.searchParams.get("next");
     redirectUrl.pathname =
