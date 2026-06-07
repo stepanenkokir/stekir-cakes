@@ -35,6 +35,19 @@ vi.mock("resend", () => ({
   },
 }));
 
+vi.mock("@/lib/data/cakes", () => ({
+  getCakePricingBySlug: vi.fn(async (slug: string) => {
+    const pricing: Record<string, { slug: string; pricePerPound: number; minWeight: number }> = {
+      napoleon: { slug: "napoleon", pricePerPound: 14, minWeight: 2 },
+      medovik: { slug: "medovik", pricePerPound: 13, minWeight: 2 },
+      smetannik: { slug: "smetannik", pricePerPound: 12, minWeight: 2 },
+      mannik: { slug: "mannik", pricePerPound: 11, minWeight: 1.5 },
+    };
+
+    return pricing[slug] ?? null;
+  }),
+}));
+
 import { POST } from "./route";
 
 const envKeys = [

@@ -22,6 +22,10 @@ vi.mock("@supabase/supabase-js", () => ({
   })),
 }));
 
+vi.mock("@/lib/data/cakes", () => ({
+  getCakeSlugs: vi.fn(async () => ["napoleon", "medovik", "smetannik", "mannik"]),
+}));
+
 import { POST } from "./route";
 
 const envKeys = [

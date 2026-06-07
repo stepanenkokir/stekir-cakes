@@ -18,6 +18,8 @@
     "textUs": "Envíenos un mensaje",
     "signIn": "Iniciar sesión",
     "signOut": "Cerrar sesión",
+    "createAccount": "Crear cuenta",
+    "forgotPassword": "¿Olvidó su contraseña?",
     "myAccount": "Mi cuenta",
     "languageSwitcher": "Elegir idioma",
     "fromPrice": "Desde {price}",
@@ -120,64 +122,6 @@
     "catalogTitle": "Nuestros pasteles",
     "catalogDescription": "Recetas clásicas de Europa del Este, reinventadas para cada celebración",
     "notFound": "Pastel no encontrado"
-  },
-  "cakes": {
-    "napoleon": {
-      "name": "Napoleon",
-      "tagline": "Capas de tradición, un sabor para toda la vida",
-      "description": "Nuestro Napoleon es un auténtico clásico: docenas de capas de hojaldre finísimas y crujientes alternadas con una rica crema pastelera casera. Cada bocado equilibra lo crujiente y lo sedoso. Perfecto para cumpleaños, aniversarios y cualquier momento que merezca celebrarse.",
-      "ingredients": "Mantequilla, harina, huevos, leche entera, azúcar, vainilla",
-      "servings": "1 lb alimenta aprox. a 3–4 personas",
-      "prepTime": "Se requieren 3 días de anticipación",
-      "storageInstructions": "Refrigere en la caja. Mejor consumir en 3 días. El Napoleon mejora con 1 día de refrigeración.",
-      "tags": [
-        "Birthday",
-        "Anniversary",
-        "Most Popular"
-      ]
-    },
-    "medovik": {
-      "name": "Medovik",
-      "tagline": "Capas con miel, crema suave como una nube",
-      "description": "El Medovik es nuestro pastel más querido: finas capas de bizcocho de miel que se impregnan con el tiempo, acompañadas de un glaseado aterciopelado de crema agria. Su dulzura aromática y textura que se deshace en la boca lo han convertido en el favorito de la familia de generación en generación.",
-      "ingredients": "Miel, mantequilla, huevos, harina, crema agria, azúcar",
-      "servings": "1 lb alimenta aprox. a 3–4 personas",
-      "prepTime": "Se requieren 3 días de anticipación",
-      "storageInstructions": "Refrigere en la caja. Mejor consumir en 3 días para una frescura y textura óptimas.",
-      "tags": [
-        "Birthday",
-        "Holiday",
-        "Fan Favorite"
-      ]
-    },
-    "smetannik": {
-      "name": "Smetannik",
-      "tagline": "Ligero como una nube, cálido como el hogar",
-      "description": "El Smetannik es el pastel que su abuela habría hecho un domingo por la tarde. Esponjosas capas de bizcocho con crema agria y un relleno suave y ligeramente ácido — más ligero de lo que parece e imposible de dejar de comer.",
-      "ingredients": "Crema agria, huevos, harina, azúcar, mantequilla, vainilla",
-      "servings": "1 lb alimenta aprox. a 3–4 personas",
-      "prepTime": "Se requieren 2 días de anticipación",
-      "storageInstructions": "Refrigere en la caja. Mejor consumir en 3 días. Deje reposar a temperatura ambiente 15 minutos antes de servir.",
-      "tags": [
-        "Everyday",
-        "Birthday",
-        "Kids"
-      ]
-    },
-    "mannik": {
-      "name": "Mannik",
-      "tagline": "Sencillo, tierno y profundamente satisfactorio",
-      "description": "Nuestro Mannik es un pastel a base de sémola con una miga única, densa pero tierna — sin harina, solo sémola gruesa que le da una textura rústica y reconfortante. Adaptable sin lácteos, ideal para niños y quienes prefieren un postre menos dulce.",
-      "ingredients": "Sémola, huevos, crema agria, azúcar, mantequilla, bicarbonato",
-      "servings": "1 lb alimenta aprox. a 3–4 personas",
-      "prepTime": "Se requieren 2 días de anticipación",
-      "storageInstructions": "Guarde cubierto a temperatura ambiente hasta 2 días, o refrigere hasta 4 días. Mejor disfrutarlo en 2 días.",
-      "tags": [
-        "Kids",
-        "Everyday",
-        "Gluten-Sensitive Option"
-      ]
-    }
   },
   "cakeTags": {
     "Birthday": "Cumpleaños",
@@ -964,7 +908,55 @@
       "signingIn": "Iniciando sesión...",
       "sendMagic": "Enviar enlace mágico",
       "magicSent": "Enlace mágico enviado. Revise su bandeja de entrada para continuar.",
-      "supabaseMissing": "Supabase aún no está configurado. Configure NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY."
+      "supabaseMissing": "Supabase aún no está configurado. Configure NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY.",
+      "noAccount": "¿No tiene cuenta?",
+      "callbackFailed": "El enlace de acceso expiró o no es válido. Inténtelo de nuevo."
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "intro": "Regístrese para ver pedidos, guardar su perfil y gestionar entregas.",
+      "fullName": "Nombre completo",
+      "emailHint": "Use el email con el que hace pedidos: los pedidos de invitado se vincularán automáticamente.",
+      "passwordHint": "Mínimo 8 caracteres.",
+      "confirmPassword": "Confirmar contraseña",
+      "passwordLength": "La contraseña debe tener al menos 8 caracteres.",
+      "passwordMismatch": "Las contraseñas no coinciden.",
+      "creating": "Creando cuenta...",
+      "confirmEmail": "Cuenta creada. Revise su email para confirmar la dirección y luego inicie sesión.",
+      "hasAccount": "¿Ya tiene cuenta?"
+    },
+    "forgotPassword": {
+      "title": "Restablecer contraseña",
+      "intro": "Ingrese el email de su cuenta y le enviaremos un enlace seguro.",
+      "emailHint": "Use el email vinculado a su cuenta.",
+      "sendLink": "Enviar enlace",
+      "emailSent": "Enlace enviado. Revise su bandeja de entrada para elegir una nueva contraseña.",
+      "backToLogin": "Volver al inicio de sesión"
+    },
+    "resetPassword": {
+      "title": "Nueva contraseña",
+      "intro": "Ingrese una nueva contraseña para su cuenta.",
+      "checking": "Verificando enlace de restablecimiento...",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Confirmar nueva contraseña",
+      "passwordHint": "Mínimo 8 caracteres.",
+      "passwordLength": "La contraseña debe tener al menos 8 caracteres.",
+      "passwordMismatch": "Las contraseñas no coinciden.",
+      "savePassword": "Guardar contraseña",
+      "success": "Contraseña actualizada. Redirigiendo a su cuenta...",
+      "expiredIntro": "Este enlace de restablecimiento ya no es válido.",
+      "expired": "Abra el email más reciente o solicite un nuevo enlace.",
+      "requestNewLink": "Solicitar nuevo enlace"
+    },
+    "oauth": {
+      "divider": "O continuar con",
+      "google": "Continuar con Google",
+      "apple": "Continuar con Apple",
+      "facebook": "Continuar con Facebook",
+      "telegram": "Continuar con Telegram",
+      "connecting": "Conectando...",
+      "telegramFailed": "Error al iniciar sesión con Telegram. Inténtelo de nuevo.",
+      "hint": "Active proveedores en Supabase. Para Telegram, configure el bot y vincule su dominio con @BotFather /setdomain."
     },
     "sidebar": {
       "account": "Cuenta",
@@ -1036,6 +1028,9 @@
       "currentPassword": "Contraseña actual",
       "newPassword": "Nueva contraseña",
       "confirmPassword": "Confirmar nueva contraseña",
+      "sessionTitle": "Cerrar sesión",
+      "sessionText": "Finalizar la sesión actual en este dispositivo.",
+      "signingOut": "Cerrando sesión...",
       "deleteTitle": "Eliminar cuenta",
       "deleteText": "Eliminar permanentemente su cuenta y perfil. El historial de pedidos puede conservarse para registros de la pastelería.",
       "messages": {
@@ -1085,13 +1080,13 @@
       ]
     },
     "baker": {
-      "title": "Conozca a la pastelera",
+      "title": "Conozca al pastelero",
       "subtitle": "Las manos y el corazón detrás de cada capa",
-      "name": "Anna",
-      "role": "Fundadora y pastelera principal",
-      "imageAlt": "Anna, fundadora y pastelera principal de SteKir Cakes",
-      "p1": "Anna creció viendo a su madre y abuela apilar capas de miel y doblar hojaldre para Napoleon — habilidades que aplica en cada pedido hoy.",
-      "p2": "Cree que los pasteles de celebración deben saber a recuerdo: familiares, generosos y hechos con un cuidado que se siente en cada bocado."
+      "name": "Kirill",
+      "role": "Fundador y pastelero principal",
+      "imageAlt": "Kirill, fundador y pastelero principal de SteKir Cakes",
+      "p1": "Kirill creció viendo a su madre y abuela apilar capas de miel y doblar hojaldre para Napoleon — habilidades que aplica en cada pedido hoy.",
+      "p2": "Él cree que los pasteles de celebración deben saber a recuerdo: familiares, generosos y hechos con un cuidado que se siente en cada bocado."
     },
     "certs": {
       "title": "Certificados y asegurados",

@@ -1,72 +1,121 @@
-import { catalogImagePath } from "@/lib/images";
-import { getMessages } from "@/lib/i18n/messages";
-import { toLocale } from "@/lib/i18n/locale";
+import "server-only";
 
-export type Cake = {
-  slug: string;
-  name: string;
-  tagline: string;
-  description: string;
-  ingredients: string;
-  pricePerPound: number;
-  minWeight: number;
-  servings: string;
-  prepTime: string;
-  noticeDays: number;
-  image: string;
-  images: string[];
-  storageInstructions: string;
-  tags: string[];
-};
+import "server-only";
 
-const cakeMeta = [
-  { slug: "napoleon", pricePerPound: 14, minWeight: 2, noticeDays: 3 },
-  { slug: "medovik", pricePerPound: 13, minWeight: 2, noticeDays: 3 },
-  { slug: "smetannik", pricePerPound: 12, minWeight: 2, noticeDays: 2 },
-  { slug: "mannik", pricePerPound: 11, minWeight: 1.5, noticeDays: 2 },
-] as const;
+import { unstable_cache } from "next/cache";
+import { CAKES_CACHE_TAG } from "@/lib/catalog/revalidate";
+import type { Cake, CakePricing } from "@/lib/data/cake-types";
+import {
+  fetchActiveCakeRows,
+  fetchActiveCakeSlugs,
+  fetchAllCakeRows,
+  fetchCakePricingMap,
+  fetchCakeRowBySlug,
+} from "@/lib/data/cakes-db";
+import { seedCakeRows } from "@/lib/data/cakes-seed";
+import { getStartingPrice, mapRowToCake } from "@/lib/data/cake-utils";
 
-function buildCake(
-  slug: (typeof cakeMeta)[number]["slug"],
-  meta: (typeof cakeMeta)[number],
+export type { Cake, CakeFormInput, CakePricing } from "@/lib/data/cake-types";
+export { getStartingPrice } from "@/lib/data/cake-utils";
+
+const getCachedActiveRows = unstable_cache(
+  async () => {
+    const rows = await fetchActiveCakeRows();
+    return rows ?? seedCakeRows.filter((row) => row.is_active);
+  },
+  ["cakes-active-rows"],
+  { tags: [CAKES_CACHE_TAG], revalidate: 3600 },
+);
+
+export async function getCakes(locale: string): Promise<Cake[]> {
+  const rows = await getCachedActiveRows();
+  return rows.map((row) => mapRowToCake(row, locale));
+}
+
+export async function getCakeBySlug(
+  slug: string,
   locale: string,
-): Cake {
-  const messages = getMessages(toLocale(locale));
-  const content = messages.cakes[slug as keyof typeof messages.cakes];
+  options?: { includeInactive?: boolean },
+): Promise<Cake | undefined> {
+  if (options?.includeInactive) {
+    const row = await fetchCakeRowBySlug(slug, { includeInactive: true });
+    if (!row) {
+      const seed = seedCakeRows.find((item) => item.slug === slug);
+      return seed ? mapRowToCake(seed, locale) : undefined;
+    }
+    return mapRowToCake(row, locale);
+  }
+
+  const cakes = await getCakes(locale);
+  return cakes.find((cake) => cake.slug === slug);
+}
+
+export async function getRelatedCakes(slug: string, locale: string): Promise<Cake[]> {
+  const cakes = await getCakes(locale);
+  return cakes.filter((cake) => cake.slug !== slug);
+}
+
+export async function getCakeSlugs(options?: { activeOnly?: boolean }): Promise<string[]> {
+  if (options?.activeOnly === false) {
+    const rows = await fetchAllCakeRows();
+    return (rows ?? seedCakeRows).map((row) => row.slug);
+  }
+
+  const slugs = await fetchActiveCakeSlugs();
+  if (slugs) {
+    return slugs;
+  }
+
+  return seedCakeRows
+    .filter((row) => row.is_active)
+    .map((row) => row.slug);
+}
+
+export async function getCakePricingBySlug(slug: string): Promise<CakePricing | null> {
+  const pricingMap = await getCakePricingMap();
+  return pricingMap?.get(slug) ?? getSeedPricing(slug);
+}
+
+async function getCakePricingMap(): Promise<Map<string, CakePricing> | null> {
+  const map = await fetchCakePricingMap();
+  if (map && map.size > 0) {
+    return map;
+  }
+
+  return new Map(
+    seedCakeRows
+      .filter((row) => row.is_active)
+      .map((row) => [
+        row.slug,
+        {
+          slug: row.slug,
+          pricePerPound: Number(row.price_per_pound),
+          minWeight: Number(row.min_weight),
+        },
+      ]),
+  );
+}
+
+function getSeedPricing(slug: string): CakePricing | null {
+  const row = seedCakeRows.find((item) => item.slug === slug && item.is_active);
+  if (!row) {
+    return null;
+  }
 
   return {
-    slug,
-    name: content.name,
-    tagline: content.tagline,
-    description: content.description,
-    ingredients: content.ingredients,
-    servings: content.servings,
-    prepTime: content.prepTime,
-    storageInstructions: content.storageInstructions,
-    tags: content.tags,
-    pricePerPound: meta.pricePerPound,
-    minWeight: meta.minWeight,
-    noticeDays: meta.noticeDays,
-    image: catalogImagePath(slug, 1),
-    images: [catalogImagePath(slug, 1), catalogImagePath(slug, 2)],
+    slug: row.slug,
+    pricePerPound: Number(row.price_per_pound),
+    minWeight: Number(row.min_weight),
   };
 }
 
-export function getCakes(locale: string): Cake[] {
-  return cakeMeta.map((meta) => buildCake(meta.slug, meta, locale));
+export async function getCakeNameMap(locale: string): Promise<Record<string, string>> {
+  const cakes = await getCakes(locale);
+  return Object.fromEntries(cakes.map((cake) => [cake.slug, cake.name]));
 }
 
-export function getStartingPrice(cake: Cake): number {
-  return cake.minWeight * cake.pricePerPound;
+export async function getAllCakesForAdmin(): Promise<Cake[]> {
+  const rows = await fetchAllCakeRows();
+  const source = rows ?? seedCakeRows;
+  return source.map((row) => mapRowToCake(row, "en"));
 }
-
-export function getCakeBySlug(slug: string, locale: string): Cake | undefined {
-  return getCakes(locale).find((cake) => cake.slug === slug);
-}
-
-export function getRelatedCakes(slug: string, locale: string): Cake[] {
-  return getCakes(locale).filter((cake) => cake.slug !== slug);
-}
-
-/** @deprecated Use getCakes(locale) */
-export const cakes = getCakes("en");

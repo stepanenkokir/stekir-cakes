@@ -2,10 +2,9 @@ import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getCakeSlugs } from "@/lib/data/cakes";
 import { getApiMessages, resolveLocale } from "@/lib/i18n/api";
 import { getMessages } from "@/lib/i18n/messages";
-
-const ALLOWED_CAKE_SLUGS = ["napoleon", "medovik", "smetannik", "mannik"] as const;
 
 type ReviewPayload = {
   locale?: string;
@@ -81,7 +80,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: api.reviewEmail }, { status: 400 });
   }
 
-  if (!ALLOWED_CAKE_SLUGS.includes(cakeSlug as (typeof ALLOWED_CAKE_SLUGS)[number])) {
+  const allowedSlugs = await getCakeSlugs({ activeOnly: true });
+
+  if (!allowedSlugs.includes(cakeSlug)) {
     return NextResponse.json({ error: api.reviewCake }, { status: 400 });
   }
 

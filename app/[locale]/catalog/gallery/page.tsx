@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/catalog/Breadcrumb";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { getCakes } from "@/lib/data/cakes";
+import { buildGalleryFilters } from "@/lib/data/gallery";
 import { isLocale } from "@/lib/i18n/locale";
 
 type PageProps = {
@@ -30,6 +32,8 @@ export default async function GalleryPage({ params }: PageProps) {
 
   const t = await getTranslations({ locale, namespace: "catalog" });
   const tc = await getTranslations({ locale, namespace: "common" });
+  const cakes = await getCakes(locale);
+  const galleryFilters = buildGalleryFilters(cakes, locale);
 
   return (
     <main className="bg-bg py-12 lg:py-20">
@@ -48,7 +52,7 @@ export default async function GalleryPage({ params }: PageProps) {
           align="left"
         />
 
-        <GalleryGrid />
+        <GalleryGrid galleryFilters={galleryFilters} />
       </div>
     </main>
   );

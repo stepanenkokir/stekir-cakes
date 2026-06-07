@@ -2,12 +2,7 @@ import { galleryImagePath } from "@/lib/images";
 import { getMessages } from "@/lib/i18n/messages";
 import { toLocale } from "@/lib/i18n/locale";
 
-export type GalleryCategory =
-  | "napoleon"
-  | "medovik"
-  | "smetannik"
-  | "mannik"
-  | "custom";
+export type GalleryCategory = string;
 
 export type GalleryFilter = "all" | GalleryCategory;
 
@@ -46,14 +41,14 @@ const galleryMeta: {
   { id: "custom-4", category: "custom", height: "medium" },
 ];
 
-export function getGalleryFilters(locale: string) {
+export function buildGalleryFilters(
+  cakes: Array<{ slug: string; name: string }>,
+  locale: string,
+) {
   const f = getMessages(toLocale(locale)).galleryFilters;
   return [
     { id: "all" as const, label: f.all },
-    { id: "napoleon" as const, label: f.napoleon },
-    { id: "medovik" as const, label: f.medovik },
-    { id: "smetannik" as const, label: f.smetannik },
-    { id: "mannik" as const, label: f.mannik },
+    ...cakes.map((cake) => ({ id: cake.slug, label: cake.name })),
     { id: "custom" as const, label: f.custom },
   ];
 }
@@ -81,6 +76,6 @@ export function filterGalleryImages(
   return images.filter((image) => image.category === filter);
 }
 
-/** @deprecated */
-export const galleryFilters = getGalleryFilters("en");
+/** @deprecated Use buildGalleryFilters(cakes, locale) */
+export const galleryFilters = [{ id: "all" as const, label: "All" }];
 export const galleryImages = getGalleryImages("en");

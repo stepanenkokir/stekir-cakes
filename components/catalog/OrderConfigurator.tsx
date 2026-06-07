@@ -7,7 +7,7 @@ import { FormField, formInputClassName } from "@/components/ui/FormField";
 import { useCart } from "@/lib/cart/CartProvider";
 import { formatCurrency } from "@/lib/cart/format";
 import { BAKERY_PHONE } from "@/lib/constants";
-import type { Cake } from "@/lib/data/cakes";
+import type { Cake } from "@/lib/data/cake-types";
 
 const WEIGHT_PRESETS = [2, 2.5, 3, 3.5, 4] as const;
 

@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { calculateDeliveryFee } from "@/lib/delivery";
 import { BAKERY_EMAIL } from "@/lib/data/contact";
+import { getCakePricingBySlug } from "@/lib/data/cakes";
 import { getApiMessages, getEmailMessages, resolveLocale } from "@/lib/i18n/api";
 import { getMessages } from "@/lib/i18n/messages";
 import type { Messages } from "@/lib/i18n/messages";
@@ -251,6 +252,38 @@ async function getUserId() {
   return user?.id ?? null;
 }
 
+async function validateItemPrices(
+  items: Array<{
+    slug: string;
+    weight_lbs: number;
+    unit_price: number;
+    quantity: number;
+  }>,
+  api: ApiMessages,
+) {
+  for (const item of items) {
+    if (!item.slug) {
+      return { error: api.invalidItem };
+    }
+
+    if (item.weight_lbs <= 0 || item.quantity <= 0) {
+      return { error: api.invalidItem };
+    }
+
+    const pricing = await getCakePricingBySlug(item.slug);
+    if (!pricing) {
+      return { error: api.invalidItem };
+    }
+
+    const expectedUnitPrice = item.weight_lbs * pricing.pricePerPound;
+    if (Math.abs(item.unit_price - expectedUnitPrice) > 0.01) {
+      return { error: api.invalidItem };
+    }
+  }
+
+  return null;
+}
+
 async function sendOrderEmails(params: {
   emails: EmailMessages;
   orderNumber: string;
@@ -378,6 +411,20 @@ export async function POST(request: Request) {
 
   if ("error" in validated) {
     return NextResponse.json({ error: validated.error }, { status: 400 });
+  }
+
+  const priceError = await validateItemPrices(
+    validated.items.map((item) => ({
+      slug: item.slug,
+      weight_lbs: item.weight_lbs,
+      unit_price: item.unit_price,
+      quantity: 1,
+    })),
+    api,
+  );
+
+  if (priceError) {
+    return NextResponse.json({ error: priceError.error }, { status: 400 });
   }
 
   const env = getSupabaseEnv();

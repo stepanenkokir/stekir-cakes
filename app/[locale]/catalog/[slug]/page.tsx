@@ -10,18 +10,20 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { routing } from "@/i18n/routing";
 import {
   getCakeBySlug,
+  getCakeSlugs,
   getRelatedCakes,
   getStartingPrice,
 } from "@/lib/data/cakes";
 import { isLocale, type Locale } from "@/lib/i18n/locale";
 
-const slugs = ["napoleon", "medovik", "smetannik", "mannik"] as const;
+export const revalidate = 3600;
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const slugs = await getCakeSlugs({ activeOnly: true });
   return routing.locales.flatMap((locale) =>
     slugs.map((slug) => ({ locale, slug })),
   );
@@ -30,7 +32,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const loc = isLocale(locale) ? locale : "en";
-  const cake = getCakeBySlug(slug, loc);
+  const cake = await getCakeBySlug(slug, loc);
   const t = await getTranslations({ locale: loc, namespace: "metadata" });
 
   if (!cake) {
@@ -57,7 +59,7 @@ export default async function CakeDetailPage({ params }: PageProps) {
   }
   setRequestLocale(locale);
 
-  const cake = getCakeBySlug(slug, locale as Locale);
+  const cake = await getCakeBySlug(slug, locale as Locale);
   const t = await getTranslations({ locale, namespace: "catalog" });
   const tc = await getTranslations({ locale, namespace: "common" });
 
@@ -65,7 +67,7 @@ export default async function CakeDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const relatedCakes = getRelatedCakes(slug, locale as Locale);
+  const relatedCakes = await getRelatedCakes(slug, locale as Locale);
 
   return (
     <main className="bg-bg py-12 lg:py-20">

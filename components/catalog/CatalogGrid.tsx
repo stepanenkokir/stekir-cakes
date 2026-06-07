@@ -8,7 +8,8 @@ import {
   getOccasionFilters,
   type OccasionFilter,
 } from "@/lib/data/catalog-filters";
-import { getStartingPrice, type Cake } from "@/lib/data/cakes";
+import { getStartingPrice } from "@/lib/data/cake-utils";
+import type { Cake } from "@/lib/data/cake-types";
 
 type CatalogGridProps = {
   allCakes: Cake[];

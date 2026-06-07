@@ -6,7 +6,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { GalleryLightbox } from "@/components/gallery/GalleryLightbox";
 import {
   filterGalleryImages,
-  getGalleryFilters,
   type GalleryFilter,
   type GalleryImage,
 } from "@/lib/data/gallery";
@@ -17,10 +16,18 @@ const heightClasses: Record<GalleryImage["height"], string> = {
   tall: "aspect-[2/3]",
 };
 
-export function GalleryGrid() {
+type GalleryFilterOption = {
+  id: GalleryFilter;
+  label: string;
+};
+
+type GalleryGridProps = {
+  galleryFilters: GalleryFilterOption[];
+};
+
+export function GalleryGrid({ galleryFilters }: GalleryGridProps) {
   const locale = useLocale();
   const t = useTranslations("galleryFilters");
-  const galleryFilters = useMemo(() => getGalleryFilters(locale), [locale]);
   const [activeFilter, setActiveFilter] = useState<GalleryFilter>("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 

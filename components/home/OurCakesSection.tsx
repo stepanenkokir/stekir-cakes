@@ -6,7 +6,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 export async function OurCakesSection() {
   const locale = await getLocale();
   const t = await getTranslations("home.ourCakes");
-  const cakes = getCakes(locale);
+  const cakes = await getCakes(locale);
 
   return (
     <section className="bg-bg py-20" aria-labelledby="our-cakes-heading">

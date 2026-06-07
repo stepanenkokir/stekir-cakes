@@ -18,6 +18,8 @@
     "textUs": "Text Us",
     "signIn": "Sign In",
     "signOut": "Sign Out",
+    "createAccount": "Create Account",
+    "forgotPassword": "Forgot password?",
     "myAccount": "My Account",
     "languageSwitcher": "Choose language",
     "fromPrice": "From {price}",
@@ -120,64 +122,6 @@
     "catalogTitle": "Our Cakes",
     "catalogDescription": "Classic Eastern European recipes, reimagined for every celebration",
     "notFound": "Cake Not Found"
-  },
-  "cakes": {
-    "napoleon": {
-      "name": "Napoleon",
-      "tagline": "Layers of tradition, a lifetime of flavor",
-      "description": "Our Napoleon is a true classic — dozens of paper-thin, flaky pastry layers alternating with rich homemade custard cream. Every bite is a balance of crunch and silk. Perfect for birthdays, anniversaries, and any moment worth celebrating.",
-      "ingredients": "Butter, flour, eggs, whole milk, sugar, vanilla bean",
-      "servings": "1 lb feeds approx. 3–4 people",
-      "prepTime": "3 days notice required",
-      "storageInstructions": "Refrigerate in the box. Best consumed within 3 days. Napoleon improves with 1 day of refrigeration.",
-      "tags": [
-        "Birthday",
-        "Anniversary",
-        "Most Popular"
-      ]
-    },
-    "medovik": {
-      "name": "Medovik",
-      "tagline": "Honey-kissed layers, cloud-soft cream",
-      "description": "Medovik is our most beloved cake — thin honey sponge layers soaked in time, paired with a velvety sour cream frosting. Its fragrant sweetness and melt-in-your-mouth texture have made it a family favorite across generations.",
-      "ingredients": "Honey, butter, eggs, flour, sour cream, sugar",
-      "servings": "1 lb feeds approx. 3–4 people",
-      "prepTime": "3 days notice required",
-      "storageInstructions": "Refrigerate in the box. Best consumed within 3 days for optimal freshness and texture.",
-      "tags": [
-        "Birthday",
-        "Holiday",
-        "Fan Favorite"
-      ]
-    },
-    "smetannik": {
-      "name": "Smetannik",
-      "tagline": "Light as a cloud, warm as home",
-      "description": "Smetannik is the cake your grandmother would have made on a Sunday afternoon. Fluffy sour cream sponge layers with a smooth, tangy cream — this cake is lighter than it looks and impossible to stop eating.",
-      "ingredients": "Sour cream, eggs, flour, sugar, butter, vanilla",
-      "servings": "1 lb feeds approx. 3–4 people",
-      "prepTime": "2 days notice required",
-      "storageInstructions": "Refrigerate in the box. Best consumed within 3 days. Let sit at room temperature for 15 minutes before serving.",
-      "tags": [
-        "Everyday",
-        "Birthday",
-        "Kids"
-      ]
-    },
-    "mannik": {
-      "name": "Mannik",
-      "tagline": "Simple, tender, and perfectly satisfying",
-      "description": "Our Mannik is a semolina-based cake with a uniquely dense yet tender crumb — no flour, just coarsely ground semolina giving it a rustic, comforting texture. Naturally dairy-free adaptable, great for kids and those who prefer a less sweet dessert.",
-      "ingredients": "Semolina, eggs, sour cream, sugar, butter, baking soda",
-      "servings": "1 lb feeds approx. 3–4 people",
-      "prepTime": "2 days notice required",
-      "storageInstructions": "Store covered at room temperature for up to 2 days, or refrigerate for up to 4 days. Best enjoyed within 2 days.",
-      "tags": [
-        "Kids",
-        "Everyday",
-        "Gluten-Sensitive Option"
-      ]
-    }
   },
   "cakeTags": {
     "Birthday": "Birthday",
@@ -964,7 +908,55 @@
       "signingIn": "Signing in...",
       "sendMagic": "Send Magic Link",
       "magicSent": "Magic link sent. Check your inbox to continue.",
-      "supabaseMissing": "Supabase is not configured yet. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY."
+      "supabaseMissing": "Supabase is not configured yet. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.",
+      "noAccount": "Don't have an account?",
+      "callbackFailed": "Sign-in link expired or is invalid. Please try again."
+    },
+    "register": {
+      "title": "Create Account",
+      "intro": "Register to track orders, save your profile, and manage deliveries.",
+      "fullName": "Full name",
+      "emailHint": "Use the email you order with — past guest orders will be linked automatically.",
+      "passwordHint": "At least 8 characters.",
+      "confirmPassword": "Confirm password",
+      "passwordLength": "Password must be at least 8 characters.",
+      "passwordMismatch": "Passwords do not match.",
+      "creating": "Creating account...",
+      "confirmEmail": "Account created. Check your email to confirm your address, then sign in.",
+      "hasAccount": "Already have an account?"
+    },
+    "forgotPassword": {
+      "title": "Reset Password",
+      "intro": "Enter your account email and we will send a secure reset link.",
+      "emailHint": "Use the email linked to your account.",
+      "sendLink": "Send Reset Link",
+      "emailSent": "Reset link sent. Check your inbox to choose a new password.",
+      "backToLogin": "Back to sign in"
+    },
+    "resetPassword": {
+      "title": "Choose New Password",
+      "intro": "Enter a new password for your account.",
+      "checking": "Verifying your reset link...",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "passwordHint": "At least 8 characters.",
+      "passwordLength": "Password must be at least 8 characters.",
+      "passwordMismatch": "Passwords do not match.",
+      "savePassword": "Save New Password",
+      "success": "Password updated. Redirecting to your account...",
+      "expiredIntro": "This reset link is no longer valid.",
+      "expired": "Open the latest reset email or request a new link.",
+      "requestNewLink": "Request a new reset link"
+    },
+    "oauth": {
+      "divider": "Or continue with",
+      "google": "Continue with Google",
+      "apple": "Continue with Apple",
+      "facebook": "Continue with Facebook",
+      "telegram": "Continue with Telegram",
+      "connecting": "Connecting...",
+      "telegramFailed": "Telegram sign-in failed. Please try again.",
+      "hint": "Enable providers in Supabase. For Telegram, set bot credentials and link your domain via @BotFather /setdomain."
     },
     "sidebar": {
       "account": "Account",
@@ -1036,6 +1028,9 @@
       "currentPassword": "Current password",
       "newPassword": "New password",
       "confirmPassword": "Confirm new password",
+      "sessionTitle": "Sign out",
+      "sessionText": "End your current session on this device.",
+      "signingOut": "Signing out...",
       "deleteTitle": "Delete account",
       "deleteText": "Permanently remove your account and profile. Order history may be retained for bakery records.",
       "messages": {
@@ -1087,11 +1082,11 @@
     "baker": {
       "title": "Meet the Baker",
       "subtitle": "The hands and heart behind every layer",
-      "name": "Anna",
+      "name": "Kirill",
       "role": "Founder & Head Baker",
-      "imageAlt": "Anna, founder and head baker of SteKir Cakes",
-      "p1": "Anna grew up watching her mother and grandmother stack honey layers and fold Napoleon pastry — skills she brings to every order today.",
-      "p2": "She believes celebration cakes should taste like memory: familiar, generous, and made with care you can feel in every bite."
+      "imageAlt": "Kirill, founder and head baker of SteKir Cakes",
+      "p1": "Kirill grew up watching his mother and grandmother stack honey layers and fold Napoleon pastry — skills he brings to every order today.",
+      "p2": "He believes celebration cakes should taste like memory: familiar, generous, and made with care you can feel in every bite."
     },
     "certs": {
       "title": "Certified & Insured",

@@ -2,9 +2,7 @@ import { reviewImagePath } from "@/lib/images";
 import { getMessages } from "@/lib/i18n/messages";
 import { intlLocale, isLocale, toLocale } from "@/lib/i18n/locale";
 
-export type ReviewCakeSlug = "napoleon" | "medovik" | "smetannik" | "mannik";
-
-export type ReviewFilter = "all" | ReviewCakeSlug;
+export type ReviewFilter = "all" | string;
 
 export type Review = {
   id: string;
@@ -12,17 +10,14 @@ export type Review = {
   name: string;
   rating: number;
   occasion: string;
-  cakeSlug: ReviewCakeSlug;
+  cakeSlug: string;
   date: string;
   photoUrl?: string;
 };
 
 const photoIds = new Set(["1", "5", "9"]);
 
-const reviewMeta: Record<
-  string,
-  { rating: number; date: string }
-> = {
+const reviewMeta: Record<string, { rating: number; date: string }> = {
   "1": { rating: 5, date: "2025-04-12" },
   "2": { rating: 5, date: "2025-03-28" },
   "3": { rating: 5, date: "2025-03-15" },
@@ -37,14 +32,14 @@ const reviewMeta: Record<
   "12": { rating: 4, date: "2024-06-03" },
 };
 
-export function getReviewFilters(locale: string) {
+export function buildReviewFilters(
+  cakes: Array<{ slug: string; name: string }>,
+  locale: string,
+) {
   const f = getMessages(toLocale(locale)).reviews.filters;
   return [
     { id: "all" as const, label: f.all },
-    { id: "napoleon" as const, label: f.napoleon },
-    { id: "medovik" as const, label: f.medovik },
-    { id: "smetannik" as const, label: f.smetannik },
-    { id: "mannik" as const, label: f.mannik },
+    ...cakes.map((cake) => ({ id: cake.slug, label: cake.name })),
   ];
 }
 
@@ -54,19 +49,20 @@ export function getReviews(locale: string): Review[] {
     return {
       ...item,
       ...meta,
-      cakeSlug: item.cakeSlug as ReviewCakeSlug,
+      cakeSlug: item.cakeSlug,
       photoUrl: photoIds.has(item.id) ? reviewImagePath(item.id) : undefined,
     };
   });
 }
 
-export function getReviewCakeName(slug: ReviewCakeSlug, locale: string): string {
-  return getMessages(toLocale(locale)).cakes[slug].name;
-}
-
-export function filterReviews(filter: ReviewFilter, locale: string): Review[] {
-  const reviews = getReviews(locale);
-  if (filter === "all") return reviews;
+export function filterReviews(
+  filter: ReviewFilter,
+  locale: string,
+  reviews = getReviews(locale),
+): Review[] {
+  if (filter === "all") {
+    return reviews;
+  }
   return reviews.filter((review) => review.cakeSlug === filter);
 }
 
@@ -93,6 +89,6 @@ export function formatReviewDate(isoDate: string, locale?: string): string {
   });
 }
 
-/** @deprecated */
-export const reviewFilters = getReviewFilters("en");
+/** @deprecated Use buildReviewFilters(cakes, locale) */
+export const reviewFilters = [{ id: "all" as const, label: "All" }];
 export const reviews = getReviews("en");

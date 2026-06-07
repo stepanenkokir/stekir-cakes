@@ -29,7 +29,8 @@ Object.assign(messages, {
     },
     ourCakes: {
       title: "Choose Your Cake",
-      subtitle: "Classic Eastern European recipes, reimagined for every celebration",
+      subtitle:
+        "Classic Eastern European recipes, reimagined for every celebration",
     },
     howItWorks: {
       title: "How It Works",
@@ -61,12 +62,14 @@ Object.assign(messages, {
     },
     cta: {
       title: "Ready to order your perfect cake?",
-      subtitle: "Order at least 3 days in advance. Weekend orders fill quickly!",
+      subtitle:
+        "Order at least 3 days in advance. Weekend orders fill quickly!",
     },
   },
   catalog: {
     pageTitle: "Our Cakes",
-    pageSubtitle: "Classic Eastern European recipes, reimagined for every celebration",
+    pageSubtitle:
+      "Classic Eastern European recipes, reimagined for every celebration",
     detailsSr: "Cake details",
     youMightLove: "You Might Also Love",
     relatedSubtitle: "Explore more of our handcrafted favorites",
@@ -79,7 +82,8 @@ Object.assign(messages, {
       decorationNotes: "Decoration notes",
       inscriptionOptional: "Optional, max 40 characters",
       inscriptionPlaceholder: "Happy Birthday, Anna!",
-      notesPlaceholder: "Any special wishes for decoration, flavors, or design?",
+      notesPlaceholder:
+        "Any special wishes for decoration, flavors, or design?",
       custom: "Custom",
       customWeight: "Custom weight in pounds",
       weightPreset: "{weight} lbs",
@@ -87,8 +91,10 @@ Object.assign(messages, {
       priceFormula: "{weight} lbs × {price}/lb",
       deliveryFees: "Delivery: $10 within 15 miles | $20 up to 30 miles",
       questionsText: "Questions? Text us",
-      selectDate: "Please select a delivery date ({days} {dayLabel} notice required).",
-      dateAfter: "Please choose a date on or after {date} ({days} {dayLabel} notice required).",
+      selectDate:
+        "Please select a delivery date ({days} {dayLabel} notice required).",
+      dateAfter:
+        "Please choose a date on or after {date} ({days} {dayLabel} notice required).",
       day: "day",
       days: "days",
       thumbAria: "View image {index} of {total}",
@@ -121,12 +127,14 @@ Object.assign(messages, {
   },
   checkout: {
     pageTitle: "Checkout",
-    pageIntro: "Complete your order in three quick steps. We'll confirm details by phone or text.",
+    pageIntro:
+      "Complete your order in three quick steps. We'll confirm details by phone or text.",
     stepOf: "Step {step} of 3",
     steps: { contact: "Contact", delivery: "Delivery", review: "Review" },
     step1: {
       title: "Contact Information",
-      intro: "We'll use your phone to confirm order details and delivery timing.",
+      intro:
+        "We'll use your phone to confirm order details and delivery timing.",
       firstName: "First name",
       lastName: "Last name",
       phone: "Phone number",
@@ -142,7 +150,8 @@ Object.assign(messages, {
     },
     step2: {
       title: "Delivery Details",
-      intro: "Choose delivery or pickup, then set your preferred date and time window.",
+      intro:
+        "Choose delivery or pickup, then set your preferred date and time window.",
       method: "Delivery method",
       deliveryOption: "Delivery",
       deliveryHint: "$10 within 15 miles, $20 up to 30 miles",
@@ -155,7 +164,8 @@ Object.assign(messages, {
       datePickup: "Pickup date",
       timeWindow: "Time window",
       instructions: "Special instructions (optional)",
-      instructionsPlaceholder: "Gate code, parking details, landmark, or pickup note",
+      instructionsPlaceholder:
+        "Gate code, parking details, landmark, or pickup note",
       windows: {
         morning: "Morning (9am-12pm)",
         afternoon: "Afternoon (12pm-5pm)",
@@ -167,7 +177,8 @@ Object.assign(messages, {
         invalidZip: "Enter a valid ZIP to confirm delivery fee.",
         within15: "Delivery within 15 miles: $10",
         within30: "Delivery 15–30 miles: $20",
-        outside: "This ZIP may be outside our 30-mile delivery zone. Contact us to confirm.",
+        outside:
+          "This ZIP may be outside our 30-mile delivery zone. Contact us to confirm.",
       },
       errors: {
         date: "Please choose a date.",
@@ -179,8 +190,10 @@ Object.assign(messages, {
     },
     step3: {
       title: "Review & Payment",
-      intro: "Confirm your order details and choose how you want to pay your deposit.",
-      lineItem: '{weight} lbs, {tiers} {tierLabel}, inscription: "{inscription}"',
+      intro:
+        "Confirm your order details and choose how you want to pay your deposit.",
+      lineItem:
+        '{weight} lbs, {tiers} {tierLabel}, inscription: "{inscription}"',
       lineDate: "{type} on {date}",
       depositNote:
         "A 50% deposit ({amount}) is required to confirm your order. We will send payment instructions via text/email after review.",
@@ -210,7 +223,12 @@ Object.assign(messages, {
       supabaseMissing:
         "Supabase is not configured yet. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.",
     },
-    sidebar: { account: "Account", dashboard: "Dashboard", orders: "Orders", profile: "Profile" },
+    sidebar: {
+      account: "Account",
+      dashboard: "Dashboard",
+      orders: "Orders",
+      profile: "Profile",
+    },
     welcome: "Welcome back",
     dashboard: {
       totalOrders: "Total Orders",
@@ -220,7 +238,8 @@ Object.assign(messages, {
     },
     orders: {
       emptyTitle: "No orders yet",
-      emptyText: "Once you place your first cake order, your history will appear here.",
+      emptyText:
+        "Once you place your first cake order, your history will appear here.",
       headers: {
         number: "Order #",
         cake: "Cake",
@@ -272,7 +291,8 @@ Object.assign(messages, {
       defaultAddress: "Default delivery address",
       addressHint: "Optional — pre-fills checkout when you order delivery.",
       changePassword: "Change password",
-      passwordHint: "Password sign-in only. Magic-link users can set a password here.",
+      passwordHint:
+        "Password sign-in only. Magic-link users can set a password here.",
       currentPassword: "Current password",
       newPassword: "New password",
       confirmPassword: "Confirm new password",
@@ -293,10 +313,15 @@ Object.assign(messages, {
     },
   },
   about: {
-    hero: { title: "Our Story", subtitle: "Made with love in Sacramento", imageAlt: "Baker preparing a fresh cake in a warm home kitchen" },
+    hero: {
+      title: "Our Story",
+      subtitle: "Made with love in Sacramento",
+      imageAlt: "Baker preparing a fresh cake in a warm home kitchen",
+    },
     story: {
       title: "From Our Kitchen to Yours",
-      subtitle: "A home bakery rooted in family tradition and California warmth",
+      subtitle:
+        "A home bakery rooted in family tradition and California warmth",
       p1: "SteKir Cakes began at our family table — recipes passed down through generations of Eastern European baking, now shared with neighbors across Sacramento.",
       p2: "Every cake is baked fresh to order in our licensed home kitchen. No freezers, no shortcuts — just butter, honey, cream, and the patience that layered cakes deserve.",
     },
@@ -304,35 +329,51 @@ Object.assign(messages, {
       title: "Why Choose Us",
       subtitle: "Small-batch baking with big-hearted service",
       items: [
-        { title: "Fresh Daily", text: "Every cake is baked to order — never pulled from a freezer or sitting on a shelf." },
-        { title: "No Preservatives", text: "Simple, honest ingredients you can pronounce. Real butter, eggs, honey, and cream." },
-        { title: "Custom Sizes", text: "From intimate gatherings to large celebrations — choose the weight and tiers that fit your event." },
-        { title: "Local Delivery", text: "We deliver across Sacramento and surrounding suburbs, fresh to your door on your chosen date." },
+        {
+          title: "Fresh Daily",
+          text: "Every cake is baked to order — never pulled from a freezer or sitting on a shelf.",
+        },
+        {
+          title: "No Preservatives",
+          text: "Simple, honest ingredients you can pronounce. Real butter, eggs, honey, and cream.",
+        },
+        {
+          title: "Custom Sizes",
+          text: "From intimate gatherings to large celebrations — choose the weight and tiers that fit your event.",
+        },
+        {
+          title: "Local Delivery",
+          text: "We deliver across Sacramento and surrounding suburbs, fresh to your door on your chosen date.",
+        },
       ],
     },
     baker: {
       title: "Meet the Baker",
       subtitle: "The hands and heart behind every layer",
-      name: "Anna",
+      name: "Kirill",
       role: "Founder & Head Baker",
-      imageAlt: "Anna, founder and head baker of SteKir Cakes",
-      p1: "Anna grew up watching her mother and grandmother stack honey layers and fold Napoleon pastry — skills she brings to every order today.",
-      p2: "She believes celebration cakes should taste like memory: familiar, generous, and made with care you can feel in every bite.",
+      imageAlt: "Kirill, founder and head baker of SteKir Cakes",
+      p1: "Kirill grew up watching his mother and grandmother stack honey layers and fold Napoleon pastry — skills he brings to every order today.",
+      p2: "He believes celebration cakes should taste like memory: familiar, generous, and made with care you can feel in every bite.",
     },
     certs: {
       title: "Certified & Insured",
-      intro: "We operate under Sacramento County cottage food regulations with the licenses and insurance your celebration deserves.",
+      intro:
+        "We operate under Sacramento County cottage food regulations with the licenses and insurance your celebration deserves.",
       cottageTitle: "Sacramento County",
       cottageSubtitle: "Cottage Food License",
-      cottageText: "Registered and approved for direct-to-customer sales under California cottage food law.",
+      cottageText:
+        "Registered and approved for direct-to-customer sales under California cottage food law.",
       insuredTitle: "Insured & Certified",
       insuredSubtitle: "Fully Covered",
-      insuredText: "Liability insurance in place for your peace of mind at every celebration we serve.",
+      insuredText:
+        "Liability insurance in place for your peace of mind at every celebration we serve.",
     },
   },
   reviewsForm: {
     title: "Share Your Experience",
-    intro: "Reviews are moderated before publishing. Sign in optional — name and email are required for guests.",
+    intro:
+      "Reviews are moderated before publishing. Sign in optional — name and email are required for guests.",
     yourName: "Your name",
     email: "Email",
     emailHint: "Not shown publicly.",
@@ -344,7 +385,8 @@ Object.assign(messages, {
     review: "Your review",
     occasionPlaceholder: "Birthday cake, anniversary, etc.",
     reviewPlaceholder: "Tell us what you loved about your cake...",
-    thankYou: "Thank you! Your review was submitted and will appear after approval.",
+    thankYou:
+      "Thank you! Your review was submitted and will appear after approval.",
     submitFailed: "Unable to submit review.",
     starsAria: "Rate your experience from 1 to 5 stars",
     starLabel: "{count} star",
@@ -358,12 +400,22 @@ Object.assign(messages, {
     deliveryDate: "Delivery date",
     nextTitle: "What happens next?",
     steps: [
-      { title: "We'll reach out soon", text: "You'll receive a text or call within a few hours to confirm your order details." },
-      { title: "Send your deposit", text: "A 50% deposit is required to confirm your order. We'll text you payment instructions." },
-      { title: "Fresh delivery on your date", text: "Your cake will be baked fresh and delivered right to your door on the chosen date." },
+      {
+        title: "We'll reach out soon",
+        text: "You'll receive a text or call within a few hours to confirm your order details.",
+      },
+      {
+        title: "Send your deposit",
+        text: "A 50% deposit is required to confirm your order. We'll text you payment instructions.",
+      },
+      {
+        title: "Fresh delivery on your date",
+        text: "Your cake will be baked fresh and delivered right to your door on the chosen date.",
+      },
     ],
     signInTrack: "Sign In to Track Order",
-    questions: "Questions? Text or call us at (916) 555-0192 — we're happy to help.",
+    questions:
+      "Questions? Text or call us at (916) 555-0192 — we're happy to help.",
   },
   api: {
     firstName: "Please enter your first name.",
@@ -395,8 +447,10 @@ Object.assign(messages, {
     customerSubject: "Your SteKir Cakes order request — #{orderNumber}",
     ownerSubject: "New order request #{orderNumber}",
     greeting: "Hi {name},",
-    received: "Thank you for your order request! We received the details below and will contact you shortly to confirm.",
-    deposit: "A 50% deposit is required to confirm your order. We will send payment instructions after review.",
+    received:
+      "Thank you for your order request! We received the details below and will contact you shortly to confirm.",
+    deposit:
+      "A 50% deposit is required to confirm your order. We will send payment instructions after review.",
     orderDetails: "Order details",
     newOrder: "New cake order request",
     review: "Please review and confirm this order in the admin panel.",

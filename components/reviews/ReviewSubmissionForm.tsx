@@ -1,20 +1,23 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { StarRating } from "@/components/shared/StarRating";
 import { Button } from "@/components/ui/Button";
 import { FormField, formInputClassName } from "@/components/ui/FormField";
-import { getCakes } from "@/lib/data/cakes";
+import type { Cake } from "@/lib/data/cake-types";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
-export function ReviewSubmissionForm() {
+type ReviewSubmissionFormProps = {
+  cakes: Array<Pick<Cake, "slug" | "name">>;
+};
+
+export function ReviewSubmissionForm({ cakes }: ReviewSubmissionFormProps) {
   const locale = useLocale();
   const t = useTranslations("reviewsForm");
   const tc = useTranslations("common");
-  const cakes = useMemo(() => getCakes(locale), [locale]);
   const [reviewerName, setReviewerName] = useState("");
   const [reviewerEmail, setReviewerEmail] = useState("");
   const [cakeSlug, setCakeSlug] = useState("");

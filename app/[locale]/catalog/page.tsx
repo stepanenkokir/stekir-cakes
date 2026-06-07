@@ -29,7 +29,7 @@ export default async function CatalogPage({ params }: PageProps) {
 
   const t = await getTranslations({ locale, namespace: "catalog" });
   const tc = await getTranslations({ locale, namespace: "common" });
-  const cakes = getCakes(locale as Locale);
+  const cakes = await getCakes(locale as Locale);
 
   return (
     <main className="bg-bg py-12 lg:py-20">

@@ -3,16 +3,21 @@
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ReviewCard } from "@/components/shared/ReviewCard";
-import {
-  filterReviews,
-  getReviewFilters,
-  type ReviewFilter,
-} from "@/lib/data/reviews";
+import { filterReviews, type ReviewFilter } from "@/lib/data/reviews";
 
-export function ReviewsGrid() {
+type ReviewFilterOption = {
+  id: ReviewFilter;
+  label: string;
+};
+
+type ReviewsGridProps = {
+  reviewFilters: ReviewFilterOption[];
+  cakeNameBySlug: Record<string, string>;
+};
+
+export function ReviewsGrid({ reviewFilters, cakeNameBySlug }: ReviewsGridProps) {
   const locale = useLocale();
   const t = useTranslations("reviews");
-  const reviewFilters = useMemo(() => getReviewFilters(locale), [locale]);
   const [activeFilter, setActiveFilter] = useState<ReviewFilter>("all");
 
   const filteredReviews = useMemo(
@@ -64,6 +69,7 @@ export function ReviewsGrid() {
               rating={review.rating}
               occasion={review.occasion}
               cakeSlug={review.cakeSlug}
+              cakeName={cakeNameBySlug[review.cakeSlug] ?? review.cakeSlug}
               date={review.date}
               photoUrl={review.photoUrl}
             />

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { StarRating } from "@/components/shared/StarRating";
-import { formatReviewDate, getReviewCakeName, type Review } from "@/lib/data/reviews";
+import { formatReviewDate } from "@/lib/data/reviews";
 
 type ReviewCardProps = {
   quote: string;
@@ -11,7 +11,8 @@ type ReviewCardProps = {
   rating: number;
   occasion: string;
   variant?: "carousel" | "grid";
-  cakeSlug?: Review["cakeSlug"];
+  cakeSlug?: string;
+  cakeName?: string;
   date?: string;
   photoUrl?: string;
 };
@@ -23,6 +24,7 @@ export function ReviewCard({
   occasion,
   variant = "carousel",
   cakeSlug,
+  cakeName,
   date,
   photoUrl,
 }: ReviewCardProps) {
@@ -65,7 +67,7 @@ export function ReviewCard({
           <p className="mt-1 text-sm text-text-muted">{occasion}</p>
           {cakeSlug && isGrid ? (
             <p className="mt-2 text-xs font-medium uppercase tracking-wide text-primary-dark">
-              {getReviewCakeName(cakeSlug, locale)}
+              {cakeName ?? cakeSlug}
             </p>
           ) : null}
         </div>

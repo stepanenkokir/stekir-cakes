@@ -6,6 +6,8 @@ import { ReviewSubmissionForm } from "@/components/reviews/ReviewSubmissionForm"
 import { ReviewsGrid } from "@/components/reviews/ReviewsGrid";
 import { ReviewsSummary } from "@/components/reviews/ReviewsSummary";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { getCakeNameMap, getCakes } from "@/lib/data/cakes";
+import { buildReviewFilters } from "@/lib/data/reviews";
 import { isLocale } from "@/lib/i18n/locale";
 
 type PageProps = {
@@ -36,6 +38,9 @@ export default async function ReviewsPage({ params }: PageProps) {
 
   const t = await getTranslations({ locale, namespace: "reviews" });
   const tc = await getTranslations({ locale, namespace: "common" });
+  const cakes = await getCakes(locale);
+  const reviewFilters = buildReviewFilters(cakes, locale);
+  const cakeNameBySlug = await getCakeNameMap(locale);
 
   return (
     <main className="bg-bg py-12 lg:py-20">
@@ -51,8 +56,8 @@ export default async function ReviewsPage({ params }: PageProps) {
         <SectionHeading title={t("pageTitle")} subtitle={t("pageIntro")} align="left" />
 
         <ReviewsSummary />
-        <ReviewsGrid />
-        <ReviewSubmissionForm />
+        <ReviewsGrid reviewFilters={reviewFilters} cakeNameBySlug={cakeNameBySlug} />
+        <ReviewSubmissionForm cakes={cakes} />
       </div>
     </main>
   );
