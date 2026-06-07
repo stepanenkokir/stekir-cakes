@@ -3,6 +3,8 @@ import {
   Playfair_Display,
   Source_Sans_3,
 } from "next/font/google";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { themeInitScript } from "@/lib/theme/constants";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -31,9 +33,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${playfair.variable} ${sourceSans.variable} ${dancingScript.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-body">{children}</body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="flex min-h-full flex-col font-body">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

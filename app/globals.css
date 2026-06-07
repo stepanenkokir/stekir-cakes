@@ -1,33 +1,59 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --color-bg: #fdf8f2;
-  --color-primary: #b5813a;
-  --color-primary-dark: #8c6020;
-  --color-accent: #d4a96a;
-  --color-text: #2c1a0e;
-  --color-text-muted: #7a6050;
-  --color-surface: #fff9f0;
-  --color-border: #e8d9c4;
+  color-scheme: light;
+
+  --token-bg: #fdf8f2;
+  --token-primary: #b5813a;
+  --token-primary-dark: #8c6020;
+  --token-accent: #d4a96a;
+  --token-text: #2c1a0e;
+  --token-text-muted: #7a6050;
+  --token-surface: #fff9f0;
+  --token-surface-accent: #fff5eb;
+  --token-border: #e8d9c4;
+  --token-shadow-card: 0 4px 24px rgba(44, 26, 14, 0.06);
+  --token-shadow-card-hover: 0 12px 40px rgba(44, 26, 14, 0.12);
+  --token-shadow-soft: 0 2px 12px rgba(44, 26, 14, 0.04);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --token-bg: #15100c;
+  --token-primary: #d4a05c;
+  --token-primary-dark: #e8c080;
+  --token-accent: #c9954a;
+  --token-text: #f5ebe0;
+  --token-text-muted: #b8a090;
+  --token-surface: #221a14;
+  --token-surface-accent: #2a2018;
+  --token-border: #3a2e24;
+  --token-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --token-shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --token-shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
 @theme inline {
-  --color-bg: #fdf8f2;
-  --color-primary: #b5813a;
-  --color-primary-dark: #8c6020;
-  --color-accent: #d4a96a;
-  --color-text: #2c1a0e;
-  --color-text-muted: #7a6050;
-  --color-surface: #fff9f0;
-  --color-border: #e8d9c4;
+  --color-bg: var(--token-bg);
+  --color-primary: var(--token-primary);
+  --color-primary-dark: var(--token-primary-dark);
+  --color-accent: var(--token-accent);
+  --color-text: var(--token-text);
+  --color-text-muted: var(--token-text-muted);
+  --color-surface: var(--token-surface);
+  --color-surface-accent: var(--token-surface-accent);
+  --color-border: var(--token-border);
 
   --font-display: var(--font-playfair);
   --font-body: var(--font-source-sans);
   --font-accent: var(--font-dancing);
 
-  --shadow-card: 0 4px 24px rgba(44, 26, 14, 0.06);
-  --shadow-card-hover: 0 12px 40px rgba(44, 26, 14, 0.12);
-  --shadow-soft: 0 2px 12px rgba(44, 26, 14, 0.04);
+  --shadow-card: var(--token-shadow-card);
+  --shadow-card-hover: var(--token-shadow-card-hover);
+  --shadow-soft: var(--token-shadow-soft);
 }
 
 html {
@@ -35,13 +61,14 @@ html {
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--token-bg);
+  color: var(--token-text);
   font-family: var(--font-body), system-ui, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 *:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--token-primary);
   outline-offset: 2px;
 }
 

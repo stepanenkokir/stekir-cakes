@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard" },
@@ -37,6 +38,9 @@ export function AdminNav() {
           );
         })}
       </nav>
+      <div className="mt-4 border-t border-border pt-4">
+        <ThemeToggle />
+      </div>
     </aside>
   );
 }

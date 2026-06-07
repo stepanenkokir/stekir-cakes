@@ -6,6 +6,7 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useCart } from "@/lib/cart/CartProvider";
 import type { Session } from "@supabase/supabase-js";
 import { getSupabaseBrowserClientOrNull } from "@/lib/supabase/client";
@@ -110,6 +111,11 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <ThemeToggle
+              toggleLabel={tc("themeToggle")}
+              lightLabel={tc("themeLight")}
+              darkLabel={tc("themeDark")}
+            />
             <LanguageSwitcher className="hidden sm:block" />
 
             <Link
@@ -192,7 +198,14 @@ export function Header() {
             </nav>
 
             <div className="border-t border-border px-5 py-6">
-              <LanguageSwitcher className="mb-4" />
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <LanguageSwitcher />
+                <ThemeToggle
+                  toggleLabel={tc("themeToggle")}
+                  lightLabel={tc("themeLight")}
+                  darkLabel={tc("themeDark")}
+                />
+              </div>
               <div className="flex flex-col gap-3">
                 <Button href="/catalog" className="w-full" onClick={() => setIsMenuOpen(false)}>
                   {tc("orderNow")}

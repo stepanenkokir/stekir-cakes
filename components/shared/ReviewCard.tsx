@@ -34,7 +34,7 @@ export function ReviewCard({
 
   return (
     <article
-      className={`flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-[#fff5eb] shadow-soft ${
+      className={`flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-accent shadow-soft ${
         isGrid
           ? "w-full transition-all hover:-translate-y-1 hover:shadow-card-hover"
           : "min-w-[280px] max-w-sm sm:min-w-[320px]"

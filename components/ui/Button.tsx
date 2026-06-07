@@ -19,7 +19,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   ghost:
     "bg-transparent text-text border border-border hover:border-primary hover:text-primary-dark",
   inverse:
-    "bg-white text-text hover:bg-surface border border-transparent shadow-soft",
+    "bg-surface text-text hover:bg-bg border border-transparent shadow-soft",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

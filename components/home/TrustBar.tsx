@@ -10,7 +10,7 @@ export async function TrustBar() {
   return (
     <section
       id="trust-bar"
-      className="border-y border-border bg-white py-10"
+      className="border-y border-border bg-surface py-10"
       aria-label={t("aria")}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 sm:px-6 md:grid-cols-4 lg:px-8">
